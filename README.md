@@ -1,2 +1,2 @@
 # koltsegterv
-Egy szervezet éves kötségvetésének a elkészítést valósítja meg, letölthető excel listákkal.
+Egy szervezet éves költségvetésének a elkészítést valósítja meg, letölthető excel listákkal.
