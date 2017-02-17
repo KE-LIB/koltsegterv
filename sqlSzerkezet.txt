@@ -1,0 +1,522 @@
+-- phpMyAdmin SQL Dump
+-- version 4.5.1
+-- http://www.phpmyadmin.net
+--
+-- Gép: 127.0.0.1
+-- Létrehozás ideje: 2017. Feb 17. 08:02
+-- Kiszolgáló verziója: 10.1.10-MariaDB
+-- PHP verzió: 7.0.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Adatbázis: `koltsegtervezes`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_aggregate_data`
+--
+
+CREATE TABLE `kltsg_aggregate_data` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `rovat` text NOT NULL,
+  `netto` bigint(20) NOT NULL,
+  `afarovat` text NOT NULL,
+  `afa` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_aggregate_group`
+--
+
+CREATE TABLE `kltsg_aggregate_group` (
+  `id` int(11) NOT NULL,
+  `name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_category`
+--
+
+CREATE TABLE `kltsg_category` (
+  `id` int(11) NOT NULL,
+  `code` text COLLATE utf8_hungarian_ci NOT NULL,
+  `name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `tax` text COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_category_bev`
+--
+
+CREATE TABLE `kltsg_category_bev` (
+  `id` int(11) NOT NULL,
+  `code` text COLLATE utf8_hungarian_ci NOT NULL,
+  `name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `tax` text COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_institute`
+--
+
+CREATE TABLE `kltsg_institute` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_policy`
+--
+
+CREATE TABLE `kltsg_policy` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_quant`
+--
+
+CREATE TABLE `kltsg_quant` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_hungarian_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions`
+--
+
+CREATE TABLE `kltsg_submissions` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_bevetel`
+--
+
+CREATE TABLE `kltsg_submissions_bevetel` (
+  `id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_bevetel_saved`
+--
+
+CREATE TABLE `kltsg_submissions_bevetel_saved` (
+  `id` int(11) NOT NULL,
+  `row_id` int(11) NOT NULL,
+  `submissions_id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_bevetel_sent`
+--
+
+CREATE TABLE `kltsg_submissions_bevetel_sent` (
+  `id` int(11) NOT NULL,
+  `row_id` int(11) NOT NULL,
+  `submissions_id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_kiadas`
+--
+
+CREATE TABLE `kltsg_submissions_kiadas` (
+  `id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_kiadas_saved`
+--
+
+CREATE TABLE `kltsg_submissions_kiadas_saved` (
+  `id` int(11) NOT NULL,
+  `row_id` int(11) NOT NULL,
+  `submissions_id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_submissions_kiadas_sent`
+--
+
+CREATE TABLE `kltsg_submissions_kiadas_sent` (
+  `id` int(11) NOT NULL,
+  `row_id` int(11) NOT NULL,
+  `submissions_id` int(11) NOT NULL,
+  `sub_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `institute_id` int(11) NOT NULL,
+  `unit_id` int(11) NOT NULL,
+  `brutto_osszes` bigint(20) NOT NULL,
+  `netto_osszes` bigint(20) NOT NULL,
+  `afa_osszes` bigint(20) NOT NULL,
+  `mennyiseg` int(11) NOT NULL,
+  `megnevezes` text NOT NULL,
+  `netto_egysegar` bigint(20) NOT NULL,
+  `tax` bigint(20) NOT NULL,
+  `category_tax_field` text NOT NULL,
+  `afa_ossz_egyseg` bigint(20) NOT NULL,
+  `quant` text NOT NULL,
+  `brutto_egysegar` bigint(20) NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_tax`
+--
+
+CREATE TABLE `kltsg_tax` (
+  `id` int(11) NOT NULL,
+  `value` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_unit`
+--
+
+CREATE TABLE `kltsg_unit` (
+  `id` int(11) NOT NULL,
+  `name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `parent` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `kltsg_users`
+--
+
+CREATE TABLE `kltsg_users` (
+  `id` int(11) NOT NULL,
+  `email` text COLLATE utf8_hungarian_ci NOT NULL,
+  `user_name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `password` text COLLATE utf8_hungarian_ci NOT NULL,
+  `first_name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `last_name` text COLLATE utf8_hungarian_ci NOT NULL,
+  `level` int(11) NOT NULL,
+  `email_changed` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- Indexek a kiírt táblákhoz
+--
+
+--
+-- A tábla indexei `kltsg_aggregate_data`
+--
+ALTER TABLE `kltsg_aggregate_data`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_aggregate_group`
+--
+ALTER TABLE `kltsg_aggregate_group`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_category`
+--
+ALTER TABLE `kltsg_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_category_bev`
+--
+ALTER TABLE `kltsg_category_bev`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_institute`
+--
+ALTER TABLE `kltsg_institute`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_policy`
+--
+ALTER TABLE `kltsg_policy`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_quant`
+--
+ALTER TABLE `kltsg_quant`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions`
+--
+ALTER TABLE `kltsg_submissions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_bevetel`
+--
+ALTER TABLE `kltsg_submissions_bevetel`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_bevetel_saved`
+--
+ALTER TABLE `kltsg_submissions_bevetel_saved`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_bevetel_sent`
+--
+ALTER TABLE `kltsg_submissions_bevetel_sent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_kiadas`
+--
+ALTER TABLE `kltsg_submissions_kiadas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_kiadas_saved`
+--
+ALTER TABLE `kltsg_submissions_kiadas_saved`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_submissions_kiadas_sent`
+--
+ALTER TABLE `kltsg_submissions_kiadas_sent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_tax`
+--
+ALTER TABLE `kltsg_tax`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_unit`
+--
+ALTER TABLE `kltsg_unit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A tábla indexei `kltsg_users`
+--
+ALTER TABLE `kltsg_users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- A kiírt táblák AUTO_INCREMENT értéke
+--
+
+--
+-- AUTO_INCREMENT a táblához `kltsg_aggregate_data`
+--
+ALTER TABLE `kltsg_aggregate_data`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT a táblához `kltsg_aggregate_group`
+--
+ALTER TABLE `kltsg_aggregate_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT a táblához `kltsg_category`
+--
+ALTER TABLE `kltsg_category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+--
+-- AUTO_INCREMENT a táblához `kltsg_category_bev`
+--
+ALTER TABLE `kltsg_category_bev`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+--
+-- AUTO_INCREMENT a táblához `kltsg_institute`
+--
+ALTER TABLE `kltsg_institute`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+--
+-- AUTO_INCREMENT a táblához `kltsg_policy`
+--
+ALTER TABLE `kltsg_policy`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=191;
+--
+-- AUTO_INCREMENT a táblához `kltsg_quant`
+--
+ALTER TABLE `kltsg_quant`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions`
+--
+ALTER TABLE `kltsg_submissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=476;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_bevetel`
+--
+ALTER TABLE `kltsg_submissions_bevetel`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_bevetel_saved`
+--
+ALTER TABLE `kltsg_submissions_bevetel_saved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_bevetel_sent`
+--
+ALTER TABLE `kltsg_submissions_bevetel_sent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_kiadas`
+--
+ALTER TABLE `kltsg_submissions_kiadas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6136;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_kiadas_saved`
+--
+ALTER TABLE `kltsg_submissions_kiadas_saved`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17228;
+--
+-- AUTO_INCREMENT a táblához `kltsg_submissions_kiadas_sent`
+--
+ALTER TABLE `kltsg_submissions_kiadas_sent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=407;
+--
+-- AUTO_INCREMENT a táblához `kltsg_tax`
+--
+ALTER TABLE `kltsg_tax`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT a táblához `kltsg_unit`
+--
+ALTER TABLE `kltsg_unit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+--
+-- AUTO_INCREMENT a táblához `kltsg_users`
+--
+ALTER TABLE `kltsg_users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
