@@ -295,3 +295,7 @@ table.merleg_table_red th{
 	padding-right:0px;
 	margin-right:0px;
 }
+#editRow
+{
+	display:none;
+}

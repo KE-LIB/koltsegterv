@@ -62,8 +62,11 @@ function ajaxLoad(mit)
 		}
 		if(mit=="main")
 		{
-			document.cookie = "alegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv	;";
-			document.cookie = "egyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv	;";
+			document.cookie = "alegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "egyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 		}
 		if(mit=="form")
 		{
@@ -222,7 +225,8 @@ function showBev(){
 }
 
 function showKiad(){
-	
+	getAlEgysegName();
+	getEgysegName();
 	var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
@@ -257,7 +261,19 @@ function showKiad(){
 				
 				}
 	});							
+//Mértékegységek betöltése					
 					
+		$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getAllMertek.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#mertekegyseg").html(result);
+				
+				}
+	});				
 					
 					
 					
@@ -286,6 +302,41 @@ function showKiad(){
 					
 					
 
+}
+function ajaxAddKiadas()
+{
+	var megnevezes=$("#megnevezes").val();
+	var egysegAr=$("#egysegAr").val();
+	var mennyiseg=$("#mennyiseg").val();
+	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/addKiadas.php",
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg},
+		success:function(result)
+				{
+					//console.log(result);
+					$("#kiadsSubmission").html(result);
+				
+				}
+	});
+	
+}
+function setRovatKiadas()
+{
+	var rovat=$("#rovat").val();
+	document.cookie="rovatKiadas="+rovat;	
+}
+function setAfa()
+{
+	var afa=$("#afaKulcs").val();
+	document.cookie="afaKulcs="+afa;	
+}
+function setMertek()
+{
+	var mertekegyseg=$("#mertekegyseg").val();
+	document.cookie="mertekegyseg="+mertekegyseg;	
 }
 function showInfo(){
 	
