@@ -1,8 +1,3 @@
-<?php
-//echo'egyseg'.$_GET['egyseg'].' alegyseg:'.$_GET['alegyseg'];
-?>
-  
-
 <div class="row_own">
 	  <div class="col-xs-4 col-md-4">
 	  <div class="merleg_cimke alert alert-success merleg"><table class="merleg_table_green" ><thead>
@@ -28,7 +23,7 @@
 
 <li class="active" ><a data-toggle="tab" href="#kiadful" onclick="showKiad()" id="0">Kiadások</a></li>
  <li><a data-toggle="tab" href="#bevful" onclick="showBev()" id="1">Bevételek</a></li>
- <li class=""><a data-toggle="tab" href="#info" onclick="showInfo()" >Útmutató</a></li>'
+ <li class=""><a data-toggle="tab" href="#info" onclick="showInfo()" >Útmutató</a></li>
 </ul>
 <div id="koltsegfel">
 </div>

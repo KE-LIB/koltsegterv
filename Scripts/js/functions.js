@@ -60,6 +60,16 @@ function ajaxLoad(mit)
 		{
 			ajaxGetEgyseg();
 		}
+		if(mit=="main")
+		{
+			document.cookie = "alegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv	;";
+			document.cookie = "egyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv	;";
+		}
+		if(mit=="form")
+		{
+			getAlEgysegName();
+			getEgysegName();
+		}
 		document.cookie="Page="+mit;
 		var xmlhttp = new XMLHttpRequest();
 						xmlhttp.onreadystatechange = function() {
@@ -212,6 +222,7 @@ function showBev(){
 }
 
 function showKiad(){
+	
 	var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
