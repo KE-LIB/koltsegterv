@@ -326,33 +326,33 @@ function ajaxAddKiadas()
 	{
 		if(rovat=="999")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket ";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket ";
 		document.getElementById("errorRovat").style.color="red";
 		}
 		if(afa=="999")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
 		document.getElementById("errorAfa").style.color="red";
 		}
 	
 		if(mertekegyseg=="999")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
 		document.getElementById("errorMertek").style.color="red";
 		}
 		if(megnevezes=="")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
 		document.getElementById("errorMegnev").style.color="red";
 		}
 		if(egysegAr=="")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
 		document.getElementById("errorBrutto").style.color="red";
 		}
 		if(mertekegyseg=="999")
 		{
-		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
 		document.getElementById("errorMennyiseg").style.color="red";
 		}
 	}
@@ -363,14 +363,48 @@ function ajaxAddKiadas()
 		url:"ajax/addKiadas.php",
 		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat},
 		success:function(result)
-				{
-					//console.log(result);
-					$("#kiadsSubmission").html(result);
-				
-				}
+		{
+		showKiad();
+		}
+
 	});
 	
 	}
+}
+function delKiadRow(id)
+{
+	
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/delKiadasRow.php",
+		data:{'id':id},
+		success:function(result)
+		{
+		console.log(result)
+		showKiad();
+		}
+		});
+}
+function editKiadRow(id)
+{
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getKiadasRow.php",
+		data:{'id':id},
+		success:function(result)
+		{
+		exp=result.split(",");
+		$("#rovat").val(exp[0]);
+		$("#afaKulcs").val(exp[1]);
+		$("#megnevezes").val(exp[2]);
+		$("#egysegAr").val(exp[3]);
+		$("#mennyiseg").val(exp[4]);
+		$("#mertekegyseg").val(exp[5]);
+		document.getElementById("Kiadas"+id).style.display="none";
+		}
+		});
 }
 function setRovatKiadas()
 {

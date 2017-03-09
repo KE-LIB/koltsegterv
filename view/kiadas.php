@@ -70,9 +70,8 @@ Nettó egységár</th><th class="collapsed">Áfakulcs</th><th class="collapsed">
 </select>
 </div>
 </td>
-<td class="muv"><button type="submit" id="" onclick="return deleteSelectedRow(this.id)" value="" name="rfd" class="btn btn-danger">
+<td class="muv"><button type="submit" id="" onclick="showKiad()" value="" name="rfd" class="btn btn-danger">
 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
-<td class="muv"><button type="submit" name="ujsor" value="1" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button></td>
 </tr>
 </table>
 <div id="EditRow">
