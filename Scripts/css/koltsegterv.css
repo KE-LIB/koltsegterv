@@ -21,10 +21,14 @@
 #errorMsg
 {
 	width:40%;
-
 	position:relative;
 	margin-left:30%;
 	margin-top:5%;	
+}
+#errorMsgForm
+{
+	color:red;
+	font-size:20px;
 }
 #topLeft
 {

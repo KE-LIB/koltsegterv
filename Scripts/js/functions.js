@@ -223,7 +223,7 @@ function showBev(){
 	document.getElementById("bevful").style.display = "inline";
 			document.getElementById("send").style.display = "inline";
 }
-
+//kiadás megjelenítése+ amit eddig felvittünk
 function showKiad(){
 	getAlEgysegName();
 	getEgysegName();
@@ -274,7 +274,17 @@ function showKiad(){
 				
 				}
 	});				
-					
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getKiadas1.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#meglevoKoltseg").html(result);
+				
+				}
+	});								
 					
 					
 					
@@ -308,12 +318,50 @@ function ajaxAddKiadas()
 	var megnevezes=$("#megnevezes").val();
 	var egysegAr=$("#egysegAr").val();
 	var mennyiseg=$("#mennyiseg").val();
+	var rovat=$("#rovat").val();
+	var afa=$("#afaKulcs").val();
+	var mertekegyseg=$("#mertekegyseg").val();
 	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
+	{
+		if(rovat=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket ";
+		document.getElementById("errorRovat").style.color="red";
+		}
+		if(afa=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorAfa").style.color="red";
+		}
+	
+		if(mertekegyseg=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMertek").style.color="red";
+		}
+		if(megnevezes=="")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMegnev").style.color="red";
+		}
+		if(egysegAr=="")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorBrutto").style.color="red";
+		}
+		if(mertekegyseg=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirssal megjelőlt részeket";
+		document.getElementById("errorMennyiseg").style.color="red";
+		}
+	}
+	else{
 	$.ajax(
 	{
 		type:"POST",
 		url:"ajax/addKiadas.php",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat},
 		success:function(result)
 				{
 					//console.log(result);
@@ -322,21 +370,25 @@ function ajaxAddKiadas()
 				}
 	});
 	
+	}
 }
 function setRovatKiadas()
 {
 	var rovat=$("#rovat").val();
 	document.cookie="rovatKiadas="+rovat;	
+	document.getElementById("errorRovat").style.color="black"
 }
 function setAfa()
 {
 	var afa=$("#afaKulcs").val();
 	document.cookie="afaKulcs="+afa;	
+	document.getElementById("errorAfa").style.color="black"
 }
 function setMertek()
 {
 	var mertekegyseg=$("#mertekegyseg").val();
-	document.cookie="mertekegyseg="+mertekegyseg;	
+	document.cookie="mertekegyseg="+mertekegyseg;
+	document.getElementById("errorMertek").style.color="black";	
 }
 function showInfo(){
 	
@@ -350,4 +402,16 @@ function confirmExit()
 	var x = confirm("Biztosan ELVETI a költségtervezetet?\n\nHa az OK-t választja a munkája törlésre kerül és később sem folytathatja azt!");
 		if (x){
 		ajaxLoad('main');}
+}
+function ellenoriz(erromsg,mit)
+{
+	if(document.getElementById(mit).value=="")
+	{
+		document.getElementById(erromsg).style.color="red";
+	}
+	else
+	{
+		document.getElementById(erromsg).style.color="black";
+	}
+	
 }

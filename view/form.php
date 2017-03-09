@@ -13,6 +13,7 @@
 		<div class="col-xs-8 col-md-8">
 		<div class="alert alert-info place"><div class="place-text"><strong>Hely:</strong>
 		<oreo id="egyseg">-</oreo><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><oreo id="alegyseg">-</oreo></span>
+		<br><oreo id="errorMsgForm"></oreo>
 		 </div>
 		 </div>
  </div>
@@ -26,6 +27,8 @@
  <li class=""><a data-toggle="tab" href="#info" onclick="showInfo()" >Útmutató</a></li>
 </ul>
 <div id="koltsegfel">
+</div>
+<div id="meglevoKoltseg">
 </div>
  </div>
  <div id="send">
