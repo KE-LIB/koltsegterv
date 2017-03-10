@@ -1,10 +1,10 @@
 <div class="row_own">
 	  <div class="col-xs-4 col-md-4">
-	  <div class="merleg_cimke alert alert-success merleg"><table class="merleg_table_green" ><thead>
+	  <div class="merleg_cimke alert alert-success merleg" id="merleg_cimer"><table class="merleg_table_green" id="merleg_table"><thead>
 	  <tr ><th >&nbsp;Bevételek&nbsp;</th><th >&nbsp;Kiadások&nbsp;</th></tr></thead>
-	  <tr  ><td >&nbsp;<span id="bevetel">-</span>&nbsp;</td><td >&nbsp;<span id="kiadas">-</span>&nbsp;</td></tr>
+	  <tr  ><td >&nbsp;<span id="bevetelossz">0</span>&nbsp;</td><td >&nbsp;<span id="kiadasossz">0</span>&nbsp;</td></tr>
 	  <tr ><th colspan="2">Egyenleg:</th></tr>
-	  <tr ><td colspan="2"><span id="egyenleg">-</span></td></tr>
+	  <tr ><td colspan="2"><span id="egyenleg">0</span></td></tr>
 	  </tbody></tobdy></table>
 
 		</div>

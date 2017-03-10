@@ -282,12 +282,12 @@ function showKiad(){
 				{
 					//console.log(result);
 					$("#meglevoKoltseg").html(result);
-				
+				getEgyenleg();
 				}
 	});								
-					
-					
-					
+	
+			
+			
 					
 					
 					
@@ -312,6 +312,43 @@ function showKiad(){
 					
 					
 
+}
+function getEgyenleg()
+{
+	var i=1;		
+	var osszKiad=0;
+	var osszBev=0;	
+		if(document.getElementById("kiadasossz").innerHTML!='0')
+		{
+			osszKiad=document.getElementById("kiadasossz").innerHTML;
+		}
+		else
+		{
+			osszKiad=document.getElementById("buruttOsszesKiad").innerHTML;
+			document.getElementById("kiadasossz").innerHTML=osszKiad;
+		}
+		if(document.getElementById("bevetelossz"))
+		{
+			document.getElementById("bevetelossz").innerHTML=osszBev;
+		}
+		else
+		{
+			osszBev=document.getElementById("buruttOsszesBev").innerHTML;
+			ocument.getElementById("bevetelossz").innerHTML=osszBev;
+		}
+			var egyenleg=Number(osszBev)-Number(osszKiad)
+			document.getElementById("egyenleg").innerHTML=egyenleg;
+			console.log(egyenleg);
+		if(egyenleg>=0)
+		{
+			document.getElementById("merleg_cimer").className="merleg_cimke alert alert-success merleg";
+			document.getElementById("merleg_table").className="merleg_table_green";
+		}
+		else
+		{
+			document.getElementById("merleg_cimer").className="merleg_cimke alert alert-danger merleg";
+			document.getElementById("merleg_table").className="merleg_table_red";
+		}
 }
 function ajaxAddKiadas()
 {

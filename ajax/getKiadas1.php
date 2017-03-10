@@ -7,9 +7,10 @@ $res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas leké
 //echo $res;
 	$sub_id=0;
 	$rovatCounter=1;
+	$ossz=0;
 while($sor=$res->fetch_array(MYSQLI_BOTH))
 {
-	
+
 	if($sub_id!=$sor['sub_id'] or $sub_id==0)
 	{
 		$sqlRovat="select name from kltsg_category where id='".$sor['sub_id']."'";
@@ -18,6 +19,7 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$sor['sub_id']."'";
 		$resSzamolas=$GLOBALS['conn']->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		$sorSzamolas=$resSzamolas->fetch_array(MYSQLI_BOTH);
+		$ossz=$ossz+$sorSzamolas['brutto'];
 		
 	echo '
 <table class="table table-bordered"><thead>
@@ -28,7 +30,7 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 <td colspan="6">'.$sorRovat['name'].'</td>
 <td colspan="">'.$sorSzamolas['netto'].'</td>
 <td colspan="">'.$sorSzamolas['afa'].'</td>
-<td colspan="">'.$sorSzamolas['brutto'].'</td>
+<td colspan=""><span id=brutto'.$rovatCounter.'>'.$sorSzamolas['brutto'].'</span></td>
 </tr>
 </table><table class="table table-bordered">
 <tr class="subtable">
@@ -51,5 +53,5 @@ echo "<td><button type='button'  onclick='delKiadRow(".$sor['id'].")' class='btn
 onclick='editKiadRow(".$sor['id'].")' class='btn btn-default'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></td></tr><tr class='edited-row'>";
 $sub_id=$sor['sub_id'];
 }
-print_r($sor);
+echo'<oreo id="buruttOsszesKiad" class="stealth">'.$ossz.'</oreo>';
 ?>
