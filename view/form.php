@@ -40,7 +40,7 @@
 	FŐMENÜ > SAJÁT TERVEZETEK menüpont alat érheti el.</p>
 	
 
-	<button type="button" onclick="return confirmSave()"  class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>&nbsp;Mentés és kilépés</button>
+	<button type="button" onclick="confirmSave()"  class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>&nbsp;Mentés és kilépés</button>
 	<button type="button" onclick="return confirmSend()" class="btn btn-success"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Mentés és feladás</button>
 	<button type="button" onclick="return confirmExit()" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>&nbsp;Elvetés</button>
 

@@ -35,7 +35,7 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 </table><table class="table table-bordered">
 <tr class="subtable">
 <th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Áfa egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
-<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Művelet</th></tr><tr id="Bevetel'.$sor['id'].'"class="edited-row">';
+<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Művelet</th></tr><tr id="Bevetel'.$sor['id'].'"class="edited-row2">';
 $rovatCounter++;
 	}
 

@@ -72,8 +72,13 @@ textarea {
 	width:100%;
 }
 .edited-row{
-	background:#ebccd1;
+	background:#f2dede;
 	color:#a94442;
+	font-weight:bold;
+}
+.edited-row2{
+	background:#dff0d8;
+	color:#3c763d;
 	font-weight:bold;
 }
 .row_own{

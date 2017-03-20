@@ -69,6 +69,7 @@ function ajaxLoad(mit)
 			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			clearSubmission();
 		}
 		if(mit=="form")
 		{
@@ -605,16 +606,32 @@ function setMertek()
 }
 function showInfo(){
 	
+	
 		document.getElementById("bevful").style.display = "none";
 		document.getElementById("kiadful").style.display = "none";
 		document.getElementById("send").style.display = "none";
 		document.getElementById("info").style.display = "inline";
 }
+//elvetés
 function confirmExit()
 {
 	var x = confirm("Biztosan ELVETI a költségtervezetet?\n\nHa az OK-t választja a munkája törlésre kerül és később sem folytathatja azt!");
 		if (x){
 		ajaxLoad('main');}
+}
+//mentés és kilépés
+function confirmSave()
+{
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/confirmAndSave.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+	ajaxLoad("main");
 }
 function ellenoriz(erromsg,mit)
 {
@@ -627,4 +644,17 @@ function ellenoriz(erromsg,mit)
 		document.getElementById(erromsg).style.color="black";
 	}
 	
+}
+//h mainbe valki vissza megy kitörli a submission táblákat
+function clearSubmission()
+{
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/clearSubmission.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
 }
