@@ -13,7 +13,7 @@
 <div class="row">
 <div class="col-xs-3 col-md-3">
 <div class="dropdown">
-<select name="rovat"  id="rovat" onchange="setRovatKiadas()" class="form-control add-panel-select" >
+<select name="rovat"  id="rovat" onchange="setRovat()" class="form-control add-panel-select" >
 <option value="999" selected>Válasszon...</option>
 
 </select>
@@ -74,14 +74,6 @@ Nettó egységár</th><th class="collapsed">Áfakulcs</th><th class="collapsed">
 <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>
 </tr>
 </table>
-<div id="EditRow">
-<button type="submit" value="1" name="save_edit_kiad" class="btn btn-success">
-<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Sor mentése</button>&nbsp;
-<button type="button" value="1" id="" onclick="delKiadRow(this.id)" class="btn btn-danger">
-<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Sor törlése</button>&nbsp;
-<button type="button" value="1" onclick="cancel_kiad()" class="btn btn-warning">
-<span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>&nbsp;Mégse</button>
-</div>
 <button type="submit" onclick="ajaxAddKiadas()" value="1" name="upload_kiad" class="btn btn-success"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;Rovat rögzítése</button>
 
 </div>

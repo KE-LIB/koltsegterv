@@ -1,5 +1,7 @@
 //globális változók
-
+var  osszKiad=0;
+var  osszBev=0;
+var delay=50//0,05 sec
 ///////////////////////////////////////////////////
 $(document).ready(function(){
 	//Bejelentkezés
@@ -215,13 +217,181 @@ function getAlEgysegName()
 				}
 	});
 }
+//bevétele megjelenítése és feltöltése
 function showBev(){
 
 
-	document.getElementById("kiadful").style.display = "none";
-	document.getElementById("info").style.display = "none";
-	document.getElementById("bevful").style.display = "inline";
-			document.getElementById("send").style.display = "inline";
+	getAlEgysegName();
+	getEgysegName();
+	var xmlhttp = new XMLHttpRequest();
+					xmlhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.getElementById("koltsegfel").innerHTML = this.responseText;
+						}
+					};
+					xmlhttp.open("GET", "view/bevetel.php", true);
+					xmlhttp.send();
+					
+//Rovatok betöltése
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getAllBevRovat.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#rovat").html(result);
+				
+				}
+	});				
+					
+//Áfa kulcsok betöltése					
+					
+		$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getAllAfa.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#afaKulcs").html(result);
+				
+				}
+	});							
+//Mértékegységek betöltése					
+					
+		$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getAllMertek.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#mertekegyseg").html(result);
+				
+				}
+	});				
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getBevetel1.php",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#meglevoKoltseg").html(result);
+				
+				}
+	});			
+setTimeout(function() {getEgyenleg()},delay);
+}
+function delBevRow(id)
+{
+	
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/delBevetelRow.php",
+		data:{'id':id},
+		success:function(result)
+		{
+		console.log(result)
+		showBev();
+		}
+		});
+}
+//bevételek felvitele
+function ajaxAddBevetel()
+{
+	var megnevezes=$("#megnevezes").val();
+	var egysegAr=$("#egysegAr").val();
+	var mennyiseg=$("#mennyiseg").val();
+	var rovat=$("#rovat").val();
+	var afa=$("#afaKulcs").val();
+	var mertekegyseg=$("#mertekegyseg").val();
+	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
+	{
+		if(rovat=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket ";
+		document.getElementById("errorRovat").style.color="red";
+		}
+		if(afa=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
+		document.getElementById("errorAfa").style.color="red";
+		}
+	
+		if(mertekegyseg=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
+		document.getElementById("errorMertek").style.color="red";
+		}
+		if(megnevezes=="")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
+		document.getElementById("errorMegnev").style.color="red";
+		}
+		if(egysegAr=="")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
+		document.getElementById("errorBrutto").style.color="red";
+		}
+		if(mertekegyseg=="999")
+		{
+		document.getElementById("errorMsgForm").innerHTML="Kérlek Töltsd ki a pirossal megjelőlt részeket";
+		document.getElementById("errorMennyiseg").style.color="red";
+		}
+	}
+	else{
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/addBevetel.php",
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat},
+		success:function(result)
+		{
+		showBev();
+		}
+
+	});
+	
+	}
+}
+//bevitt bevételei sor szerkesztése
+function editBevRow(id)
+{
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getBevetelRow.php",
+		data:{'id':id},
+		success:function(result)
+		{
+		exp=result.split(",");
+		$("#rovat").val(exp[0]);
+		$("#afaKulcs").val(exp[1]);
+		$("#megnevezes").val(exp[2]);
+		$("#egysegAr").val(exp[3]);
+		$("#mennyiseg").val(exp[4]);
+		$("#mertekegyseg").val(exp[5]);
+		document.getElementById("Bevetel"+id).style.display="none";
+		}
+		});
+}
+function sumBev()
+{
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getBevetelSum.php",
+		success:function(result)
+		{
+			osszBev=result;
+			document.getElementById("bevetelossz").innerHTML=osszBev;	
+		}
+		});
+	
 }
 //kiadás megjelenítése+ amit eddig felvittünk
 function showKiad(){
@@ -235,6 +405,7 @@ function showKiad(){
 					};
 					xmlhttp.open("GET", "view/kiadas.php", true);
 					xmlhttp.send();
+					
 //Rovatok betöltése
 	$.ajax(
 	{
@@ -282,61 +453,18 @@ function showKiad(){
 				{
 					//console.log(result);
 					$("#meglevoKoltseg").html(result);
-				getEgyenleg();
+				
 				}
-	});								
-	
-			
-			
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-
+	});	
+setTimeout(function() {getEgyenleg()},delay);	
 }
 function getEgyenleg()
-{
-	var i=1;		
-	var osszKiad=0;
-	var osszBev=0;	
-		if(document.getElementById("kiadasossz").innerHTML!='0')
-		{
-			osszKiad=document.getElementById("kiadasossz").innerHTML;
-		}
-		else
-		{
-			osszKiad=document.getElementById("buruttOsszesKiad").innerHTML;
-			document.getElementById("kiadasossz").innerHTML=osszKiad;
-		}
-		if(document.getElementById("bevetelossz"))
-		{
-			document.getElementById("bevetelossz").innerHTML=osszBev;
-		}
-		else
-		{
-			osszBev=document.getElementById("buruttOsszesBev").innerHTML;
-			ocument.getElementById("bevetelossz").innerHTML=osszBev;
-		}
-			var egyenleg=Number(osszBev)-Number(osszKiad)
+{		
+			sumKiad()
+			sumBev()
+			setTimeout(function() {
+				var egyenleg=Number(osszBev)-Number(osszKiad);
+			console.log(osszBev+","+osszKiad);
 			document.getElementById("egyenleg").innerHTML=egyenleg;
 			console.log(egyenleg);
 		if(egyenleg>=0)
@@ -348,7 +476,7 @@ function getEgyenleg()
 		{
 			document.getElementById("merleg_cimer").className="merleg_cimke alert alert-danger merleg";
 			document.getElementById("merleg_table").className="merleg_table_red";
-		}
+		}},delay);
 }
 function ajaxAddKiadas()
 {
@@ -443,10 +571,24 @@ function editKiadRow(id)
 		}
 		});
 }
-function setRovatKiadas()
+function sumKiad()
+{
+	$.ajax(
+	{
+		type:"POST",
+		url:"ajax/getKiadasSum.php",
+		success:function(result)
+		{
+		osszKiad=result;
+		document.getElementById("kiadasossz").innerHTML=osszKiad;	
+		}
+		});
+
+}
+function setRovat()
 {
 	var rovat=$("#rovat").val();
-	document.cookie="rovatKiadas="+rovat;	
+	document.cookie="rovat="+rovat;	
 	document.getElementById("errorRovat").style.color="black"
 }
 function setAfa()
