@@ -14,7 +14,7 @@ $brutto_egysegar=round($brutto_osszes/$mennyiseg);
 $sql="insert into kltsg_submissions_bevetel 
 (`sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`,
 `megnevezes`, `netto_egysegar`, `tax`,  `afa_ossz_egyseg`, `quant`, `brutto_egysegar`)
-values ('".$rovat."','".$_SESSION['id']."','".$_COOKIE['egyseg']."','".$_COOKIE['rovat']."','".$brutto_osszes."','".$netto_osszes."',
+values ('".$rovat."','".$_SESSION['id']."','".$_COOKIE['egyseg']."','".$_COOKIE['alegyseg']."','".$brutto_osszes."','".$netto_osszes."',
 '".$afa_osszes."','".$mennyiseg."','".$megnevezes."','".$nettoEA."','".$_COOKIE['afaKulcs']."','".$afa_ossz_egyseg."','".$_COOKIE['mertekegyseg']."','".$brutto_egysegar."')";
 //echo $sql;
 $GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_bevétel felvitelénél " . mysqli_error($GLOBALS['conn']));

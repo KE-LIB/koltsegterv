@@ -1,7 +1,8 @@
 <?php
 include_once("../Scripts/db.php");
 @session_start();
-$sql="select * from kltsg_submissions_kiadas where user_id=".$_SESSION['id']."   order by sub_id desc";
+$sql="select * from kltsg_submissions_kiadas where user_id=".$_SESSION['id']." and  institute_id='".$_COOKIE['egyseg']."' and unit_id='".$_COOKIE['alegyseg']."'  order by sub_id desc";
+echo $sql;
 //echo $sql;
 $res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
 //echo $res;

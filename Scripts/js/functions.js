@@ -69,7 +69,7 @@ function ajaxLoad(mit)
 			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
-			clearSubmission();
+			
 		}
 		if(mit=="form")
 		{
@@ -631,6 +631,7 @@ function confirmSave()
 					console.log(result);
 				}
 	});	
+	clearSubmission();
 	ajaxLoad("main");
 }
 function ellenoriz(erromsg,mit)
