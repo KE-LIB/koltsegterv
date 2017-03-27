@@ -465,9 +465,9 @@ function getEgyenleg()
 			sumBev()
 			setTimeout(function() {
 				var egyenleg=Number(osszBev)-Number(osszKiad);
-			console.log(osszBev+","+osszKiad);
+			//console.log(osszBev+","+osszKiad);
 			document.getElementById("egyenleg").innerHTML=egyenleg;
-			console.log(egyenleg);
+			//console.log(egyenleg);
 		if(egyenleg>=0)
 		{
 			document.getElementById("merleg_cimer").className="merleg_cimke alert alert-success merleg";
@@ -656,6 +656,34 @@ function clearSubmission()
 		success:function(result)
 				{
 					console.log(result);
+				}
+	});	
+}
+function savedPlans()
+{
+	
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/getSavedPlansList.php",
+		success:function(result)
+				{
+					
+					$("#plansData").html(result);
+					console.log(result);
+				}
+	});	
+}
+function sendPlans()
+{
+	
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/getSendPlansList.php",
+		success:function(result)
+				{
+					//$("#plans").innerHTML=result;
 				}
 	});	
 }

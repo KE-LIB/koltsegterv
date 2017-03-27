@@ -1,6 +1,6 @@
 <div class="options">
 		
-		<button type="button" onclick="ownplans()" class="btn btn-primary btn-lg opt-btn">
+		<button type="button" onclick="ajaxLoad('list')" class="btn btn-primary btn-lg opt-btn">
 			<span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span><br>Saját tervezetek
 		</button>
 		<button type="button" onclick='ajaxLoad("newForm")' id="newForm" name="newForm" class="btn btn-success btn-lg opt-btn">
