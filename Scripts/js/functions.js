@@ -686,7 +686,8 @@ function sendPlans()
 		url:"ajax/getSendPlansList.php",
 		success:function(result)
 				{
-					//$("#plans").innerHTML=result;
+					$("#plansData").html(result);
+					//console.log(result);
 				}
 	});	
 }
@@ -713,6 +714,45 @@ function changePlace(sub,form,row_id)
 	{
 	setTimeout(function() {sendPlans();},delay);
 	}
+}
+//terv törlése
+function deletePlane(sub,form)
+{
+	$.ajax(
+	{
+		type:"GET",
+		data:{"sub":sub,"form":form},
+		url:"ajax/deletePlane.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+	if(form==="S")
+	{
+		setTimeout(function() {savedPlans();},delay);
+	}
+	else
+	{
+	setTimeout(function() {sendPlans();},delay);
+	}
+}
+//terv feladás
+function sendPlane(sub)
+{
+	$.ajax(
+	{
+		type:"GET",
+		data:{"sub":sub},
+		url:"ajax/sendSavedPlane.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+	
+	setTimeout(function() {savedPlans();},delay);
+	
 }
 //tervek szerkesztése
 function editWork(sub,form,row_id)

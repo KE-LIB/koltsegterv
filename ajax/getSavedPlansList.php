@@ -3,12 +3,11 @@ include_once("../Scripts/db.php");
 @session_start();
 echo '
 <div class="col-xs-11 col-md-11"><h2 style="margin-top:10px;">Mentett tervezetek</h2></div>';
-	$sql="SELECT * FROM kltsg_submissions_kiadas_saved, kltsg_submissions_bevetel_saved 
-	WHERE kltsg_submissions_bevetel_saved.user_id='".$_SESSION['id']."'
-	or kltsg_submissions_kiadas_saved.user_id='".$_SESSION['id']."'";
-	
+	$sql="SELECT * FROM kltsg_submissions_kiadas_saved
+	WHERE  kltsg_submissions_kiadas_saved.user_id='".$_SESSION['id']."'";
 	$res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas_saved lekérdezésénél " . mysqli_error($GLOBALS['conn']));
 	$savenum = $res->num_rows;
+	
 if($savenum==0){
 echo '<br><br><br><div class="alert alert-info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;Még nem mentett költségtervezetet!</div>';
 }else{
@@ -43,7 +42,10 @@ echo'
 
 			echo '</select></td><td class="main-table">'.$record['submissions_id'].'</td><td>'.$record['submissions_time'].'</td>
 			<td><button type="submit" name="editSavedWork" onclick=editWork('.$record['submissions_id'].',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
-			<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record['submissions_id'].',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button></td>';
+			<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record['submissions_id'].',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
+			<button type="submit"  class=" btn btn-success" onclick=sendPlane('.$record['submissions_id'].')><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Feladás</button>
+			<button type="submit"  class=" btn btn-danger" onclick=deletePlane('.$record['submissions_id'].',"S")><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Törlés</button>
+			</td>';
 		}
 
 	
