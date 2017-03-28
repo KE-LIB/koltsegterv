@@ -74,7 +74,8 @@ function ajaxLoad(mit)
 		if(mit=="form")
 		{
 			getAlEgysegName();
-			getEgysegName();
+			getEgysegName();	
+			setTimeout(function() {showKiad();},delay);
 		}
 		document.cookie="Page="+mit;
 		var xmlhttp = new XMLHttpRequest();
@@ -659,6 +660,7 @@ function clearSubmission()
 				}
 	});	
 }
+//kilistázza a mentett terveket
 function savedPlans()
 {
 	
@@ -670,10 +672,11 @@ function savedPlans()
 				{
 					
 					$("#plansData").html(result);
-					console.log(result);
+					//console.log(result);
 				}
 	});	
 }
+//kilistázza az elküldött terveket
 function sendPlans()
 {
 	
@@ -686,4 +689,49 @@ function sendPlans()
 					//$("#plans").innerHTML=result;
 				}
 	});	
+}
+//terveknél a hely módosítás
+function changePlace(sub,form,row_id)
+{
+	place=$("#inst_unit_"+row_id).val();
+	//console.log(place)
+	$.ajax(
+	{
+		type:"GET",
+		data:{"sub":sub,"form":form,"place":place},
+		url:"ajax/changedPlansPlace.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+	if(form==="S")
+	{
+		setTimeout(function() {savedPlans();},delay);
+	}
+	else
+	{
+	setTimeout(function() {sendPlans();},delay);
+	}
+}
+//tervek szerkesztése
+function editWork(sub,form,row_id)
+{
+var  place=$("#inst_unit_"+row_id).val();
+var	 exp=place.split("#");
+document.cookie="egyseg="+exp[0];
+document.cookie="alegyseg="+exp[1];
+$.ajax(
+	{
+		type:"GET",
+		data:{"sub":sub,"form":form},
+		url:"ajax/editWork.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+
+	setTimeout(function() {ajaxLoad("form")},delay);
+	
 }

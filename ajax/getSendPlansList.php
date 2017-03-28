@@ -33,9 +33,7 @@ $i=1;
 			<button type="submit" name="resendSubmittedWork" onclick="return editWork()" class=" btn btn-default"><span class="glyphicon glyphicon-new-window" aria-hidden="true"></span>&nbsp;Újra beadom</button></td>';
 	
 	
-			echo "<input type='hidden' name='institute' value='".$record['institute_id']."'/>";
-			echo "<input type='hidden' name='unit' value='".$record['unit_id']."'/>";
-			echo "<input type='hidden' name='submissions_id' value='".$record['submissions_id']."'/></tr></form>";
+			
 		}
 
 	}

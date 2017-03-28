@@ -22,11 +22,11 @@ echo'
 	GROUP BY unit_id,
 	institute_id, submissions_id ORDER BY id DESC;";
 	$category=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg  lekérdezésénél " . mysqli_error($GLOBALS['conn']));
-	$i=1;
+	$i=0;
 	while($record=$category->fetch_array(MYSQLI_BOTH))
 	{
 	//legördülő kell ide
-	echo '<tr><td>'.$i++.'</td><td colspan=""><select name="inst_unit" class="form-control">';
+	echo '<tr><td>'.$i++.'</td><td colspan=""><select id="inst_unit_'.$i.'" class="form-control">';
 		$place=$GLOBALS['conn']->query("
 		SELECT (SELECT kltsg_institute.id FROM kltsg_institute WHERE id=parent)AS instid, (SELECT kltsg_institute.name FROM kltsg_institute WHERE id=parent)AS instname, kltsg_unit.id AS unitid, kltsg_unit.name AS unitname
 		FROM kltsg_unit
@@ -42,13 +42,8 @@ echo'
 			}
 
 			echo '</select></td><td class="main-table">'.$record['submissions_id'].'</td><td>'.$record['submissions_time'].'</td>
-			<td><button type="submit" name="editSavedWork" onclick="return editWork()" class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
-			<button type="submit" name="changePlace" class=" btn btn-primary"><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button></td>';
-			echo "<input type='hidden' name='institute' value='".$record['institute_id']."'/>";
-			echo "<input type='hidden' name='unit' value='".$record['unit_id']."'/>";
-			echo "<input type='hidden' name='submissions_id' value='".$record['submissions_id']."'/></tr></form>";
-
-
+			<td><button type="submit" name="editSavedWork" onclick=editWork('.$record['submissions_id'].',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
+			<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record['submissions_id'].',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button></td>';
 		}
 
 	
