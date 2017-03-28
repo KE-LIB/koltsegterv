@@ -40,8 +40,8 @@ echo'
 			}
 
 			echo '</select></td><td class="main-table">'.$record['submissions_id'].'</td><td>'.$record['submissions_time'].'</td>
-			<td><button type="submit" name="editSavedWork" onclick=editWork('.$record['submissions_id'].',"R",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
-			<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record['submissions_id'].',"R",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
+			<td><button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record['submissions_id'].',"R",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
+			<button type="submit" name="changePlace" class=" btn btn-warning" onclick=changePlace('.$record['submissions_id'].',"R",'.$i.')><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>&nbsp;Előnézet</button>
 			<button type="submit"  class=" btn btn-danger" onclick=deletePlane('.$record['submissions_id'].',"R")><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Törlés</button>
 			</td>';
 		}
