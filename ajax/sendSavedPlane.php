@@ -23,5 +23,6 @@ include_once("../Scripts/db.php");
 	where user_id='".$_SESSION['id']."' and submissions_id='".$_GET['sub']."'";
 	$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_bevetel_saved törlésénél " . mysqli_error($GLOBALS['conn']));
 	
+	
 
 ?>

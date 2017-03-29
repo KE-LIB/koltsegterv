@@ -1,3 +1,38 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+		<meta name="description" content="">
+		<meta name="author" content="">
+		<link rel="icon" href="img/favicon.ico">
+		<title>Költségtervező új</title>
+		<link rel="stylesheet" href="../Scripts\css\bootstrap.min.css">
+		<link rel="stylesheet" href="../Scripts\css\koltsegterv.css">
+		<script src="../Scripts/js/jquery.min.js"></script>
+		<script src="../Scripts/js/bootstrap.min.js"></script>
+		<script src="./Scripts/js/functions.js"></script>
+	</head>
+		<body>
+			<div class="container" style="width:100%;">
+				<div class="row" style="width:100%;">
+					<div id="headPage">
+						<div class="col-sm-4">
+								<img class="felirat" src="../img/felirat.png"  alt="KE Költségtervező" border="0"/>
+						</div>
+						<div class="col-sm-4">
+								<a class="pull-center" target="_blank" href="http://www.ke.hu">
+								<img class="logo" onmouseover="this.src='../img/ke_kozep_ff.png'" onmouseout="this.src='../img/ke_kozep.png'" src="img/ke_kozep.png"  alt="KE logo" border="0"/>
+								</a>
+						</div>
+						<div class="col-sm-4">
+								<div class="pull-right" id="topLeft"></div>
+								
+						</div>
+					</div>
+				</div>
+				<div class="row" id="mainPage">
 <div class="row_own">
 	  <div class="col-xs-4 col-md-4">
 	  <div class="merleg_cimke alert alert-success merleg" id="merleg_cimer"><table class="merleg_table_green" id="merleg_table"><thead>
@@ -34,17 +69,6 @@
  <div id="send">
 
 
-	<div class="panel panel-default"><div class="panel-body"><p>
-	A teljes költségtervezet (bevétel / kiadás) beküldéséhez, kattintson a MENTÉS ÉS FELADÁS gombra, a tervezet elvetéséhez válassza az ELVETÉS gombot, 
-	ha később szeretné folytatni a megkezdett munkát, akkor válassza a MENTÉS ÉS KILÉPÉS opciót.<br>A mentett és elküldött munkáit a 
-	FŐMENÜ > SAJÁT TERVEZETEK menüpont alat érheti el.</p>
-	
-
-	<button type="button" onclick="confirmSave()"  class="btn btn-primary"><span class="glyphicon glyphicon-floppy-saved" aria-hidden="true"></span>&nbsp;Mentés és kilépés</button>
-	<button type="button" onclick="confirmSend()" class="btn btn-success"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Mentés és feladás</button>
-	<button type="button" onclick="confirmExit()" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>&nbsp;Elvetés</button>
-
-	
 	
 	</div></div></div>
 	</div>

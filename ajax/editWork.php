@@ -50,4 +50,6 @@ else
 	where user_id='".$_SESSION['id']."' and submissions_id='".$_GET['sub']."'";
 	$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_bevetel_sent  törlésénél " . mysqli_error($GLOBALS['conn']));
 }
+$sql="delete from kltsg_submissions	where id='".$_GET['sub']."'";
+	$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions törlésénél " . mysqli_error($GLOBALS['conn']));
 ?>

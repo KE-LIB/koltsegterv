@@ -1,8 +1,8 @@
 <?php
+
 include_once("../Scripts/db.php");
 @session_start();
 $sql="select * from kltsg_submissions_kiadas where user_id=".$_SESSION['id']." and  institute_id='".$_COOKIE['egyseg']."' and unit_id='".$_COOKIE['alegyseg']."'  order by sub_id desc";
-//echo $sql;
 //echo $sql;
 $res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
 //echo $res;
@@ -11,7 +11,6 @@ $res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas leké
 	$ossz=0;
 while($sor=$res->fetch_array(MYSQLI_BOTH))
 {
-
 	if($sub_id!=$sor['sub_id'] or $sub_id==0)
 	{
 		$sqlRovat="select name from kltsg_category where id='".$sor['sub_id']."'";
@@ -39,7 +38,6 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 <th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Művelet</th></tr><tr id="Kiadas'.$sor['id'].'"class="edited-row">';
 $rovatCounter++;
 	}
-
 echo "<td>".$sor['megnevezes']."</td>";
 echo "<td>".$sor['netto_egysegar']."</td>";
 echo "<td>".$sor['afa_ossz_egyseg']."</td>";
@@ -54,5 +52,6 @@ echo "<td><button type='button'  onclick='delKiadRow(".$sor['id'].")' class='btn
 onclick='editKiadRow(".$sor['id'].")' class='btn btn-default'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></td></tr><tr class='edited-row'>";
 $sub_id=$sor['sub_id'];
 }
+echo $ossz;
 echo'<oreo id="buruttOsszesKiad" class="stealth">'.$ossz.'</oreo>';
 ?>

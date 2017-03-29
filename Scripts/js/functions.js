@@ -2,6 +2,7 @@
 var  osszKiad=0;
 var  osszBev=0;
 var delay=50//0,05 sec
+var delay2=500//0,5 sec
 ///////////////////////////////////////////////////
 $(document).ready(function(){
 	//Bejelentkezés
@@ -618,6 +619,7 @@ function confirmExit()
 {
 	var x = confirm("Biztosan ELVETI a költségtervezetet?\n\nHa az OK-t választja a munkája törlésre kerül és később sem folytathatja azt!");
 		if (x){
+			clearSubmission();
 		ajaxLoad('main');}
 }
 //mentés és kilépés
@@ -632,7 +634,20 @@ function confirmSave()
 					console.log(result);
 				}
 	});	
-	clearSubmission();
+	ajaxLoad("main");
+}
+//felad és kilép
+function confirmSend()
+{
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/confirmAndSend.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
 	ajaxLoad("main");
 }
 function ellenoriz(erromsg,mit)
@@ -772,6 +787,6 @@ $.ajax(
 				}
 	});	
 
-	setTimeout(function() {ajaxLoad("form")},delay);
+	setTimeout(function() {ajaxLoad("form")},delay2);
 	
 }
