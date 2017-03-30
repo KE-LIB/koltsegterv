@@ -52,6 +52,6 @@ echo "<td><button type='button'  onclick='delKiadRow(".$sor['id'].")' class='btn
 onclick='editKiadRow(".$sor['id'].")' class='btn btn-default'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></td></tr><tr class='edited-row'>";
 $sub_id=$sor['sub_id'];
 }
-echo $ossz;
+//echo $ossz;
 echo'<oreo id="buruttOsszesKiad" class="stealth">'.$ossz.'</oreo>';
 ?>

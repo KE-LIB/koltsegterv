@@ -187,8 +187,8 @@ function newKoltseg()
 						};
 						xmlhttp.open("GET", "view/form.php", true);
 						xmlhttp.send();
-						getAlEgysegName();
-						getEgysegName();
+						setTimeout(function() {getAlEgysegName();},500);		
+						setTimeout(function() {getEgysegName();},500);		
 }
 //egység neve
 function getEgysegName()
@@ -222,10 +222,8 @@ function getAlEgysegName()
 }
 //bevétele megjelenítése és feltöltése
 function showBev(){
-
-
-	getAlEgysegName();
-	getEgysegName();
+getAlEgysegName();
+getEgysegName();
 	var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {
@@ -236,7 +234,8 @@ function showBev(){
 					xmlhttp.send();
 					
 //Rovatok betöltése
-	$.ajax(
+	setTimeout(function() {
+		$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllBevRovat.php",
@@ -246,11 +245,11 @@ function showBev(){
 					$("#rovat").html(result);
 				
 				}
-	});				
+	});	},500);		
 					
 //Áfa kulcsok betöltése					
 					
-		$.ajax(
+	setTimeout(function() {	$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllAfa.php",
@@ -260,10 +259,10 @@ function showBev(){
 					$("#afaKulcs").html(result);
 				
 				}
-	});							
+	});		},500);					
 //Mértékegységek betöltése					
 					
-		$.ajax(
+	setTimeout(function() {	$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllMertek.php",
@@ -273,8 +272,9 @@ function showBev(){
 					$("#mertekegyseg").html(result);
 				
 				}
-	});				
-	$.ajax(
+	});	},500);	
+	
+	setTimeout(function() { $.ajax(
 	{
 		type:"POST",
 		url:"ajax/getBevetel1.php",
@@ -284,9 +284,10 @@ function showBev(){
 					$("#meglevoKoltseg").html(result);
 				
 				}
-	});			
+	});		},500);	
 setTimeout(function() {getEgyenleg()},delay);
 }
+
 function delBevRow(id)
 {
 	
@@ -410,7 +411,7 @@ function showKiad(){
 					xmlhttp.send();
 					
 //Rovatok betöltése
-	$.ajax(
+	setTimeout(function() {$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllRovat.php",
@@ -420,11 +421,11 @@ function showKiad(){
 					$("#rovat").html(result);
 				
 				}
-	});				
+	});			},500);		
 					
 //Áfa kulcsok betöltése					
 					
-		$.ajax(
+	setTimeout(function() {	$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllAfa.php",
@@ -434,10 +435,10 @@ function showKiad(){
 					$("#afaKulcs").html(result);
 				
 				}
-	});							
+	});				},500);				
 //Mértékegységek betöltése					
 					
-		$.ajax(
+	setTimeout(function() {	$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getAllMertek.php",
@@ -447,8 +448,8 @@ function showKiad(){
 					$("#mertekegyseg").html(result);
 				
 				}
-	});				
-	$.ajax(
+	});	},500);				
+	setTimeout(function() {$.ajax(
 	{
 		type:"POST",
 		url:"ajax/getKiadas1.php",
@@ -458,7 +459,7 @@ function showKiad(){
 					$("#meglevoKoltseg").html(result);
 				
 				}
-	});	
+	});	},500);	
 setTimeout(function() {getEgyenleg()},delay);	
 }
 function getEgyenleg()
