@@ -4,13 +4,13 @@ var  osszBev=0;
 var delay=50//0,05 sec
 var delay2=500//0,5 sec
 ///////////////////////////////////////////////////
-$(document).ready(function(){
-	//Bejelentkezés
-	$("#login").click(function()
-	{
-		 username=$("#inputEmail").val();
-		 psw=$("#inputPassword").val();
-			$.ajax(
+//bejelntkezés
+function login()
+{
+	username=$("#inputEmail").val();
+	psw=$("#inputPassword").val();	
+	
+				$.ajax(
 			{
 				type:"POST",
 				url:"ajax/login.php",
@@ -22,13 +22,17 @@ $(document).ready(function(){
 					{
 						document.getElementById("errorMsg").innerHTML = " ";
 						var xmlhttp = new XMLHttpRequest();
-						document.cookie="KEname="+html;
+						var exp=html.split(" ");
+						document.cookie="KEname="+exp[0]+" "+exp[1];
 						document.cookie="Page=main";
+						document.cookie="lvl="+exp[2];
 						xmlhttp.onreadystatechange = function() {
 							if (this.readyState == 4 && this.status == 200) {
 								document.getElementById("mainPage").innerHTML = this.responseText;
 							}
 						};
+						if(exp[2]=="0")
+						{
 						xmlhttp.open("GET", "view/main.php", true);
 						xmlhttp.send();
 						var xmlhttp = new XMLHttpRequest();
@@ -39,6 +43,20 @@ $(document).ready(function(){
 						};
 						xmlhttp.open("GET", "view/topLeft.php", true);
 						xmlhttp.send();
+						}
+						else
+						{
+						xmlhttp.open("GET", "view/amain.php", true);
+						xmlhttp.send();
+						var xmlhttp = new XMLHttpRequest();
+						xmlhttp.onreadystatechange = function() {
+							if (this.readyState == 4 && this.status == 200) {
+								document.getElementById("topLeft").innerHTML = this.responseText;
+							}
+						};
+						xmlhttp.open("GET", "view/topLeft.php", true);
+						xmlhttp.send();
+						}
 					}
 					else
 					{
@@ -54,8 +72,7 @@ $(document).ready(function(){
 					}
 				}
 			});
-	});
-	});
+}
 //simaoldal betöltés
 function ajaxLoad(mit)
 		{
@@ -790,4 +807,25 @@ $.ajax(
 
 	setTimeout(function() {ajaxLoad("form")},delay2);
 	
+}
+//kijelentkezés
+function logOut()
+{
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/logOut.php",
+		success:function(result)
+				{
+					console.log(result);
+				}
+	});	
+	var xmlhttp = new XMLHttpRequest();
+					xmlhttp.onreadystatechange = function() {
+						if (this.readyState == 4 && this.status == 200) {
+							document.getElementById("overPage").innerHTML = this.responseText;
+						}
+					};
+					xmlhttp.open("GET", "index.php", true);
+					xmlhttp.send();
 }

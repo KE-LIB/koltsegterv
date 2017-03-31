@@ -79,7 +79,7 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 		$sqlRovat="select name from kltsg_category where id='".$sor['sub_id']."'";
 		$resRovat=$GLOBALS['conn']->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		$sorRovat=$resRovat->fetch_array(MYSQLI_BOTH);
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas_sent where sub_id='".$sor['sub_id']."'";
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas_sent where sub_id='".$sor['sub_id']."' and submissions_id='".$_GET['id']."'";
 		$resSzamolas=$GLOBALS['conn']->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		$sorSzamolas=$resSzamolas->fetch_array(MYSQLI_BOTH);
 		$ossz=$ossz+$sorSzamolas['brutto'];
@@ -140,7 +140,7 @@ while($sor=$res->fetch_array(MYSQLI_BOTH))
 		$sqlRovat="select name from kltsg_category where id='".$sor['sub_id']."'";
 		$resRovat=$GLOBALS['conn']->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		$sorRovat=$resRovat->fetch_array(MYSQLI_BOTH);
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_bevetel_sent where sub_id='".$sor['sub_id']."'";
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_bevetel_sent where sub_id='".$sor['sub_id']."'and submissions_id='".$_GET['id']."'";
 		$resSzamolas=$GLOBALS['conn']->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		$sorSzamolas=$resSzamolas->fetch_array(MYSQLI_BOTH);
 		$ossz=$ossz+$sorSzamolas['brutto'];

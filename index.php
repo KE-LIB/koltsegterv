@@ -15,7 +15,7 @@
 		<script src="Scripts/js/functions.js"></script>
 	</head>
 		<body>
-			<div class="container" style="width:100%;">
+			<div class="container" style="width:100%;" id="overPage">
 				<div class="row" style="width:100%;">
 					<div id="headPage">
 						<div class="col-sm-4">
@@ -52,7 +52,7 @@
 										<input type="password"  name="psw" id="inputPassword" class="form-control" placeholder="Jelszó" required>
 								</div>
 								<br>
-									<button class="btn btn-lg btn-primary btn-block"  id="login" name="login">Bejelentkezés</button>
+									<button class="btn btn-lg btn-primary btn-block"  id="login" name="login" onclick="login()">Bejelentkezés</button>
 								</div>
 							
 						</div>
