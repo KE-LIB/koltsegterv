@@ -9,7 +9,7 @@
 	<button type="button" onclick=ajaxLoad("download") class="btn btn-warning btn-lg opt-btn">
 			<span class="glyphicon glyphicon-save" aria-hidden="true"></span><br>Letöltések
 			</button>		
-				<button  type="button" onclick="ajaxLoad(download)" class="btn btn-danger btn-lg opt-btn stealth">
+				<button  type="button" onclick="ajaxLoad(admin)" id="privi" class="btn btn-danger btn-lg opt-btn stealth">
 			<span class="glyphicon glyphicon-king" aria-hidden="true"></span><br>Admin
 			</button>
 	</div>

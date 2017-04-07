@@ -87,7 +87,7 @@ function ajaxLoad(mit)
 			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
-			checkPriv();
+			
 			
 		}
 		if(mit=="form")
@@ -95,6 +95,10 @@ function ajaxLoad(mit)
 			getAlEgysegName();
 			getEgysegName();	
 			setTimeout(function() {showKiad();},delay);
+		}
+		if(mit=="download")
+		{	
+			setTimeout(function() {egysegenkentiLista();},delay);
 		}
 		document.cookie="Page="+mit;
 		var xmlhttp = new XMLHttpRequest();
@@ -106,6 +110,7 @@ function ajaxLoad(mit)
 						xmlhttp.open("GET", "view/"+mit+".php", true);
 						xmlhttp.send();
 						ajaxLoadTopLeft();
+		setTimeout(function() {checkPriv();},500);
 	}
 //betöltö a bal felső menüt
 function ajaxLoadTopLeft()
@@ -837,6 +842,15 @@ function logOut()
 }
 //jogusultság ellenőrzése
 function checkPriv()
+{
+if(getCookie("lvl")=="1")
+{
+	
+	$("#privi").show();
+}	
+}
+//egységenkénti listázás letöltéshez
+function egysegenkentiLista()
 {
 	
 }
