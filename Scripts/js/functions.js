@@ -31,8 +31,7 @@ function login()
 								document.getElementById("mainPage").innerHTML = this.responseText;
 							}
 						};
-						if(exp[2]=="0")
-						{
+						
 						xmlhttp.open("GET", "view/main.php", true);
 						xmlhttp.send();
 						var xmlhttp = new XMLHttpRequest();
@@ -43,20 +42,8 @@ function login()
 						};
 						xmlhttp.open("GET", "view/topLeft.php", true);
 						xmlhttp.send();
-						}
-						else
-						{
-						xmlhttp.open("GET", "view/amain.php", true);
-						xmlhttp.send();
-						var xmlhttp = new XMLHttpRequest();
-						xmlhttp.onreadystatechange = function() {
-							if (this.readyState == 4 && this.status == 200) {
-								document.getElementById("topLeft").innerHTML = this.responseText;
-							}
-						};
-						xmlhttp.open("GET", "view/topLeft.php", true);
-						xmlhttp.send();
-						}
+						
+						
 					}
 					else
 					{
@@ -852,5 +839,30 @@ if(getCookie("lvl")=="1")
 //egységenkénti listázás letöltéshez
 function egysegenkentiLista()
 {
+		$.ajax(
+	{
+		type:"GET",
+		url:"ajax/getEgysegenkentiLista.php",
+		success:function(result)
+				{
+					$("#egysegenkentiLista").html(result);
+					//console.log(result);
+				}
+	});	
+}
+//letöltésnél elemek elrejtése/megjelenítése
+function hide(mit)
+{
+	$("table tr[group="+mit+"]").hide()
+	$("#s"+mit).removeClass("stealth")
+	$("#h"+mit).addClass("stealth")
+	
+	
+}
+function show(mit)
+{
+	$("table tr[group="+mit+"]").show()
+	$("#s"+mit).addClass("stealth")
+	$("#h"+mit).removeClass("stealth")
 	
 }
