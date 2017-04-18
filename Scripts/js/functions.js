@@ -866,3 +866,64 @@ function show(mit)
 	$("#h"+mit).removeClass("stealth")
 	
 }
+//Egységenkénti analitikus lista
+function analyticsEgyseg(id)
+{
+	$("#downloads_"+id).html("<span class='glyphicon glyphicon-floppy-disk'>folyamatban</span>")
+	$.ajax(
+	{
+		type:"GET",
+		data:{'id':id},
+		url:"ajax/makeAnEgyseg.php",
+		success:function(result)
+				{
+					$("#downloads_"+id).html(result);
+				}
+	});	
+} 
+//Alegységenkénti analitikus lista
+function makeAnAlEgyseg(id,iid)
+{
+	$("#downloads_"+id+"_"+iid).html("<span class='glyphicon glyphicon-floppy-disk'>folyamatban</span>")
+	$.ajax(
+	{
+		type:"GET",
+		data:{'id':id},
+		url:"ajax/makeAnAlEgyseg.php",
+		success:function(result)
+				{
+					$("#downloads_"+id+"_"+iid).html(result);
+				}
+	});	
+} 
+//recordonkénti analitikus lista
+function makeAnRecord(id,iid)
+{
+	$("#downloads_record_"+id+"_"+iid).html("<span class='glyphicon glyphicon-floppy-disk'>folyamatban</span>")
+	$.ajax(
+	{
+		type:"GET",
+		data:{'id':id,'uid':iid},
+		url:"ajax/makeAnRecord.php",
+		success:function(result)
+				{
+					$("#downloads_record_"+id+"_"+iid).html(result);
+				}
+	});	
+} 
+//letöltött file törlése
+function deleteFile(name,id)
+{
+setTimeout(function() {
+	$("div[id^='downloads_']").html("")
+	$.ajax(
+	{
+		type:"GET",
+		data:{'name':name},
+		url:"ajax/deleteFile.php",
+		success:function(result)
+				{
+					console.log(result)
+				}
+	});	},2000);	
+}

@@ -13,18 +13,20 @@ where kltsg_policy.user_id='".$_SESSION['id']."' and kltsg_policy.unit_id=kltsg_
 	{
 	echo '<tr class="main-table" group="istitute"><td colspan="3">'.$record['institute_name'].'</td>
 	<td>
-	<button type="button"  onclick="analytics(this.id)"  class="btn btn-info"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
+	<button type="button"  onclick="analyticsEgyseg('.$record['institute_id'].')"  class="btn btn-info"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
 	<button type="button"  onclick="aggregate(this.id)" class="btn btn-warning"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Aggregált</button>
+	<div id="downloads_'.$record['institute_id'].'" calss="pull-right" ></div>
 	</td>
 	</tr>
 	<tr class="warning" group="unit"><td colspan="3">'.$record['unit_name'].'</td>
-	<td><button type="button"  onclick="analytics(this.id)"  class="btn btn-danger"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
+	<td><button type="button"  onclick="makeAnAlEgyseg('.$record['unit_id'].','.$record['institute_id'].')"  class="btn btn-danger"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
 	<button type="button"  onclick="aggregate(this.id)" class="btn btn-warrning"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Aggregált</button>
+	<div id="downloads_'.$record['institute_id'].'_'.$record['unit_id'].'" calss="pull-right" ></div>
 	</td>
 	</tr>
 		<thead>
-			<tr class="subtable">
-			<th colspan="">Beadó</th><th colspan="">Azonosító</th><th colspan="">Dátum</th><th colspan="">Művelet</th></tr>
+			<tr class="subtable" group="records">
+			<th colspan="" >Beadó</th><th colspan="">Azonosító</th><th colspan="">Dátum</th><th colspan="">Művelet</th></tr>
 		</thead>';
 
 		$submiss=$GLOBALS['conn']->query("SELECT CONCAT
@@ -40,8 +42,9 @@ where kltsg_policy.user_id='".$_SESSION['id']."' and kltsg_policy.unit_id=kltsg_
 			
 			echo '</td>
 				<td> 
-	<button type="button" id="'.$record['unit_id'].'#'.$sub_record['user_id'].'" onclick="analytics(this.id)"  class="btn btn-primary"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
+	<button type="button" id="'.$record['unit_id'].'#'.$sub_record['user_id'].'" onclick="makeAnRecord('.$record['unit_id'].','.$sub_record['user_id'].')"  class="btn btn-primary"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
 	<button type="button" id="'.$record['unit_id'].'#'.$sub_record['user_id'].'" onclick="aggregate(this.id)" class="btn btn-success"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Aggregált</button>
+	<div id="downloads_record_'.$record['unit_id'].'_'.$sub_record['user_id'].'" calss="pull-right" ></div>
 	</td>
 			</tr>';
 		}
