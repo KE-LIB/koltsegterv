@@ -3,16 +3,15 @@
 <div class="container">
 <div class="stealth" id="privi">
 	<div class="panel panel-default"><div class="panel-body"><p><b><h2>Összegyetemi listák</h2></b></p><hr>
-	
-
-	<button type="button" onclick="analyticsFull()"  class="btn btn-primary"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
+		<button type="button" onclick="analyticsFull()"  class="btn btn-primary"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>&nbsp;Analitkus</button>
 	<button type="button" onclick="aggregateFull()" class="btn btn-success"><span class="glyphicon glyphicon-th" aria-hidden="true"></span>&nbsp;Aggregált</button>
+	<div id="downloads_full" calss="pull-right" ></div>
 	</div></div></div>
 	
 
 
 <h2><b>Egységenkénti listák</b></h2>
-Szűrés<br>
+<h3>Szűrés</h3>
 <button class="btn" onclick="hide('istitute')" id="histitute" >Egységek elrejtése</button>
 <button class="btn stealth" onclick="show('istitute')" id="sistitute">Egységek mutatása</button>
 <button class="btn" onclick="hide('unit')" id="hunit">Alegységek elrejtése</button>

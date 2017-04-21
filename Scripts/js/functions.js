@@ -911,6 +911,34 @@ function makeAnRecord(id,iid)
 				}
 	});	
 } 
+//teljes analitikus lista
+function analyticsFull()
+{
+	$("#downloads_full").html("<span class='glyphicon glyphicon-floppy-disk'>folyamatban</span>")
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/makeAnFull.php",
+		success:function(result)
+				{
+					$("#downloads_full").html(result);
+				}
+	});	
+} 
+//teljes agregált lista
+function aggregateFull()
+{
+	$("#downloads_full").html("<span class='glyphicon glyphicon-floppy-disk'>folyamatban</span>")
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/makeAgFull.php",
+		success:function(result)
+				{
+					$("#downloads_full").html(result);
+				}
+	});	
+} 
 //letöltött file törlése
 function deleteFile(name,id)
 {
