@@ -1,11 +1,8 @@
 <?php
-error_reporting(E_ALL);
-/*include '/var/www/clients/client11/web36/web/lib/convert/Classes/PHPExcel.php';
-include '/var/www/clients/client11/web36/web/lib/convert/Classes/PHPExcel/Writer/Excel2007.php';*/
 include_once("../Scripts/db.php");
 include_once("../Scripts/excelwriter/xlsxwriter.class.php");
 @session_start();
-$filename="agregaltFull_".date('Y_m_d_his');
+$filename="agregaltEgyseg_".date('Y_m_d_his');
 	$ertek = array();
 	$inst = array();
 	$sql_all="SELECT unit_id, (SELECT kltsg_institute.name FROM kltsg_institute WHERE kltsg_institute.id=(SELECT parent FROM kltsg_unit WHERE id=unit_id)) AS inst,(SELECT name FROM kltsg_unit WHERE id=unit_id) AS unit, (SELECT code FROM kltsg_category_bev WHERE id=sub_id ORDER bY kltsg_category_bev.code ASC) AS rovat, 
@@ -76,13 +73,11 @@ $filename="agregaltFull_".date('Y_m_d_his');
 			
 		}
 	}
+	$name=$GLOBALS['conn']->query("SELECT name FROM kltsg_institute where id='".$_GET['id']."'");
+	$name_a=$name->fetch_array(MYSQLI_BOTH);
 	$rows = array(
     array('Szervezet' , 'Egység', 'Rovat','Áfarovat','Netto','Áfa','Brutto'));	
-	
-	
-	
-	$sql_grp="SELECT * FROM `kltsg_aggregate_group`";
-	
+	$sql_grp="SELECT * FROM `kltsg_aggregate_group` where name like '".$name_a['name']." >%'";
 	$grp=$GLOBALS['conn']->query($sql_grp);
 	
 	while($group=$grp->fetch_array(MYSQLI_BOTH))
