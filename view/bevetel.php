@@ -6,6 +6,7 @@
 <div class="col-xs-3 col-md-3"><span id="errorRovat">Rovat</span></div>
 <div class=" collapsed col-xs-1 col-md-1">Nettó</div>
 <div class="col-xs-1 col-md-1"><span id="errorAfa">Áfakulcs</span></div>
+<div class="col-xs-1 col-md-1"><span id="errorEv">Év</span></div>
 <div class="collapsed col-xs-1 col-md-1">Áfa</div>
 <div class=" collapsed col-xs-1 col-md-1">Bruttó</div>
 <div class="col-xs-1 col-md-1"></div>
@@ -30,6 +31,9 @@
 <option value="999" selected>Válasszon...</option>
 </select>
 </div>
+</div>
+<div class="col-xs-1 col-md-1">
+<input  type="number" min="0" step="any"  class="form-control"  id="kltsgEve" name="bt_" value="" pattern="\d{4}" onblur="ellenoriz('errorEv','kltsgEve')" required/></td>
 </div>
 <div class=" collapsed col-xs-1 col-md-1">
 <input type="number" name="af_summa" min="0" step="any" id="data5"  value="" class="form-control" placeholder="Összesen" readonly/>

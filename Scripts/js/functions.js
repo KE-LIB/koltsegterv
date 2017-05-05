@@ -25,6 +25,10 @@ function login()
 						var exp=html.split(" ");
 						document.cookie="KEname="+exp[0]+" "+exp[1];
 						document.cookie="Page=main";
+						var d = new Date();
+						var n = d.getFullYear();
+						n=Number(n)+Number(1);
+						document.cookie="Ev="+n;
 						document.cookie="lvl="+exp[2];
 						xmlhttp.onreadystatechange = function() {
 							if (this.readyState == 4 && this.status == 200) {
@@ -59,6 +63,7 @@ function login()
 					}
 				}
 			});
+			setTimeout(function() {checkPriv();},500);
 }
 //simaoldal betöltés
 function ajaxLoad(mit)
@@ -294,8 +299,15 @@ getEgysegName();
 					$("#meglevoKoltseg").html(result);
 				
 				}
-	});		},500);	
+	});		},500);
+	setTimeout(function() {
+	var d = new Date();
+	var n = d.getFullYear();
+	n=Number(n)+Number(1);
+	$("#kltsgEve").val(n)
+	},500);	
 setTimeout(function() {getEgyenleg()},delay);
+
 }
 
 function delBevRow(id)
@@ -321,6 +333,7 @@ function ajaxAddBevetel()
 	var mennyiseg=$("#mennyiseg").val();
 	var rovat=$("#rovat").val();
 	var afa=$("#afaKulcs").val();
+	var ev=$("#kltsgEve").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
 	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
@@ -362,7 +375,7 @@ function ajaxAddBevetel()
 	{
 		type:"POST",
 		url:"ajax/addBevetel.php",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev},
 		success:function(result)
 		{
 		showBev();
@@ -470,6 +483,12 @@ function showKiad(){
 				
 				}
 	});	},500);	
+	setTimeout(function() {
+	var d = new Date();
+	var n = d.getFullYear();
+	n=Number(n)+Number(1);
+	$("#kltsgEve").val(n)
+	},500);	
 setTimeout(function() {getEgyenleg()},delay);	
 }
 function getEgyenleg()
@@ -499,6 +518,7 @@ function ajaxAddKiadas()
 	var mennyiseg=$("#mennyiseg").val();
 	var rovat=$("#rovat").val();
 	var afa=$("#afaKulcs").val();
+	var ev=$("#kltsgEve").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
 	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
@@ -540,7 +560,7 @@ function ajaxAddKiadas()
 	{
 		type:"POST",
 		url:"ajax/addKiadas.php",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev},
 		success:function(result)
 		{
 		showKiad();
@@ -818,6 +838,7 @@ function logOut()
 			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "ev=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 	var xmlhttp = new XMLHttpRequest();
 					xmlhttp.onreadystatechange = function() {
 						if (this.readyState == 4 && this.status == 200) {

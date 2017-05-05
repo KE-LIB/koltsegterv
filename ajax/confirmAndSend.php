@@ -13,8 +13,8 @@ include_once("../Scripts/db.php");
 	$res=$GLOBALS['conn']->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérdezésénél");
 	while($kiadas=$res->fetch_array(MYSQLI_BOTH))
 	{
-	$sqlKiadas="insert into kltsg_submissions_kiadas_sent ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar)
-	values('".$row_id."','".$subId."','".$kiadas['sub_id']."','".$_SESSION['id']."','".$kiadas['institute_id']."','".$kiadas['unit_id']."','".$kiadas['brutto_osszes']."','".$kiadas['netto_osszes']."','".$kiadas['afa_osszes']."','".$kiadas['mennyiseg']."','".$kiadas['megnevezes']."','".$kiadas['netto_egysegar']."','".$kiadas['tax']."','0','".$kiadas['afa_ossz_egyseg']."','".$kiadas['quant']."','".$kiadas['brutto_egysegar']."')";
+	$sqlKiadas="insert into kltsg_submissions_kiadas_sent ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year)
+	values('".$row_id."','".$subId."','".$kiadas['sub_id']."','".$_SESSION['id']."','".$kiadas['institute_id']."','".$kiadas['unit_id']."','".$kiadas['brutto_osszes']."','".$kiadas['netto_osszes']."','".$kiadas['afa_osszes']."','".$kiadas['mennyiseg']."','".$kiadas['megnevezes']."','".$kiadas['netto_egysegar']."','".$kiadas['tax']."','0','".$kiadas['afa_ossz_egyseg']."','".$kiadas['quant']."','".$kiadas['brutto_egysegar']."','".$kiadas['Year']."')";
 	//echo $sqlKiadas;
 	$GLOBALS['conn']->query($sqlKiadas) or die("Hiba a kltsg_submissions_kiadas_sent beillesztésénél");
 	}
@@ -31,7 +31,7 @@ include_once("../Scripts/db.php");
 	{
 	$sqlbevetel="insert into kltsg_submissions_bevetel_sent ( row_id, submissions_id, sub_id, user_id, institute_id,
 	unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,
-	category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar)
+	category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year)
 	values('".$row_id."',
 	'".$subId."',
 	'".$bevetel['sub_id']."',
@@ -48,7 +48,8 @@ include_once("../Scripts/db.php");
 	'0',
 	'".$bevetel['afa_ossz_egyseg']."',
 	'".$bevetel['quant']."',
-	'".$bevetel['brutto_egysegar']."')";
+	'".$bevetel['brutto_egysegar']."',
+	'".$bevetel['Year']."')";
 	$GLOBALS['conn']->query($sqlbevetel) or die("Hiba a kltsg_submissions_bevetel_sent beillesztésénél");
 	}
 	$sqlDelteBevetel="delete from kltsg_submissions_bevetel where user_id='".$_SESSION['id']."'" ;
