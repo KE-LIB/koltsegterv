@@ -5,8 +5,9 @@
 (SELECT name FROM kltsg_institute WHERE id=institute_id) AS institute_name,
 (SELECT name FROM kltsg_unit WHERE id=kltsg_submissions_kiadas_sent.unit_id) AS unit_name 
 FROM `kltsg_submissions_kiadas_sent`,kltsg_policy 
-where kltsg_policy.user_id='".$_SESSION['id']."' and kltsg_policy.unit_id=kltsg_submissions_kiadas_sent.unit_id
+where kltsg_policy.user_id='".$_SESSION['id']."' and kltsg_policy.unit_id=kltsg_submissions_kiadas_sent.unit_id and Year='".$_COOKIE['Ev']."'
  GROUP BY kltsg_submissions_kiadas_sent.unit_id, institute_id ORDER BY kltsg_submissions_kiadas_sent.unit_id DESC";
+
 	$category=$GLOBALS['conn']->query($sqlCat);
 	echo'<table class="table table-bordered">';
 	while($record=$category->fetch_array(MYSQLI_BOTH))
@@ -34,7 +35,7 @@ where kltsg_policy.user_id='".$_SESSION['id']."' and kltsg_policy.unit_id=kltsg_
 		((SELECT last_name from kltsg_users WHERE id=user_id),' 
 		',(SELECT first_name from kltsg_users WHERE id=user_id)) AS username, user_id, created_time, id 
 		FROM `kltsg_submissions` WHERE 
-		id IN(SELECT submissions_id FROM kltsg_submissions_kiadas_sent WHERE unit_id=".$record['unit_id']." ) ORDER BY id DESC");
+		id IN(SELECT submissions_id FROM kltsg_submissions_kiadas_sent WHERE unit_id=".$record['unit_id']." and Year='".$_COOKIE['Ev']."' ) ORDER BY id DESC");
 		
 		while($sub_record=$submiss->fetch_array(MYSQLI_BOTH))
 		{

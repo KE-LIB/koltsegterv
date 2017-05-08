@@ -91,6 +91,8 @@ function ajaxLoad(mit)
 		if(mit=="download")
 		{	
 			setTimeout(function() {egysegenkentiLista();},delay);
+			setTimeout(function() {setYear();},delay);
+			
 		}
 		document.cookie="Page="+mit;
 		var xmlhttp = new XMLHttpRequest();
@@ -1010,4 +1012,25 @@ setTimeout(function() {
 					console.log(result)
 				}
 	});	},2000);	
+}
+//letöltésnél az évszámok feltöltése
+function setYear()
+{
+	setTimeout(function() {
+	$.ajax(
+	{
+		type:"GET",
+		url:"ajax/setYear.php",
+		success:function(result)
+				{
+					$("#evszam").html(result);
+				}
+	});	},500);	
+}
+function changeYear()
+{
+	var evszam=$('#evszam').val();
+	console.log(evszam)
+	document.cookie="Ev="+evszam;
+	setTimeout(function() { ajaxLoad("download")},500);	
 }

@@ -11,13 +11,21 @@
 
 
 <h2><b>Egységenkénti listák</b></h2>
-<h3>Szűrés</h3>
-<button class="btn" onclick="hide('istitute')" id="histitute" >Egységek elrejtése</button>
-<button class="btn stealth" onclick="show('istitute')" id="sistitute">Egységek mutatása</button>
-<button class="btn" onclick="hide('unit')" id="hunit">Alegységek elrejtése</button>
-<button class="btn stealth" onclick="show('unit')" id="sunit">Alegységek mutatása</button>
-<button class="btn" onclick="hide('records')" id="hrecords">Rekordok elrejtése</button>
-<button class="btn stealth" onclick="show('records')" id="srecords">Rekordok mutatása</button>
+<h2>Szűrés</h2>
+<div class="row">
+<div class="col-xs-2 col-md-2" id="histitute"><button class="btn" onclick="hide('istitute')"  >Egységek elrejtése</button></div>
+<div class="col-xs-2 col-md-2 stealth" id="sistitute"><button class="btn " onclick="show('istitute')" >Egységek mutatása</button></div>
+<div class="col-xs-2 col-md-2" id="hunit"><button class="btn" onclick="hide('unit')" >Alegységek elrejtése</button></div>
+<div class="col-xs-2 col-md-2 stealth" id="sunit"><button class="btn " onclick="show('unit')" >Alegységek mutatása</button></div>
+<div class="col-xs-2 col-md-2" id="hrecords"><button class="btn" onclick="hide('records')" >Rekordok elrejtése</button></div>
+<div class="col-xs-2 col-md-2 stealth" id="srecords"><button class="btn " onclick="show('records')" >Rekordok mutatása</button></div>
+<div class="col-xs-2 col-md-2">Költségvetés Éve
+<div class="dropdown">
+<select name="evszam"  id="evszam" onChange="changeYear()" class="form-control add-panel-select" >
+</select>
+</div>
+</div>
+</div>
 <div  id="egysegenkentiLista">
 	
 
