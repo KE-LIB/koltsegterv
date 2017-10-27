@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LANGUAGE>
+  <HEADER_LOGOUT_MENU1>Pontotthon angol verzió</HEADER_LOGOUT_MENU1>
+  <HEADER_LOGOUT_MENU2>Rólunk</HEADER_LOGOUT_MENU2>
+  <HEADER_LOGOUT_MENU3>Regisztráció</HEADER_LOGOUT_MENU3>
+  <HEADER_LOGOUT_MENU4>Nyelv/Language</HEADER_LOGOUT_MENU4>
+  <HEADER_LOGOUT_MENU5>Visszajelzés</HEADER_LOGOUT_MENU5>
+  <HEADER_LOGOUT_SUBMENU1>Magyar</HEADER_LOGOUT_SUBMENU1>
+  <HEADER_LOGOUT_SUBMENU2>English</HEADER_LOGOUT_SUBMENU2>
+  <HOME_PTITLE>Bejelentkezés</HOME_PTITLE>
+  <HOME_TAB1>Lakástulajdonos</HOME_TAB1>
+  <HOME_TAB2>Közösképviselő</HOME_TAB2>
+  <HOME_TAB3>Családi ház</HOME_TAB3>
+  <HOME_TAB4>Szakember</HOME_TAB4>
+  <HOME_LABEL1>Felhasználó név</HOME_LABEL1>
+  <HOME_LABEL2>Jelszó</HOME_LABEL2>
+  <HOME_LOGINBUTTON>Belépés</HOME_LOGINBUTTON>
+  <HOME_UNDERCONST>Feltöltés alatt</HOME_UNDERCONST>
+  <HOME_ERROR1>Ki Kell tölteni a mezőket!</HOME_ERROR1>
+  <HOME_ERROR2>Rossz felhasználónév vagy jelszó!</HOME_ERROR2>
+  <HOME_SUCCES>Sikeres regisztráció kérlek jelentkezz be!</HOME_SUCCES>
+  <REG_PTITLE>Regisztráció</REG_PTITLE>
+  <REG_TITLE1>Lakástulajdonos</REG_TITLE1>
+  <REG_TITLE2>Családi ház</REG_TITLE2>
+  <REG_TITLE3>Közösképviselő</REG_TITLE3>
+  <REG_TAB1>Lakástulajdonos </REG_TAB1>
+  <REG_TAB2>Közösképviselő </REG_TAB2>
+  <REG_TAB3>Családi ház </REG_TAB3>
+  <REG_TAB4>Szakember</REG_TAB4>
+  <REG_LABEL1>Vezetéknév: </REG_LABEL1>
+  <REG_LABEL2>Keresztnév: </REG_LABEL2>
+  <REG_LABEL3>Település: </REG_LABEL3>
+  <REG_LABEL4>Utca: </REG_LABEL4>
+  <REG_LABEL5>Házszám: </REG_LABEL5>
+  <REG_LABEL6>Emelet: </REG_LABEL6>
+  <REG_LABEL7>Ajtó: </REG_LABEL7>
+  <REG_LABEL8>Irányítószám: </REG_LABEL8>
+  <REG_LABEL9>Email: </REG_LABEL9>
+  <REG_LABEL10>Telefonszám: </REG_LABEL10>
+  <REG_LABEL10_a>Telefonszám:</REG_LABEL10_a>
+  <REG_LABEL11>Felhasználónév: </REG_LABEL11>
+  <REG_LABEL12>Jelszó: </REG_LABEL12>
+  <REG_LABEL13>Jelszó újra: </REG_LABEL13>
+  <REG_LABEL14>Hány emeletes a lakótömb: </REG_LABEL14>
+  <REG_LABEL15>Lakás/emelet: </REG_LABEL15>
+  <REG_LABEL16>Lakók száma: </REG_LABEL16>
+  <REG_LABEL17>Nyelv: </REG_LABEL17>
+  <REG_LABEL18>Magyar</REG_LABEL18>
+  <REG_HINT1>Kérem válasszon a listából, amennyiben az irányítószámot kitöltötte de a  lista üres, kövesse a fenti szöveg utasítását</REG_HINT1>
+  <REG_LABEL19>English</REG_LABEL19>
+  <REG_BUTTON>Regisztrálok</REG_BUTTON>
+  <ABOUT_TITLE>Rólunk</ABOUT_TITLE>
+   <REG_PLACEHOLDER1>Példa</REG_PLACEHOLDER1>
+  <REG_PLACEHOLDER2>István</REG_PLACEHOLDER2>
+  <REG_PLACEHOLDER3>Nagyváros</REG_PLACEHOLDER3>
+  <REG_PLACEHOLDER4>Kiss</REG_PLACEHOLDER4>
+  <REG_PLACEHOLDER5>Valami</REG_PLACEHOLDER5>
+  <REG_PLACEHOLDER6>Jelszó</REG_PLACEHOLDER6>
+  <REG_PLACEHOLDER7>Jelszó újra</REG_PLACEHOLDER7>
+  <REG_INFOL>Lakástulajdonosi regisztráció csak abban az esetben lehetséges, ha a közös képviselő regisztrálta a társasházat, lakásszövetkezetet, és feltöltötte annak adatait. Amennyiben még nem rendelkezik regisztrációval, jelezze szándékát a közös képviselő felé.</REG_INFOL>
+  <HEADER_USER_MENU1>Pontotthon</HEADER_USER_MENU1>
+  <HEADER_USER_MENU2>Üdvözöllek :</HEADER_USER_MENU2>
+  <HEADER_USER_MENU3>Friss</HEADER_USER_MENU3>
+  <HEADER_USER_MENU4>Hírek</HEADER_USER_MENU4>
+  <HEADER_USER_MENU5>Új Hír</HEADER_USER_MENU5>
+  <HEADER_USER_MENU6>Események</HEADER_USER_MENU6>
+  <HEADER_USER_MENU7>Új Esemény</HEADER_USER_MENU7>
+  <HEADER_USER_MENU8>Szavazás</HEADER_USER_MENU8>
+  <HEADER_USER_MENU9>Szavazás eredménye</HEADER_USER_MENU9>
+  <HEADER_USER_MENU10>Profil szerkesztése</HEADER_USER_MENU10>
+  <HEADER_USER_MENU11>Cash-flow</HEADER_USER_MENU11>
+  <HEADER_USER_MENU12>Cash-flow felvitele</HEADER_USER_MENU12>
+  <HEADER_USER_MENU13>Lakás Cash-flow</HEADER_USER_MENU13>
+  <HEADER_USER_MENU14>Hiteleim</HEADER_USER_MENU14> 
+  <HEADER_USER_MENU15>Előző havi kimutatás</HEADER_USER_MENU15>
+  <HEADER_USER_MENU16>Társasház Cash-flow</HEADER_USER_MENU16>
+  <HEADER_USER_MENU17>Társasház előző havi kimutatása</HEADER_USER_MENU17>
+  <HEADER_USER_MENU18>Kijelentkezés</HEADER_USER_MENU18>
+  <HEADER_USER_MENU19>Visszajelzés</HEADER_USER_MENU19>
+  <HEADER_USER_MENU20>Átváltás lakóra</HEADER_USER_MENU20>
+  <HEADER_USER_MENU21>Új Szavazás</HEADER_USER_MENU21>
+  <HEADER_USER_MENU22>Gyűjtés</HEADER_USER_MENU22>
+  <HEADER_USER_MENU23>Beállítások</HEADER_USER_MENU23>
+  <HEADER_USER_MENU24>Közösköltség/Fő</HEADER_USER_MENU24>
+  <HEADER_USER_MENU25>Fogyasztások</HEADER_USER_MENU25>
+  <HEADER_USER_MENU26>Társasház Cash-flow felvitele</HEADER_USER_MENU26>
+  <MAIN_TITLE>Távolléted alatt az alábbi dolgok történtek</MAIN_TITLE>
+  <MAIN_TEXT1>Kedves </MAIN_TEXT1>
+  <MAIN_TEXT2> távol léted alatt az alábbi dolgok történtek:</MAIN_TEXT2>
+  <MAIN_TEXT3>Hírek:</MAIN_TEXT3>
+  <MAIN_TEXT4>Commentek:</MAIN_TEXT4>
+  <MAIN_TEXT5>  Közelgő események:</MAIN_TEXT5>
+  <MAIN_TEXT6> Akualás szavazások:</MAIN_TEXT6>
+  <NEWS_TITLE>Hírek</NEWS_TITLE>
+  <NEWS_TEXT1>Kommentek</NEWS_TEXT1>
+  <NEWS_BUTTON1>Küldés</NEWS_BUTTON1>
+  <NEWNEWS_TITLE>Új Hír felvitele</NEWNEWS_TITLE>
+  <NEWNEWS_TEXT1>Cím: </NEWNEWS_TEXT1>
+  <NEWNEWS_TEXT2>Szöveg: </NEWNEWS_TEXT2>
+  <NEWNEWS_PLACEHOLDER1>Példa cím</NEWNEWS_PLACEHOLDER1>
+  <NEWNEWS_BUTTON1>Küldés</NEWNEWS_BUTTON1>
+  <EVENT_TITLE>Események</EVENT_TITLE>
+  <EVENT_TEXT1>A lejártakat ne mutassa</EVENT_TEXT1>
+  <EVENT_TEXT2>Készült: </EVENT_TEXT2>
+  <EVENT_TEXT3>Kezdet:  </EVENT_TEXT3>
+  <EVENT_TEXT4>Vég: </EVENT_TEXT4>
+  <EVENT_TEXT5>Tervezett költség: </EVENT_TEXT5>
+  <EVENT_TEXT6>Bevétel: </EVENT_TEXT6>
+  <EVENT_TEXT7>Kiadás: </EVENT_TEXT7>
+  <EVENT_BUTTON1>Törlés</EVENT_BUTTON1>
+  <NEWEVENT_TITLE>Új esemény létrehozása</NEWEVENT_TITLE>
+  <NEWEVENT_TEXT1>Cím:  </NEWEVENT_TEXT1>
+  <NEWEVENT_TEXT2>Szöveg:  </NEWEVENT_TEXT2>
+  <NEWEVENT_TEXT3>Költség:  </NEWEVENT_TEXT3>
+  <NEWEVENT_TEXT4>Bevétel: </NEWEVENT_TEXT4>
+  <NEWEVENT_TEXT5>Kezdet:  </NEWEVENT_TEXT5>
+  <NEWEVENT_TEXT6>Vég:  </NEWEVENT_TEXT6>
+  <NEWEVENT_BUTTON1>Küldés</NEWEVENT_BUTTON1>
+  <VOTEFOR_TITLE>Aktuális szavazások</VOTEFOR_TITLE>
+  <VOTEFOR_BUTTON1>Szavazok</VOTEFOR_BUTTON1>
+  <VOTEFOR_TEXT1>nincs aktuális szavazás</VOTEFOR_TEXT1>
+   <VOTE_TITLE>Aktuális szavazások</VOTE_TITLE>
+   <VOTE_TEXT1>még nem szavaztak ebben a témában</VOTE_TEXT1>
+   <EDITP_TITLE>Profil Szerkeszése</EDITP_TITLE>
+   <EDITP_TEXT1>* a csillaggal jelőlt részek kitöltése kötelező</EDITP_TEXT1>
+   <EDITP_TEXT2>Vezeték név:  </EDITP_TEXT2>
+   <EDITP_TEXT3>Kereszt név:  </EDITP_TEXT3>
+   <EDITP_TEXT4>Település:  </EDITP_TEXT4>
+   <EDITP_TEXT5>Utca:  </EDITP_TEXT5>
+   <EDITP_TEXT6>Ház szám:  </EDITP_TEXT6>
+   <EDITP_TEXT7>Emelet:  </EDITP_TEXT7>
+   <EDITP_TEXT8>Ajtó:  </EDITP_TEXT8>
+   <EDITP_TEXT9>Irányító szám:  </EDITP_TEXT9>
+   <EDITP_TEXT10>Email:  </EDITP_TEXT10>
+   <EDITP_TEXT11>Telefon: </EDITP_TEXT11>
+   <EDITP_TEXT12>Felhasználó név:  </EDITP_TEXT12>
+   <EDITP_TEXT13>Jelszó:  </EDITP_TEXT13>
+   <EDITP_TEXT14>Típus: </EDITP_TEXT14>
+   <EDITP_TEXT15>Családiház</EDITP_TEXT15>
+   <EDITP_TEXT16>Lakás</EDITP_TEXT16>
+   <EDITP_TEXT17>Nyelv:  </EDITP_TEXT17>
+   <EDITP_TEXT18> Magyar </EDITP_TEXT18>
+   <EDITP_TEXT19> English </EDITP_TEXT19>
+   <EDITP_BUTTON1>Módosít</EDITP_BUTTON1>
+   <CFEDIT_TITLE>Cash-Flow felvitele</CFEDIT_TITLE>
+   <CFEDIT_TEXT1>kérlek töltsd ki a mezőket és nevezd el a bevételeidet és a kiadásokat</CFEDIT_TEXT1>
+   <CFEDIT_TEXT2>Név* :</CFEDIT_TEXT2>
+   <CFEDIT_TEXT3>Érték* :</CFEDIT_TEXT3>
+   <CFEDIT_TEXT4>Fix minden hónapban</CFEDIT_TEXT4>
+   <CFEDIT_PLACEHOLDER1>Munkabér 1</CFEDIT_PLACEHOLDER1>
+   <CFEDIT_PLACEHOLDER2>100000</CFEDIT_PLACEHOLDER2>   
+   <CFEDIT_PLACEHOLDER3>Kiadás 1</CFEDIT_PLACEHOLDER3>
+   <CFEDIT_PLACEHOLDER4>10000</CFEDIT_PLACEHOLDER4>
+   <CFEDIT_LIST1>GYES</CFEDIT_LIST1>
+   <CFEDIT_LIST2>GYED</CFEDIT_LIST2>
+   <CFEDIT_LIST3>GYÁP</CFEDIT_LIST3>
+   <CFEDIT_LIST4>Munkabér 1</CFEDIT_LIST4>
+   <CFEDIT_LIST5>Munkabér 2</CFEDIT_LIST5>
+   <CFEDIT_LIST6>Munkabér 3</CFEDIT_LIST6>
+   <CFEDIT_LIST7>Munkabér 4</CFEDIT_LIST7>
+   <CFEDIT_LIST8>Családi pótlék</CFEDIT_LIST8>
+   <CFEDIT_LIST9>Maszek</CFEDIT_LIST9>
+   <CFEDIT_LIST10>Gáz</CFEDIT_LIST10>
+   <CFEDIT_LIST11>Víz</CFEDIT_LIST11>
+   <CFEDIT_LIST12>Villany</CFEDIT_LIST12>
+   <CFEDIT_LIST13>TV,Internet</CFEDIT_LIST13>
+   <CFEDIT_LIST14>TV</CFEDIT_LIST14>
+   <CFEDIT_LIST15>Internet</CFEDIT_LIST15>
+   <CFEDIT_LIST16>Mobil(ok)</CFEDIT_LIST16>
+   <CFEDIT_LIST17>Vezetékes telefon</CFEDIT_LIST17>
+   <CFEDIT_LIST18>Hitel</CFEDIT_LIST18>
+   <CFEDIT_LIST19>Kölcsön</CFEDIT_LIST19>
+   <CFEDIT_LIST20>Hitel 1</CFEDIT_LIST20>
+   <CFEDIT_LIST21>Kocsi</CFEDIT_LIST21>
+   <CFEDIT_LIST22>Szerelő</CFEDIT_LIST22>
+   <CFEDIT_LIST23>Bevásárlás</CFEDIT_LIST23>
+   <CFEDIT_LIST24>Felújítás</CFEDIT_LIST24>
+   <CFEDIT_BUTTON1>Felvitel</CFEDIT_BUTTON1>
+   <CFEDIT_BUTTON2>Opciók</CFEDIT_BUTTON2>
+   <CFEDIT_BUTTON3>Módosítás</CFEDIT_BUTTON3>
+   <CFEDIT_BUTTON4>Törlés</CFEDIT_BUTTON4>
+   <CFEDIT_BUTTON5>Felvitel</CFEDIT_BUTTON5>
+   <CFEDIT_TAB1>Bevétel</CFEDIT_TAB1>
+   <CFEDIT_TAB2>Kiadás</CFEDIT_TAB2>
+   <CF_TITLE>Havi cash-flow kimutatás</CF_TITLE>
+   <CF_TABLE1>Bevétel</CF_TABLE1>
+   <CF_TABLE1_ROW1>Bevétel név</CF_TABLE1_ROW1>
+   <CF_TABLE1_ROW2>Összeg</CF_TABLE1_ROW2>
+   <CF_TABLE2>Kiadás</CF_TABLE2>
+   <CF_TABLE2_ROW1>Kiadás név</CF_TABLE2_ROW1>
+   <CF_TABLE2_ROW2>Összeg</CF_TABLE2_ROW2>
+   <CF_MESSAG1>Még nem vittél be bevételt erre a hónapra</CF_MESSAG1>
+   <CF_MESSAG2>Bevételek</CF_MESSAG2>
+   <CF_MESSAG3>összesen:</CF_MESSAG3>
+   <CF_MESSAG4>Kiadások</CF_MESSAG4>
+   <CF_MESSAG5>marad</CF_MESSAG5>
+   <CF_MESSAG6>Hiány</CF_MESSAG6>
+   <CF_VIEW_TITLE>pontotthon</CF_VIEW_TITLE>
+   <CF_VIEW_TITLE1>CashFlow</CF_VIEW_TITLE1>
+   <CF_OLDCF_TITLE>Eddigi cash-flow kimutatás</CF_OLDCF_TITLE>
+   <CF_OLDCF>CashFlow-k</CF_OLDCF>
+   <FEEDBACK_TITLE>Visszajelzés küldése a fejlesztőknek</FEEDBACK_TITLE>
+   <DEBT_TITLE>Hiteleim</DEBT_TITLE>
+   <CONSTRUKTION>Fejlesztés alatt..</CONSTRUKTION>
+
+   
+  
+  
+  
+ 
+  
+
+</LANGUAGE> 
