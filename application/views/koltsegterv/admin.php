@@ -1,5 +1,5 @@
 <div class="options">
-		<button type="button" onclick="ajaxLoad('users')" class="btn btn-primary btn-lg opt-btn">
+		<button type="button" onclick="ajaxALoad('users')" class="btn btn-primary btn-lg opt-btn">
 			<span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Felhasználók
 		</button>
 		<button type="button" onclick='ajaxLoad("newForm")' id="newForm" name="newForm" class="btn btn-success btn-lg opt-btn">

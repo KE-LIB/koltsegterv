@@ -1,7 +1,25 @@
 <div id="users">
-<table id="user"></table>
+<table id="user" class="table">
+<thead><tr><th>Vezetéknév</th><th>Keresztnév</th><th>Admin</th><th>Email</th><th>Műveletek</th></tr></thead>
+<?php
+
+for($i=0;$i<count($users);$i++)
+{
+	echo '<tr id="sor_'.$users[$i][4].'">';
+	for($j=0;$j<4;$j++)
+	{
+		echo '<td>'.$users[$i][$j].'</td>';
+	}
+	echo '<td>
+	<button type="button" onclick="Change('.$users[$i][4].')" class="btn btn-success"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Módosítás</button>
+	<button type="button" onclick="Delete('.$users[$i][4].')" class="btn btn-danger"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>&nbsp;Törlés</button>
+	</td></tr>';
+}
+?>
+		</table>
+		<br>
 </div>
-<div id="mod">
+<div id="mod" class="stealth">
     <?php
 $this->load->helper('form');
 echo form_open('Koltsegterv/modUser');
@@ -45,7 +63,16 @@ echo form_label('Jelszó&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;',
    
 		'required'		=>'required',
 );
-echo form_input($data).'</div></div><div class="row"><div class="col-sm-2">';
+echo form_input($data).'</div></div><div class="row"><div class="col-sm-6">';
+$data = array(
+        'name'          => 'admin',
+        'id'            => 'admin',
+        'value'         => '1',
+        'style'         => 'margin:10px'
+);
+
+echo form_checkbox($data).'A felhasználó admin jogosúltsággal rendelkezik</div></div><div class="row"><div class="col-sm-2">';
+
 $attributes = array(
 					'class' => 'btn btn-primary',
 					);
@@ -57,3 +84,36 @@ echo form_close($string);
 ?>
 
 </div>
+<script>
+function Delete(id)
+{
+	console.log(id)
+		$.ajax(
+	{
+		type:"POST",
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/deleteUser',
+			data:"id="+id,
+			success:function(result)
+				{
+					//console.log(result)
+					ajaxALoad('users')
+				}
+	});
+}
+function Change(id)
+{
+	$('#users').hide();
+	$('#mod').show();
+	$.ajax(
+	{
+		type:"POST",
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/getModUser',
+			data:"id="+id,
+			success:function(result)
+				{
+					//console.log(result)
+					ajaxALoad('users')
+				}
+	});*/
+}
+</script>

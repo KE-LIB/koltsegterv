@@ -112,12 +112,49 @@ class Koltsegterv extends CI_Controller {
         $this->load->view('koltsegterv/'.$_POST['mit'], $data);
 		}
 		}
+		public function loadAPage()
+		{
+		$data['title']="Költségtervező";
 		
+		if($_POST['mit']=="users")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getUsers();
+			$user=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->last_name);
+				array_push($help,$row->first_name);
+				array_push($help,$row->level);
+				array_push($help,$row->email);
+				array_push($help,$row->id);
+				array_push($user,$help);
+			}
+			$data['users']=$user;
+		}
+			
+        $this->load->view('koltsegterv/'.$_POST['mit'], $data);
+		}
+		
+		public function deleteUser()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->deleteUser();
+		}
+		public function getModUser()
+		{
+		$this->load->model('Helper_model');
+		$query=$this->Helper_model->deleteUser();
+		foreach ($query->result() as $sor)
+		{
+		$return=$sor->id.','.$sor->email.','.$sor->user_name.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year;
+		}
+		}
 		public function getEgyseg()
 		{
 		$this->load->model('Helper_model');
 		$query=$this->Helper_model->getEgyseg();
-		echo "1egy";
 		foreach ($query->result() as $row)
 		{
 			echo "<option value=".$row->instid." selected>".$row->instname."</option>";

@@ -15,6 +15,20 @@
 	</div>
 	</div>
 	<script>
+	function ajaxALoad(mit)
+{
+	$.ajax(
+	{
+		type:"POST",
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage',
+			data:"mit="+mit,
+			success:function(result)
+				{
+					//console.log(result)
+					$("#mainPage").html(result);
+				}
+	});
+}
 function ajaxLoad(mit)
 {
 	$.ajax(

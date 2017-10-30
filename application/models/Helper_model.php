@@ -956,6 +956,27 @@ public function setYear()
 	$query=$this->db->query($sql);
 	return $query;
 }
+public function deleteUser()
+{
+	$this->load->database();
+	$this->db->where('id', $_POST['id']);
+	$this->db->delete('kltsg_users');
+	
+}
+public function deleteUser()
+{
+	$this->load->database();
+	$this->db->where('id', $_POST['id']);
+	$this->db->get('kltsg_users');
+	
+}
+public function getUsers()
+{
+	$this->load->database();
+	$sql="SELECT first_name,last_name,level,email,id FROM `kltsg_users";
+	$query=$this->db->query($sql);
+	return $query;
+}
 public function getFinanc()
 {
 
