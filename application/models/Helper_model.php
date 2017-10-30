@@ -963,12 +963,12 @@ public function deleteUser()
 	$this->db->delete('kltsg_users');
 	
 }
-public function deleteUser()
+public function getModUser()
 {
 	$this->load->database();
 	$this->db->where('id', $_POST['id']);
-	$this->db->get('kltsg_users');
-	
+	$query=$this->db->get('kltsg_users');
+	return $query;
 }
 public function getUsers()
 {

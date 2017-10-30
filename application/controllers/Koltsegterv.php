@@ -145,11 +145,12 @@ class Koltsegterv extends CI_Controller {
 		public function getModUser()
 		{
 		$this->load->model('Helper_model');
-		$query=$this->Helper_model->deleteUser();
+		$query=$this->Helper_model->getModUser();
 		foreach ($query->result() as $sor)
 		{
-		$return=$sor->id.','.$sor->email.','.$sor->user_name.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year;
+		$return=$sor->id.','.$sor->last_name.','.$sor->first_name.','.$sor->email.','.$sor->level;
 		}
+		echo $return;
 		}
 		public function getEgyseg()
 		{

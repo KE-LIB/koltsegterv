@@ -13,8 +13,9 @@
 			
 	</div>
 	<script>
-	function ajaxLoad(mit)
+	 function ajaxLoad(mit)
 {
+	
 	$.ajax(
 	{
 		type:"POST",
@@ -22,11 +23,13 @@
 			data:"mit="+mit,
 			success:function(result)
 				{
-						
+					//console.log(result)
 					$("#mainPage").html(result);
 				}
 	});
 }
+	
+
 function szamol(){
 setTimeout(function() {
 	var bevOssz=document.getElementById("buruttOsszesBev").innerHTML;

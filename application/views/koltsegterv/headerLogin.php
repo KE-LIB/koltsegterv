@@ -37,7 +37,7 @@
 	  } 
 	   $this->load->helper('form');
 	echo form_open('Koltsegterv/LogOut');?>
-	<button  type="button" class="btn btn-primary btn-panel" onclick="ajaxLoad('main')"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Főmenü</button>
+	<button  type="button" id="fomenu"  class="btn btn-primary btn-panel" onclick="ajaxLoad('main')"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Főmenü</button>
 
 	<button  type="button" class="btn btn-danger btn-panel" onclick="logOut()"><span class="glyphicon glyphicon-log-out" aria-hidden="true">Kijelentkezés</button>
 <?php	 $string = '</div></div>';

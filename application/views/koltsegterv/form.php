@@ -54,6 +54,7 @@
   </body>
 
 <script>
+changeFoGomb();	
 //kiadás megjelenítése+ amit eddig felvittünk
 function showKiad(){
 //	getAlEgysegName();
@@ -64,8 +65,7 @@ ajaxLoadKoltsegfel("kiadas")
 function showBev(){
 //	getAlEgysegName();
 //getEgysegName();
-ajaxLoadKoltsegfel("bevetel")
-					
+ajaxLoadKoltsegfel("bevetel")				
 }
 function ajaxLoadKoltsegfel(mit)
 {
@@ -87,6 +87,7 @@ function confirmExit()
 	var x = confirm("Biztosan ELVETI a költségtervezetet?\n\nHa az OK-t választja a munkája törlésre kerül és később sem folytathatja azt!");
 		if (x){
 			clearSubmission();
+			$("#fomenu").attr('onclick','ajaxLoad("main")')
 		ajaxLoad('main');}
 }
 //mentés és kilépés
@@ -129,5 +130,9 @@ function clearSubmission()
 					console.log(result);
 				}
 	});	
+}
+function changeFoGomb()
+{
+	$("#fomenu").attr('onclick','confirmExit()')
 }
 </script>

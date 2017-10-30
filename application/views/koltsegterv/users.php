@@ -54,11 +54,11 @@ echo form_label('email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
 		'required'		=>'required',
 );
 echo form_input($data).'</div></div><div class="row"><div class="col-sm-2 well">';
-echo form_label('Jelszó&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','psw').'</div><div class="col-sm-3 well">';
+echo form_label('Jelszó(kérelk akkor töltsd ki ha új jelszót akarsz adni neki)','psw').'</div><div class="col-sm-3 well">';
    $data = array(
         'name'          => 'psw',
         'id'            => 'psw',
-		'title'			=>'A felhasználó vezetéknve kerül ide',
+		'title'			=>'A felhasználó új jelszava',
 		'type'			=>'password',
    
 		'required'		=>'required',
@@ -87,7 +87,7 @@ echo form_close($string);
 <script>
 function Delete(id)
 {
-	console.log(id)
+	//console.log(id)
 		$.ajax(
 	{
 		type:"POST",
@@ -111,9 +111,9 @@ function Change(id)
 			data:"id="+id,
 			success:function(result)
 				{
-					//console.log(result)
-					ajaxALoad('users')
+					console.log(result)
+					//ajaxALoad('users')
 				}
-	});*/
+	});
 }
 </script>

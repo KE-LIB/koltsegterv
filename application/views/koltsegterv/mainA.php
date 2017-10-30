@@ -15,12 +15,13 @@
 	</div>
 	</div>
 	<script>
-	function ajaxALoad(mit)
+ function ajaxLoad(mit)
 {
+	
 	$.ajax(
 	{
 		type:"POST",
-			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage',
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadPage',
 			data:"mit="+mit,
 			success:function(result)
 				{
@@ -29,6 +30,8 @@
 				}
 	});
 }
+	
+
 function ajaxLoad(mit)
 {
 	$.ajax(

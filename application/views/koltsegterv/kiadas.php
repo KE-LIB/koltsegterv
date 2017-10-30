@@ -9,6 +9,7 @@
 <div class="col-xs-1 col-md-1"><span id="errorEv">Év</span></div>
 <div class="col-xs-3 col-md-3"><span id="errorcpv1">CPV-01 szint</span></div>
 <div class="col-xs-3 col-md-3"><span id="errorcpv2">CPV-02 szint</span></div>
+<div class="col-xs-1 col-md-1"><span id="errorHonap">Hónap</span></div>
 
 </div>
 <div class="row">
@@ -47,12 +48,24 @@
 </select>
 </div>
 </div>
-
-
-
-
 <div class="col-xs-1 col-md-1">
-
+<div class="dropdown">
+<select name="honap"  id="honap"  onchange="setHonap()"class="form-control add-panel-select" >
+<option value="999" selected>Válasszon...</option>
+<option value="1" >Január</option>
+<option value="2" >Február</option>
+<option value="3" >Március</option>
+<option value="4" >Április</option>
+<option value="5" >Május</option>
+<option value="6" >Június</option>
+<option value="7" >Július</option>
+<option value="8" >Augusztus</option>
+<option value="9" >Szeptember</option>
+<option value="10" >Október</option>
+<option value="11" >Novemnber</option>
+<option value="12" >december</option>
+</select>
+</div>
 </div>
 <div class="col-xs-2 col-md-2">
 
@@ -227,9 +240,10 @@ function ajaxAddKiadas()
 	var ev=$("#kltsgEve").val();
 	var cpv1=$("#cpv1").val();
 	var cpv2=$("#cpv2").val();
+	var honap=$("#honap").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
-	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="" || cpv1=="999" || cpv2=="999")
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="" || cpv1=="999" || cpv2=="999" || honap=="999")
 	{
 		if(rovat=="999")
 		{
@@ -272,13 +286,18 @@ function ajaxAddKiadas()
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
 		$("#errorcpv1").css("color","red");
 		}
+		if(honap=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorcpv1").css("color","red");
+		}
 	}
 	else{
 	$.ajax(
 	{
 			type:"POST",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/addKiadas",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"cpv":cpv1},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"cpv":cpv1,"honap":honap},
 		success:function(result)
 		{
 		showKiad();
