@@ -3,13 +3,13 @@
  <h1 class="card-header bg-primary text-white">Bevezető</h1>
   <div class="card-block">
    <h4 class="card-title">Üdvözöllek kalandor!</h4>
- <p class="card-text"><span id="history">Gondolom azért tévedtél ide hogy segítsek neked el magyarázni, hogy is müködik ez, amit össze raktunk neked.<br>
-Hát akkor figyelj nagyon, és kezdődjön az utazása költségtervező ezen részén!</span></div></div>
+ <p class="card-text"> <blockquote>Gondolom azért tévedtél ide hogy segítsek neked el magyarázni, hogy is müködik ez, amit össze raktunk neked.<br>
+Hát akkor figyelj nagyon, és kezdődjön az utazása költségtervező ezen részén! <blockquote></div></div>
 <div class="card">
  <h1 class="card-header bg-danger text-white">Kiadások-Bevételek</h1>
   <div class="card-block">
    <h4 class="card-title">Elmagyarázom neked a kiadások-Bevételek müködését!</h4>
- <p class="card-text"><span id="history">Mikor megérkezel a honlapra, az alábbi kép fogad.
+ <p class="card-text"> <blockquote>Mikor megérkezel a honlapra, az alábbi kép fogad.
  <br><img src="<?php echo base_url(); ?>img/alapkep.png" ><br>
  Itt a kiadások  fülre kattintva, az alábbi kép fogad:
  <br><img src="<?php echo base_url(); ?>img/kiadas.png" ><br>
@@ -23,8 +23,11 @@ Előszőr a rovat mezőt töltjük ki.
  Ezután a hozzá tartozó Áfát és az Évet.(megjegyzés: az év automatán kitöltődik mindig a következő évre,nyugodtan bele lehet javítani ha nem tetszik az év amit oda beírt.)
  <br><img src="<?php echo base_url(); ?>img/KAfaesEv.png" ><br> 
  Majd ezután ki kell tölteni a kiadáshoz tartozó CPV kódokat! <br>
+ <blockquote>
  -És, hogy mi az a CPV kód?<br>
- -Fogalmam sincs. Azt mondták ez legyen ott, és ezt mindenki használta már, nekem meg ennyi elég volt-mondotta a programozó.
+ -Fogalmam sincs. Azt mondták ez legyen ott, és ezt mindenki használta már, nekem meg ennyi elég volt
+ </blockquote>
+ <footer>-mondotta a programozó.</footer>
  <br><img src="<?php echo base_url(); ?>img/cpv1.png" ><br>
  Miután kiválasztottuk a cpv 1 es kódot ,lehetőség nyillík a cpv 2 kód kiválasztása, mely egy szűkebb halmaza az előbbinek.
  <br><img src="<?php echo base_url(); ?>img/cpv2.png" ><br>
@@ -53,15 +56,15 @@ A bevétel oldalon minden úgyan úgy müködik, csak ott nincs cpv kód.
  <img src="<?php echo base_url(); ?>img/mentett.png" > fülre kattintva megnézhetjük, őket. Itt újra szerkeszthetjük, vagy csak simán előnézettel megnézzük mit írtunk bele, nincs e benne helyesírási hiba, mint ebben az útmutatóban :) stb..
 <br><img src="<?php echo base_url(); ?>img/mentes.png" > a mentés feladásra akkor kattintsunk ha már über prók vagyunk és tudjuk hogy mi aztán sosem hibázunk meg <br>különben is! Mert ez egyből elhelyezi úgy a tételt, hogy azt többé nem szerkeszthető. Tehát ez csak azoknak ajánlom egyből akik kellő Önbizalommal rendlekeznek.
 <br><img src="<?php echo base_url(); ?>img/mentes.png" > a harmadik gomb pedig arra való, hogy ha még sem akarom elmenti azt a 300 sort amit 4 óra alatt gépeltem ide bele, rákattíntok és törlődik az eddigi munkám.<br> Sőt ha a programozó elírt valamit még az is amit más csinált eddig :) 
- </span></div></div>
+  </blockquote></div></div>
  <div class="card">
  <h1 class="card-header bg-success text-white">Köszönöm</h1>
   <div class="card-block">
    <h4 class="card-title">Végeztünk mára!</h4>
- <p class="card-text"><span id="history">Köszönöm hogy végig olvastad ezt és ha valami hibát találsz nyugodtan írj nekem:<br>
+ <p class="card-text"> <blockquote>Köszönöm hogy végig olvastad ezt és ha valami hibát találsz nyugodtan írj nekem:<br>
  Diszterhöft Zoltán<br>
  diszterhoft.zoltan@ke.hu<br>
- telefon : 1306</span></div>
+ telefon : 1306 </blockquote></div>
  <div class="card-footer text-muted">
     ugrás az oldal <a href="#teto">tetejére</a>.
   </div></div><div class="card">
