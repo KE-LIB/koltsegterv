@@ -1,3 +1,4 @@
+<div id="mainPage">
 <div id="users">
 <table id="user" class="table">
 <thead><tr><th>Vezetéknév</th><th>Keresztnév</th><th>Admin</th><th>Email</th><th>Műveletek</th></tr></thead>
@@ -18,6 +19,7 @@ for($i=0;$i<count($users);$i++)
 ?>
 		</table>
 		<br>
+		<button class="btn btn-primary" onclick=newUser()><span class="glyphicon glyphicon-plus"></span> Új tag felvétele</button><br><br><br><br><br><br>
 </div>
 <div id="mod" class="stealth container">
 <?php
@@ -118,6 +120,7 @@ echo form_close($string);
 <br><br><br><br><br></div>
 </div>
 </div>
+
 <script>
 function Delete(id)
 {
@@ -163,5 +166,38 @@ function Change(id)
 				}
 	});
 }
-
+function newUser()
+{
+	$('#users').hide();
+	$('#mod').show();
+}
+ function ajaxLoad(mit)
+{
+	
+	$.ajax(
+	{
+		type:"POST",
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadPage',
+			data:"mit="+mit,
+			success:function(result)
+				{
+					//console.log(result)
+					$("#mainPage").html(result);
+				}
+	});
+}
+function ajaxALoad(mit)
+{
+	$.ajax(
+	{
+		type:"POST",
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage',
+			data:"mit="+mit,
+			success:function(result)
+				{
+					//console.log(result)
+					$("#mainPage").html(result);
+				}
+	});
+}
 </script>

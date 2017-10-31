@@ -1000,6 +1000,8 @@ public function deleteUser()
 	$this->load->database();
 	$this->db->where('id', $_POST['id']);
 	$this->db->delete('kltsg_users');
+	$this->db->where('user_id', $_POST['id']);
+	$this->db->delete('kltsg_policy');
 	
 }
 public function getModUser()
@@ -1012,6 +1014,8 @@ public function getModUser()
 public function saveUser()
 {
 	$this->load->database();
+	if($_POST['id']!="")
+	{
 	if($_POST['psw']=="")
 	{	
 	$this->db->set('password', md5($_POST['psw']));
@@ -1028,9 +1032,49 @@ public function saveUser()
 	$this->db->set('last_name', $_POST['First_Name']);
 	$this->db->set('email', $_POST['email']);
 	$this->db->where('id', $_POST['id']);
-	$this->output->enable_profiler(TRUE);
-	$query=$this->db->update('kltsg_users');
-	print_r($query);
+	$this->db->update('kltsg_users');
+	$this->db->where('user_id', $_POST['id']);
+	$this->db->delete('kltsg_policy');
+	for($i=0;$i<count($_POST['checkbox']);$i++)
+	{
+		$data = array(
+        'user_id' => $_POST['id'],
+        'unit_id' => $_POST['checkbox'][$i],
+       
+		);
+		$this->db->insert('kltsg_policy', $data);
+	}
+	}
+	else
+	{
+		if(isset($_POST['admin']))
+		{
+			$admin=1;
+		}
+		else
+		{
+			$admin=0;
+		}
+		$data = array(
+        'password' => $_POST['psw'],
+        'first_name' => $_POST['Last_Name'],
+        'last_name' => $_POST['First_Name'],
+        'level' => $admin,
+        'email' => $_POST['email'],
+        'user_name' => $_POST['Last_Name'].$_POST['First_Name'],
+        'email_changed' => '1'
+);
+	$this->db->insert('kltsg_users', $data);
+	$id=$this->db->insert_id();
+	for($i=0;$i<count($_POST['checkbox']);$i++)
+	{
+		$data = array(
+        'user_id' => $id,
+        'unit_id' => $_POST['checkbox'][$i],
+		);
+		$this->db->insert('kltsg_policy', $data);
+	}
+	}
 }
 public function getUsers()
 {

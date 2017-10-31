@@ -167,6 +167,7 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$query=$this->Helper_model->getModUser();
+		$return="";
 		foreach ($query->result() as $sor)
 		{
 		$return=$sor->id.','.$sor->last_name.','.$sor->first_name.','.$sor->email.','.$sor->level;
@@ -179,7 +180,6 @@ class Koltsegterv extends CI_Controller {
 			}
 		echo $return;
 		}
-		//public function saveUser()
 		public function modUser()
 		{
 		$data['valami']="";
