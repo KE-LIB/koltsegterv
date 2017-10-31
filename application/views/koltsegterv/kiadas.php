@@ -289,7 +289,7 @@ function ajaxAddKiadas()
 		if(honap=="999")
 		{
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
-		$("#errorcpv1").css("color","red");
+		$("#errorHonap").css("color","red");
 		}
 	}
 	else{
@@ -313,6 +313,10 @@ function setAfa()
 	var afa=$("#afaKulcs").val();
 	document.cookie="afaKulcs="+afa;	
 	$("#errorAfa").css("color","black");;			
+}
+function setHonap()
+{
+	$("#errorHonap").css("color","black");;			
 }
 function setAfaMertek()
 {
@@ -418,6 +422,7 @@ function editKiadRow(id)
 		$("#mertekegyseg").val(exp[5]);
 		$("#kltsgEve").val(exp[6]);
 		$("#cpv1").val(Number(exp[7]));
+		$("#honap").val(Number(exp[8]));
 		setCPV2();
 		$("#seged").html(id);
 		
@@ -434,8 +439,10 @@ function ajaxModKiadas()
 	var ev=$("#kltsgEve").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	var id=$("#seged").html();
+	var honap=$("#honap").val();
+	var cpv=$("#cpv1").val();
 	console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
-	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="" || honap=="999")
 	{
 		if(rovat=="999")
 		{
@@ -468,13 +475,18 @@ function ajaxModKiadas()
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
 		$("#errorMennyiseg").css("color","red");
 		}
+		if(honap=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorHonap").css("color","red");
+		}
 	}
 	else{
 	$.ajax(
 	{
 			type:"POST",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/modKiadas",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"id":id,"afa":afa},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"id":id,"afa":afa,"honap":honap,"cpv":cpv},
 		success:function(result)
 		{
 		showKiad();

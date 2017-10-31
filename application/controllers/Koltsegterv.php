@@ -376,7 +376,8 @@ class Koltsegterv extends CI_Controller {
 		$query=$this->Helper_model->editKiadasRow($_POST['id']);
 		foreach ($query->result() as $sor)
 		{
-		$return=$sor->sub_id.','.$sor->tax.','.$sor->megnevezes.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year.','.$sor->cpv;
+		$return=$sor->sub_id.','.$sor->tax.','.$sor->megnevezes.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year.','.$sor->cpv.','
+		.$sor->honap;
 		}
 		echo $return;
 		}
@@ -386,7 +387,7 @@ class Koltsegterv extends CI_Controller {
 		$query=$this->Helper_model->editBevetelRow($_POST['id']);
 		foreach ($query->result() as $sor)
 		{
-		$return=$sor->sub_id.','.$sor->tax.','.$sor->megnevezes.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year;
+		$return=$sor->sub_id.','.$sor->tax.','.$sor->megnevezes.','.$sor->brutto_egysegar.','.$sor->mennyiseg.','.$sor->quant.','.$sor->Year.','.$sor->honap;
 		}
 		echo $return;
 		}

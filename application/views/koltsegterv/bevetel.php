@@ -7,6 +7,7 @@
 <div class=" collapsed col-xs-1 col-md-1">Nettó</div>
 <div class="col-xs-1 col-md-1"><span id="errorAfa">Áfakulcs</span></div>
 <div class="col-xs-1 col-md-1"><span id="errorEv">Év</span></div>
+<div class="col-xs-1 col-md-1"><span id="errorHonap">Hónap</span></div>
 <div class="collapsed col-xs-1 col-md-1">Áfa</div>
 <div class=" collapsed col-xs-1 col-md-1">Bruttó</div>
 <div class="col-xs-1 col-md-1"></div>
@@ -36,7 +37,23 @@
 <input  type="number" min="0" step="any"  class="form-control" value="<?php echo date("Y")+1; ?>" id="kltsgEve" pattern="\d{4}" onblur="ellenoriz('errorEv','kltsgEve')" required/></td>
 </div>
 <div class="col-xs-1 col-md-1">
-
+<div class="dropdown">
+<select name="honap"  id="honap"  onchange="setHonap()"class="form-control add-panel-select" >
+<option value="999" selected>Válasszon...</option>
+<option value="1" >Január</option>
+<option value="2" >Február</option>
+<option value="3" >Március</option>
+<option value="4" >Április</option>
+<option value="5" >Május</option>
+<option value="6" >Június</option>
+<option value="7" >Július</option>
+<option value="8" >Augusztus</option>
+<option value="9" >Szeptember</option>
+<option value="10" >Október</option>
+<option value="11" >Novemnber</option>
+<option value="12" >december</option>
+</select>
+</div>
 </div>
 <div class="col-xs-2 col-md-2">
 
@@ -174,9 +191,10 @@ function ajaxAddBevetel()
 	var rovat=$("#rovat").val();
 	var afa=$("#afaKulcs").val();
 	var ev=$("#kltsgEve").val();
+	var honap=$("#honap").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
-	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg==""|| honap=="999")
 	{
 		if(rovat=="999")
 		{
@@ -209,6 +227,11 @@ function ajaxAddBevetel()
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
 		$("#errorMennyiseg").css("color","red");
 		}
+		if(honap=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorHonap").css("color","red");
+		}
 		
 	}
 	else{
@@ -216,7 +239,7 @@ function ajaxAddBevetel()
 	{
 			type:"POST",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/addBevetel",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"honap":honap},
 		success:function(result)
 		{
 		showBev();
@@ -232,6 +255,11 @@ function setAfa()
 	var afa=$("#afaKulcs").val();
 	document.cookie="afaKulcs="+afa;	
 	$("#errorAfa").css("color","black");;			
+}
+function setHonap()
+{
+		
+	$("#errorHonap").css("color","black");;			
 }
 function setAfaMertek()
 {
@@ -336,6 +364,7 @@ function editBevetelRow(id)
 		$("#mennyiseg").val(exp[4]);
 		$("#mertekegyseg").val(exp[5]);
 		$("#kltsgEve").val(exp[6]);
+		$("#honap").val(exp[7]);
 		$("#seged").html(id);
 		
 		}
@@ -351,8 +380,9 @@ function ajaxModBevetel()
 	var ev=$("#kltsgEve").val();
 	var mertekegyseg=$("#mertekegyseg").val();
 	var id=$("#seged").html();
+	var honap=$("#honap").val();
 	console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
-	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="")
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="" || honap=="999")
 	{
 		if(rovat=="999")
 		{
@@ -385,13 +415,18 @@ function ajaxModBevetel()
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
 		$("#errorMennyiseg").css("color","red");
 		}
+		if(honap=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorHonap").css("color","red");
+		}
 	}
 	else{
 	$.ajax(
 	{
 			type:"POST",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/modBevetel",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"id":id,"afa":afa},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"id":id,"afa":afa,"honap":honap},
 		success:function(result)
 		{
 			console.log(result+"jee")
