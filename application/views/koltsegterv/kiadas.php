@@ -413,7 +413,7 @@ function editKiadRow(id)
 		success:function(result)
 		{
 		exp=result.split(",");
-		console.log(result);
+		//console.log(result);
 		$("#rovat").val(Number(exp[0]));
 		$("#afaKulcs").val(exp[1]);
 		$("#megnevezes").val(exp[2]);

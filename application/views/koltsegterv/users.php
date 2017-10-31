@@ -19,12 +19,14 @@ for($i=0;$i<count($users);$i++)
 		</table>
 		<br>
 </div>
-<div id="mod" class="stealth">
-    <?php
+<div id="mod" class="stealth container">
+<?php
 $this->load->helper('form');
-echo form_open('Koltsegterv/modUser');
-echo '<div class="container"><div class="row"><div class="col-sm-2 well">';
-echo form_label('Keresztnév&nbsp;','First_Name').'</div><div class="col-sm-3 well">';
+echo form_open('Koltsegterv/modUser').'
+<div class="row">
+<div class="col-sm-6">';
+echo '<div class="container"><div class="row"><div class="col-sm-6 well">';
+echo form_label('Keresztnév&nbsp;','First_Name').'</div><div class="col-sm-6 well">';
    $data = array(
         'name'          => 'First_Name',
         'id'            => 'First_Name',
@@ -33,8 +35,8 @@ echo form_label('Keresztnév&nbsp;','First_Name').'</div><div class="col-sm-3 we
    
 		'required'		=>'required',
 );
-echo form_input($data).'</div></div><div class="row"><div class="col-sm-2 well">';
-echo form_label('Vezeték név','Last_Name').'</div><div class="col-sm-3 well">';
+echo form_input($data).'</div></div><div class="row"><div class="col-sm-6 well">';
+echo form_label('Vezeték név','Last_Name').'</div><div class="col-sm-6 well">';
    $data = array(
         'name'          => 'Last_Name',
         'id'            => 'Last_Name',
@@ -43,8 +45,8 @@ echo form_label('Vezeték név','Last_Name').'</div><div class="col-sm-3 well">'
    
 		'required'		=>'required',
 );
-echo form_input($data).'</div></div><div class="row"><div class="col-sm-2 well">';
-echo form_label('email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','email').'</div><div class="col-sm-3 well">';
+echo form_input($data).'</div></div><div class="row"><div class="col-sm-6 well">';
+echo form_label('email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;','email').'</div><div class="col-sm-6 well">';
    $data = array(
         'name'          => 'email',
         'id'            => 'email',
@@ -53,15 +55,13 @@ echo form_label('email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbs
    
 		'required'		=>'required',
 );
-echo form_input($data).'</div></div><div class="row"><div class="col-sm-2 well">';
-echo form_label('Jelszó(kérelk akkor töltsd ki ha új jelszót akarsz adni neki)','psw').'</div><div class="col-sm-3 well">';
+echo form_input($data).'</div></div><div class="row"><div class="col-sm-6 well">';
+echo form_label('Jelszó(kérelk akkor töltsd ki ha új jelszót akarsz adni neki)','psw').'</div><div class="col-sm-6 well">';
    $data = array(
         'name'          => 'psw',
         'id'            => 'psw',
 		'title'			=>'A felhasználó új jelszava',
 		'type'			=>'password',
-   
-		'required'		=>'required',
 );
 echo form_input($data).'</div></div><div class="row"><div class="col-sm-6">';
 $data = array(
@@ -70,19 +70,53 @@ $data = array(
         'value'         => '1',
         'style'         => 'margin:10px'
 );
-
 echo form_checkbox($data).'A felhasználó admin jogosúltsággal rendelkezik</div></div><div class="row"><div class="col-sm-2">';
 
 $attributes = array(
 					'class' => 'btn btn-primary',
+					'id'=>'gomb',
 					);
 echo "<br>".form_submit("lks", "mentés",$attributes);
-  
-$string = '</div></div>';
+$data = array(
+        'name'          => 'id',
+        'id'            => 'uid',	
+		'type'			=>'text',
+		'class'			=>'stealth',
+		
+);
+echo form_input($data);
+
+
+echo'
+</div></div>
+</div>
+</div>
+<div class="col-sm-6">
+<h1> Engedélyek</h1>';
+
+
+for($i=0;$i<count($egyseg);$i++)
+{
+	echo "<h4>".$egyseg[$i][1]."</h4><br>";
+	for($j=0;$j<count($alegyseg);$j++)
+	{
+		if($alegyseg[$j][2]==$egyseg[$i][0])
+		{
+			$data = array(
+        'name'          => 'checkbox[]',
+        'id'            => 'alegyseg_'.$alegyseg[$j][0],
+        'value'         => $alegyseg[$j][0],
+        'style'         => 'margin:10px'
+		);
+echo form_checkbox($data).$alegyseg[$j][1]."<br>";
+		}
+	}
+}
+$string = '';
 echo form_close($string);
-
 ?>
-
+<br><br><br><br><br></div>
+</div>
 </div>
 <script>
 function Delete(id)
@@ -108,12 +142,26 @@ function Change(id)
 	{
 		type:"POST",
 			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/getModUser',
-			data:"id="+id,
+			data:{"id":id},
 			success:function(result)
 				{
-					console.log(result)
-					//ajaxALoad('users')
+					
+					var exp=result.split(',')
+					//console.log(result)
+					$("#First_Name").attr('value',exp[1])
+					$("#Last_Name").attr('value',exp[2])
+					$("#email").attr('value',exp[3])
+					$("#uid").attr('value',exp[0])
+					if(exp[4]==1)
+					{
+					$("#admin").attr('checked','checked')
+					}
+					for(var i=5;i<exp.length;i++)
+					{
+						$("#alegyseg_"+exp[i]).attr('checked','checked')
+					}
 				}
 	});
 }
+
 </script>

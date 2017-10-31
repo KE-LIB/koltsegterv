@@ -31,6 +31,39 @@ class Helper_model extends CI_Model {
             return $query;
 		
 		}
+		public function getEveryEgyseg()
+        {
+			
+		$this->load->database();
+		$sql="SELECT kltsg_institute.id AS itid, kltsg_institute.name AS itname	FROM kltsg_institute";		
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getEveryAlEgyseg()
+        {
+			
+		$this->load->database();
+		$sql="SELECT kltsg_unit.id AS unitid,parent as unitParent, kltsg_unit.name AS unitname
+		FROM kltsg_unit";		
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getUserAlEgyseg()
+        {
+			
+		$this->load->database();
+		$sql="SELECT kltsg_unit.id AS unitid
+		FROM kltsg_unit
+		WHERE kltsg_unit.id IN (SELECT unit_id FROM kltsg_policy WHERE user_id=".$_POST['id'].") ;";		
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
 		public function getAlegysegName($alegyseg)
         {
 			
@@ -975,6 +1008,29 @@ public function getModUser()
 	$this->db->where('id', $_POST['id']);
 	$query=$this->db->get('kltsg_users');
 	return $query;
+}
+public function saveUser()
+{
+	$this->load->database();
+	if($_POST['psw']=="")
+	{	
+	$this->db->set('password', md5($_POST['psw']));
+	}
+	if(isset($_POST['admin']))
+	{	
+	$this->db->set('level',$_POST['admin']);
+	}
+	else
+	{
+	$this->db->set('level','0');	
+	}
+	$this->db->set('first_name', $_POST['Last_Name']);
+	$this->db->set('last_name', $_POST['First_Name']);
+	$this->db->set('email', $_POST['email']);
+	$this->db->where('id', $_POST['id']);
+	$this->output->enable_profiler(TRUE);
+	$query=$this->db->update('kltsg_users');
+	print_r($query);
 }
 public function getUsers()
 {

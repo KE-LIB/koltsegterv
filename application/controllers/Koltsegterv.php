@@ -132,8 +132,29 @@ class Koltsegterv extends CI_Controller {
 				array_push($user,$help);
 			}
 			$data['users']=$user;
+			$query=$this->Helper_model->getEveryEgyseg();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->itid);
+				array_push($help,$row->itname);
+				array_push($egyseg,$help);
+			}
+			$data['egyseg']=$egyseg;
+			$query=$this->Helper_model->getEveryAlEgyseg();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->unitid);
+				array_push($help,$row->unitname);
+				array_push($help,$row->unitParent);
+				array_push($alegyseg,$help);
+			}
+			$data['alegyseg']=$alegyseg;
 		}
-			
+
         $this->load->view('koltsegterv/'.$_POST['mit'], $data);
 		}
 		
@@ -150,7 +171,58 @@ class Koltsegterv extends CI_Controller {
 		{
 		$return=$sor->id.','.$sor->last_name.','.$sor->first_name.','.$sor->email.','.$sor->level;
 		}
+		$query=$this->Helper_model->GetUserAlegyseg();;
+			
+			foreach($query->result() as $row)
+			{
+				$return=$return.','.$row->unitid;
+			}
 		echo $return;
+		}
+		//public function saveUser()
+		public function modUser()
+		{
+		$data['valami']="";
+		$this->load->helper('form'); 
+		$this->load->model('Helper_model');
+		$this->Helper_model->saveUser();
+		$query=$this->Helper_model->getUsers();
+			$user=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->last_name);
+				array_push($help,$row->first_name);
+				array_push($help,$row->level);
+				array_push($help,$row->email);
+				array_push($help,$row->id);
+				array_push($user,$help);
+			}
+			$data['users']=$user;
+			$query=$this->Helper_model->getEveryEgyseg();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->itid);
+				array_push($help,$row->itname);
+				array_push($egyseg,$help);
+			}
+			$data['egyseg']=$egyseg;
+			$query=$this->Helper_model->getEveryAlEgyseg();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->unitid);
+				array_push($help,$row->unitname);
+				array_push($help,$row->unitParent);
+				array_push($alegyseg,$help);
+			}
+			$data['alegyseg']=$alegyseg;
+		$this->load->view('koltsegterv/headerLogin', $data);
+		$this->load->view('koltsegterv/users', $data);
+        $this->load->view('koltsegterv/footer', $data);
 		}
 		public function getEgyseg()
 		{
