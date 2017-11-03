@@ -1093,7 +1093,7 @@ public function saveUser()
 			$admin=0;
 		}
 		$data = array(
-        'password' => $_POST['psw'],
+        'password' => md5($_POST['psw']),
         'first_name' => $_POST['Last_Name'],
         'last_name' => $_POST['First_Name'],
         'level' => $admin,
