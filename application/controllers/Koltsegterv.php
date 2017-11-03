@@ -112,11 +112,12 @@ class Koltsegterv extends CI_Controller {
         $this->load->view('koltsegterv/'.$_POST['mit'], $data);
 		}
 		}
-		public function loadAPage()
+		public function loadAPage($mit)
 		{
+		
 		$data['title']="Költségtervező";
 		
-		if($_POST['mit']=="users")
+		if($mit=="users")
 		{
 			$this->load->model('Helper_model');
 			$query=$this->Helper_model->getUsers();
@@ -154,8 +155,32 @@ class Koltsegterv extends CI_Controller {
 			}
 			$data['alegyseg']=$alegyseg;
 		}
-
-        $this->load->view('koltsegterv/'.$_POST['mit'], $data);
+		if($mit=="instituts")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getEveryEgyseg();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->itid);
+				array_push($help,$row->itname);
+				array_push($egyseg,$help);
+			}
+			$data['egyseg']=$egyseg;
+			$query=$this->Helper_model->getEveryAlEgyseg();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->unitid);
+				array_push($help,$row->unitname);
+				array_push($help,$row->unitParent);
+				array_push($alegyseg,$help);
+			}
+			$data['alegyseg']=$alegyseg;
+		}	
+        $this->load->view('koltsegterv/'.$mit, $data);
 		}
 		
 		public function deleteUser()
@@ -179,6 +204,37 @@ class Koltsegterv extends CI_Controller {
 				$return=$return.','.$row->unitid;
 			}
 		echo $return;
+		}
+		public function getInstUnits()
+		{
+		$this->load->model('Helper_model');
+		
+		$query=$this->Helper_model->getInst();
+		$return=$_POST['id'];
+		foreach ($query->result() as $sor)
+		{
+		$return=$return.','.$sor->name;
+		}
+		$query=$this->Helper_model->getInstUnits();
+		foreach ($query->result() as $sor)
+		{
+		$return=$return.','.$sor->unitid;
+		}
+		echo $return;
+		
+		}
+		public function getUnit()
+		{
+		$this->load->model('Helper_model');
+		
+		$query=$this->Helper_model->getUnit();
+		$return=$_POST['id'];
+		foreach ($query->result() as $sor)
+		{
+		$return=$return.','.$sor->name;
+		}
+		echo $return;
+		
 		}
 		public function modUser()
 		{
@@ -224,6 +280,68 @@ class Koltsegterv extends CI_Controller {
 		$this->load->view('koltsegterv/users', $data);
         $this->load->view('koltsegterv/footer', $data);
 		}
+		public function saveModInst()
+		{
+		$data['valami']="";
+		$this->load->helper('form'); 
+		$this->load->model('Helper_model');
+		$this->Helper_model->saveModInst();
+		$query=$this->Helper_model->getEveryEgyseg();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->itid);
+				array_push($help,$row->itname);
+				array_push($egyseg,$help);
+			}
+			$data['egyseg']=$egyseg;
+			$query=$this->Helper_model->getEveryAlEgyseg();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->unitid);
+				array_push($help,$row->unitname);
+				array_push($help,$row->unitParent);
+				array_push($alegyseg,$help);
+			}
+			$data['alegyseg']=$alegyseg;
+		$this->load->view('koltsegterv/headerLogin', $data);
+		$this->load->view('koltsegterv/instituts', $data);
+        $this->load->view('koltsegterv/footer', $data);
+		}
+		public function saveModUnit()
+		{
+		$data['valami']="";
+		$this->load->helper('form'); 
+		$this->load->model('Helper_model');
+		$this->Helper_model->saveModUnit();
+		$query=$this->Helper_model->getEveryEgyseg();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->itid);
+				array_push($help,$row->itname);
+				array_push($egyseg,$help);
+			}
+			$data['egyseg']=$egyseg;
+			$query=$this->Helper_model->getEveryAlEgyseg();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->unitid);
+				array_push($help,$row->unitname);
+				array_push($help,$row->unitParent);
+				array_push($alegyseg,$help);
+			}
+			$data['alegyseg']=$alegyseg;
+		$this->load->view('koltsegterv/headerLogin', $data);
+		$this->load->view('koltsegterv/instituts', $data);
+        $this->load->view('koltsegterv/footer', $data);
+		}
 		public function getEgyseg()
 		{
 		$this->load->model('Helper_model');
@@ -237,7 +355,7 @@ class Koltsegterv extends CI_Controller {
 		public function ajaxGetAlegyseg()
 		{
 		$this->load->model('Helper_model');
-		$query=$this->Helper_model->GetAlegyseg();
+		$query=$this->Helper_model->GetAlEgyseg();
 		foreach ($query->result() as $row)
 		{
 			echo "<option value=".$row->unitid." selected>".$row->unitname."</option>";
