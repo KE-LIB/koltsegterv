@@ -2,7 +2,7 @@
 		<button type="button" onclick="ajaxALoad('users')" class="btn btn-primary btn-lg opt-btn">
 			<span class="glyphicon glyphicon-user" aria-hidden="true"></span><br>Felhasználók
 		</button>
-		<button type="button" onclick='ajaxLoad("newForm")' id="newForm" name="newForm" class="btn btn-success btn-lg opt-btn">
+		<button type="button" onclick='ajaxALoad("instituts")' id="newForm" name="newForm" class="btn btn-success btn-lg opt-btn">
 			<span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span><br>Egységek
 		</button>
 			<button type="button" onclick='ajaxLoad("download")' class="btn btn-warning btn-lg opt-btn">

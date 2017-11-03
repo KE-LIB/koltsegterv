@@ -37,7 +37,7 @@ function ajaxALoad(mit)
 	$.ajax(
 	{
 		type:"POST",
-			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage',
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage/'+mit,
 			data:"mit="+mit,
 			success:function(result)
 				{

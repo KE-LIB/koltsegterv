@@ -26,6 +26,8 @@ class Helper_model extends CI_Model {
 		$sql="SELECT kltsg_unit.id AS unitid, kltsg_unit.name AS unitname
 		FROM kltsg_unit
 		WHERE kltsg_unit.id IN (SELECT unit_id FROM kltsg_policy WHERE user_id=".$_COOKIE['userid']." AND parent=".$_POST['egyseg'].") ;";		
+		
+		echo $sql;
 		$query = $this->db->query($sql);
 			
             return $query;
@@ -47,6 +49,40 @@ class Helper_model extends CI_Model {
 		$this->load->database();
 		$sql="SELECT kltsg_unit.id AS unitid,parent as unitParent, kltsg_unit.name AS unitname
 		FROM kltsg_unit";		
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getInstUnits()
+        {
+			
+		$this->load->database();
+		$sql="SELECT kltsg_unit.id AS unitid,parent as unitParent, kltsg_unit.name AS unitname
+		FROM kltsg_unit where parent='".$_POST['id']."'";		
+		//echo $sql;
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getInst()
+        {
+			
+		$this->load->database();
+		$sql="SELECT name FROM kltsg_institute where id='".$_POST['id']."'";		
+		//echo $sql;
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getUnit()
+        {
+			
+		$this->load->database();
+		$sql="SELECT name FROM kltsg_unit where id='".$_POST['id']."'";		
+		//echo $sql;
 		$query = $this->db->query($sql);
 			
             return $query;
@@ -998,8 +1034,9 @@ public function setYear()
 public function deleteUser()
 {
 	$this->load->database();
+	$this->db->set('email_changed','0');
 	$this->db->where('id', $_POST['id']);
-	$this->db->delete('kltsg_users');
+	$this->db->update('kltsg_users');
 	$this->db->where('user_id', $_POST['id']);
 	$this->db->delete('kltsg_policy');
 	
@@ -1016,7 +1053,7 @@ public function saveUser()
 	$this->load->database();
 	if($_POST['id']!="")
 	{
-	if($_POST['psw']=="")
+	if($_POST['psw']!="")
 	{	
 	$this->db->set('password', md5($_POST['psw']));
 	}
@@ -1076,10 +1113,75 @@ public function saveUser()
 	}
 	}
 }
+public function saveModInst()
+{
+	$this->load->database();
+	if($_POST['id']!="9999")
+	{
+	$this->db->set('parent','999');
+	$this->db->where('parent', $_POST['id']);
+	$this->db->update('kltsg_unit');
+	if(isset($_POST['checkbox']))
+	{
+	for($i=0;$i<count($_POST['checkbox']);$i++)
+	{
+		$this->db->set('parent',$_POST['id']);
+		$this->db->where('id', $_POST['checkbox'][$i]);
+		$this->db->update('kltsg_unit');
+		$this->db->set('name',$_POST['Inst_Name']);
+		$this->db->where('id', $_POST['id']);
+		$this->db->update('kltsg_institute');
+	}
+	
+	$this->db->set('name',$_POST['Inst_Name']);
+		$this->db->where('id', $_POST['id']);
+		$this->db->update('kltsg_institute');
+	}
+	}
+	else
+	{
+		
+		$data = array(
+        'name' => $_POST['Inst_Name'],
+		);
+		$this->db->insert('kltsg_institute', $data);
+		$id=$this->db->insert_id();
+		if(isset($_POST['checkbox']))
+	{
+		for($i=0;$i<count($_POST['checkbox']);$i++)
+	{
+		$this->db->set('parent',$id);
+		$this->db->where('id', $_POST['checkbox'][$i]);
+		$this->db->update('kltsg_unit');
+	}
+	}
+	}
+}
+public function saveModUnit()
+{
+	$this->load->database();
+	if($_POST['id']!="9999")
+	{
+	
+	
+	$this->db->set('name',$_POST['Unit_Name']);
+		$this->db->where('id', $_POST['id']);
+		$this->db->update('kltsg_unit');
+	}
+	else
+	{
+		
+		$data = array(
+        'name' => $_POST['Unit_Name'],
+        'parent' => '999',
+		);
+		$this->db->insert('kltsg_unit', $data);
+	}
+}
 public function getUsers()
 {
 	$this->load->database();
-	$sql="SELECT first_name,last_name,level,email,id FROM `kltsg_users";
+	$sql="SELECT first_name,last_name,level,email,id FROM kltsg_users where email_changed<>0";
 	$query=$this->db->query($sql);
 	return $query;
 }

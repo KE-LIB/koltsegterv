@@ -1,6 +1,8 @@
 <div id="mainPage">
 <div id="users">
 <table id="user" class="table">
+<button class="btn btn-primary" onclick=newUser()><span class="glyphicon glyphicon-plus"></span> Új tag felvétele</button><br>
+		<br>
 <thead><tr><th>Vezetéknév</th><th>Keresztnév</th><th>Admin</th><th>Email</th><th>Műveletek</th></tr></thead>
 <?php
 
@@ -18,8 +20,7 @@ for($i=0;$i<count($users);$i++)
 }
 ?>
 		</table>
-		<br>
-		<button class="btn btn-primary" onclick=newUser()><span class="glyphicon glyphicon-plus"></span> Új tag felvétele</button><br><br><br><br><br><br>
+		<br><br><br><br><br>
 </div>
 <div id="mod" class="stealth container">
 <?php
@@ -191,7 +192,7 @@ function ajaxALoad(mit)
 	$.ajax(
 	{
 		type:"POST",
-			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage',
+			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadAPage/'+mit,
 			data:"mit="+mit,
 			success:function(result)
 				{
@@ -199,5 +200,25 @@ function ajaxALoad(mit)
 					$("#mainPage").html(result);
 				}
 	});
+}
+function logOut()
+{
+	$.ajax(
+	{
+		type:"GET",
+		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/logOut",
+		success:function(result)
+				{
+					$("#overPage").html(result);
+				}
+	});	
+			document.cookie = "alegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "egyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "rovatKiadas=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "afaKulcs=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "mertekegyseg=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "ev=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+			document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
+	
 }
 </script>
