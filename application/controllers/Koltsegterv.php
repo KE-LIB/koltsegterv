@@ -191,6 +191,18 @@ class Koltsegterv extends CI_Controller {
 				array_push($egyseg,$row->value);	
 			}
 			$data['afa']=$egyseg;
+		}
+		if($mit=="mertekEgyseg")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getEveryMertek();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				array_push($egyseg,$row->id);
+				array_push($egyseg,$row->name);	
+			}
+			$data['mertek']=$egyseg;
 		}	
         $this->load->view('koltsegterv/'.$mit, $data);
 		}
@@ -368,6 +380,11 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$this->Helper_model->addAfa();
+		}
+		public function addMertek()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->addMertek();
 		}
 		public function ajaxGetAlegyseg()
 		{

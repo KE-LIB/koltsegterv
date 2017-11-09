@@ -62,6 +62,24 @@ class Helper_model extends CI_Model {
             return $query;
 		
 		}
+		public function addMertek()
+        {
+			
+		$this->load->database();
+		$data=array('name'=>$_POST['value']);
+		$this->db->insert('kltsg_quant',$data) or die("Hiba az áfa beillesztésénél");
+		
+		}
+		public function getEveryMertek()
+        {
+			
+		$this->load->database();
+		$sql="SELECT * FROM kltsg_quant";	
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
 		public function getEveryAlEgyseg()
         {
 			

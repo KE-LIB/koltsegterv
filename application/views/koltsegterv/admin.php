@@ -8,7 +8,7 @@
 			<button type="button" onclick='ajaxALoad("afa")' class="btn btn-warning btn-lg opt-btn">
 			<span class="glyphicon glyphicon-scissors" aria-hidden="true"></span><br>Áfa
 			</button>
-				<button  type="button" onclick="ajaxLoad('feltoltes')" class="btn btn-warning btn-lg opt-btn">
+				<button  type="button" onclick="ajaxALoad('mertekEgyseg')" class="btn btn-warning btn-lg opt-btn">
 			<span class="glyphicon glyphicon-scale" aria-hidden="true"></span><br>Mértékegységek
 			</button><br></button>		
 				<button  type="button" onclick="ajaxLoad('feltoltes')" class="btn btn-danger btn-lg opt-btn">
