@@ -44,6 +44,28 @@ class Helper_model extends CI_Model {
             return $query;
 		
 		}
+		public function getEverycpv1()
+        {
+			
+		$this->load->database();
+		$sql="SELECT *	FROM kltsg_cpv1";		
+			
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getEverycpv2()
+        {
+			
+		$this->load->database();
+		$sql="SELECT *	FROM kltsg_cpv2";		
+			
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
 		public function addAfa()
         {
 			
@@ -51,6 +73,29 @@ class Helper_model extends CI_Model {
 		$data=array('value'=>$_POST['value']);
 		$this->db->insert('kltsg_tax',$data) or die("Hiba az áfa beillesztésénél");
 		
+		}
+		public function addCPV1()
+        {
+		$this->load->database();
+		
+		$data=array('name'=>$_POST['Inst_Name'],'code'=>$_POST['Inst_Kod']);
+		$this->db->insert('kltsg_cpv1',$data) or die("Hiba a cpv1 beillesztésénél");
+		
+		$id=$this->db->insert_id();
+		if(isset($_POST['checkbox'])){
+		for($i=0;$i<count($_POST['checkbox']);$i++)
+		{
+		$this->db->set('parent',$id);
+		$this->db->where('id',$_POST['checkbox'][$i]);
+		$this->db->update('kltsg_cpv2');	
+		}	
+		}
+		}
+		public function addCPV2()
+        {
+		$this->load->database();
+		$data=array('name'=>$_POST['Unit_Name'],'code'=>$_POST['Unit_Kod'],'parent'=>'999');
+		$this->db->insert('kltsg_cpv2',$data) or die("Hiba a cpv2 beillesztésénél");
 		}
 		public function getEveryAfa()
         {

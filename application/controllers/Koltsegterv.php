@@ -180,6 +180,33 @@ class Koltsegterv extends CI_Controller {
 			}
 			$data['alegyseg']=$alegyseg;
 		}
+		if($mit=="cpvKod")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getEverycpv1();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($egyseg,$help);
+			}
+			$data['cpv1']=$egyseg;
+			$query=$this->Helper_model->getEverycpv2();
+			$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($help,$row->parent);
+				array_push($alegyseg,$help);
+			}
+			$data['cpv2']=$alegyseg;
+		}
 		if($mit=="afa")
 		{
 			$this->load->model('Helper_model');
@@ -418,6 +445,68 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$this->Helper_model->addKK();
+		}
+		public function addCPV1()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->addCPV1();
+		$query=$this->Helper_model->getEverycpv1();
+		$egyseg=array();
+		foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($egyseg,$help);
+			}
+		$data['cpv1']=$egyseg;
+		$query=$this->Helper_model->getEverycpv2();
+		$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($help,$row->parent);
+				array_push($alegyseg,$help);
+			}
+		$data['cpv2']=$alegyseg;
+		$this->load->view('koltsegterv/headerLogin', $data);
+		$this->load->view('koltsegterv/cpvKod', $data);
+        $this->load->view('koltsegterv/footer', $data);
+		}
+		public function addCPV2()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->addCPV2();
+		$query=$this->Helper_model->getEverycpv1();
+		$egyseg=array();
+		foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($egyseg,$help);
+			}
+		$data['cpv1']=$egyseg;
+		$query=$this->Helper_model->getEverycpv2();
+		$alegyseg=array();
+			foreach($query->result() as $row)
+			{
+				$help=array();
+				array_push($help,$row->id);
+				array_push($help,$row->code);
+				array_push($help,$row->name);
+				array_push($help,$row->parent);
+				array_push($alegyseg,$help);
+			}
+		$data['cpv2']=$alegyseg;
+		$this->load->view('koltsegterv/headerLogin', $data);
+		$this->load->view('koltsegterv/cpvKod', $data);
+        $this->load->view('koltsegterv/footer', $data);
 		}
 		public function addBK()
 		{
