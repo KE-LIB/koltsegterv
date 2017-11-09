@@ -179,6 +179,18 @@ class Koltsegterv extends CI_Controller {
 				array_push($alegyseg,$help);
 			}
 			$data['alegyseg']=$alegyseg;
+		}
+		if($mit=="afa")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getEveryAfa();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				array_push($egyseg,$row->id);
+				array_push($egyseg,$row->value);	
+			}
+			$data['afa']=$egyseg;
 		}	
         $this->load->view('koltsegterv/'.$mit, $data);
 		}
@@ -351,6 +363,11 @@ class Koltsegterv extends CI_Controller {
 			echo "<option value=".$row->instid." selected>".$row->instname."</option>";
 		}
 		echo'<option value="999" selected>Válasszon...</option>';
+		}
+		public function addAfa()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->addAfa();
 		}
 		public function ajaxGetAlegyseg()
 		{

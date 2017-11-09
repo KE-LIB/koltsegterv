@@ -38,6 +38,25 @@ class Helper_model extends CI_Model {
 			
 		$this->load->database();
 		$sql="SELECT kltsg_institute.id AS itid, kltsg_institute.name AS itname	FROM kltsg_institute";		
+			
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function addAfa()
+        {
+			
+		$this->load->database();
+		$data=array('value'=>$_POST['value']);
+		$this->db->insert('kltsg_tax',$data) or die("Hiba az áfa beillesztésénél");
+		
+		}
+		public function getEveryAfa()
+        {
+			
+		$this->load->database();
+		$sql="SELECT * FROM kltsg_tax";	
 		$query = $this->db->query($sql);
 			
             return $query;

@@ -5,7 +5,7 @@
 		<button type="button" onclick='ajaxALoad("instituts")' id="newForm" name="newForm" class="btn btn-success btn-lg opt-btn">
 			<span class="glyphicon glyphicon-piggy-bank" aria-hidden="true"></span><br>Egységek
 		</button>
-			<button type="button" onclick='ajaxLoad("feltoltes")' class="btn btn-warning btn-lg opt-btn">
+			<button type="button" onclick='ajaxALoad("afa")' class="btn btn-warning btn-lg opt-btn">
 			<span class="glyphicon glyphicon-scissors" aria-hidden="true"></span><br>Áfa
 			</button>
 				<button  type="button" onclick="ajaxLoad('feltoltes')" class="btn btn-warning btn-lg opt-btn">
