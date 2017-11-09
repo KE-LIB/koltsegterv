@@ -35,13 +35,7 @@ $attributes = array(
 					'onclick'=>'saveMertek()',
 					);
 echo "<br>".form_submit("lks", "mentés",$attributes);
-$data = array(
-        'name'          => 'id',
-        'id'            => 'uid',	
-		'type'			=>'text',
-		'class'			=>'stealth',
-		
-);
+
 form_close('');
 ?>
 <br><br><br><br><br><br>

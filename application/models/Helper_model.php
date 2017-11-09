@@ -70,11 +70,29 @@ class Helper_model extends CI_Model {
 		$this->db->insert('kltsg_quant',$data) or die("Hiba az áfa beillesztésénél");
 		
 		}
+		public function addKK()
+        {
+			
+		$this->load->database();
+		$data=array('code'=>$_POST['kk'],'name'=>$_POST['kn'],'tax'=>$_POST['afa']);
+		$this->db->insert('kltsg_category',$data) or die("Hiba az áfa beillesztésénél");
+		
+		}
 		public function getEveryMertek()
         {
 			
 		$this->load->database();
 		$sql="SELECT * FROM kltsg_quant";	
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
+		public function getEveryKK()
+        {
+			
+		$this->load->database();
+		$sql="SELECT * FROM kltsg_category";	
 		$query = $this->db->query($sql);
 			
             return $query;
