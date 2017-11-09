@@ -14,7 +14,7 @@
 				<button  type="button" onclick="ajaxALoad('kiadKod')" class="btn btn-danger btn-lg opt-btn">
 			<span class="glyphicon glyphicon-king" aria-hidden="true"></span><br>Kiadás kódjai
 			</button></button>		
-				<button  type="button" onclick="ajaxALoad('feltoltes')" class="btn btn-danger btn-lg opt-btn">
+				<button  type="button" onclick="ajaxALoad('bevKod')" class="btn btn-danger btn-lg opt-btn">
 			<span class="glyphicon glyphicon-queen" aria-hidden="true"></span><br>Bevétel kódjai
 			</button>
 				<button  type="button" onclick="ajaxALoad('feltoltes')" class="btn btn-danger btn-lg opt-btn">

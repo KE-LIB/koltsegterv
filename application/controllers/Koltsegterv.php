@@ -217,6 +217,20 @@ class Koltsegterv extends CI_Controller {
 				array_push($egyseg,$row->tax);	
 			}
 			$data['kk']=$egyseg;
+		}
+		if($mit=="bevKod")
+		{
+			$this->load->model('Helper_model');
+			$query=$this->Helper_model->getEveryBK();
+			$egyseg=array();
+			foreach($query->result() as $row)
+			{
+				array_push($egyseg,$row->id);
+				array_push($egyseg,$row->code);
+				array_push($egyseg,$row->name);	
+				array_push($egyseg,$row->tax);	
+			}
+			$data['bk']=$egyseg;
 		}	
         $this->load->view('koltsegterv/'.$mit, $data);
 		}
@@ -404,6 +418,11 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$this->Helper_model->addKK();
+		}
+		public function addBK()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->addBK();
 		}
 		public function ajaxGetAlegyseg()
 		{

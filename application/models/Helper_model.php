@@ -62,12 +62,22 @@ class Helper_model extends CI_Model {
             return $query;
 		
 		}
+		public function getEveryBK()
+        {
+			
+		$this->load->database();
+		$sql="SELECT * FROM kltsg_category_bev";	
+		$query = $this->db->query($sql);
+			
+            return $query;
+		
+		}
 		public function addMertek()
         {
 			
 		$this->load->database();
 		$data=array('name'=>$_POST['value']);
-		$this->db->insert('kltsg_quant',$data) or die("Hiba az áfa beillesztésénél");
+		$this->db->insert('kltsg_quant',$data) or die("Hiba a Mértékegység beillesztésénél");
 		
 		}
 		public function addKK()
@@ -75,7 +85,15 @@ class Helper_model extends CI_Model {
 			
 		$this->load->database();
 		$data=array('code'=>$_POST['kk'],'name'=>$_POST['kn'],'tax'=>$_POST['afa']);
-		$this->db->insert('kltsg_category',$data) or die("Hiba az áfa beillesztésénél");
+		$this->db->insert('kltsg_category',$data) or die("Hiba a Kiadási kód beillesztésénél");
+		
+		}
+		public function addBK()
+        {
+			
+		$this->load->database();
+		$data=array('code'=>$_POST['bk'],'name'=>$_POST['bn'],'tax'=>$_POST['afa']);
+		$this->db->insert('kltsg_category_bev',$data) or die("Hiba a Bevételi kód beillesztésénél");
 		
 		}
 		public function getEveryMertek()
