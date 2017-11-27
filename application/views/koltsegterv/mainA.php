@@ -12,6 +12,8 @@
 				<button  type="button" onclick="ajaxLoad('admin')" class="btn btn-danger btn-lg opt-btn">
 			<span class="glyphicon glyphicon-king" aria-hidden="true"></span><br>Admin
 			</button>
+			<br><h1>Kedves kollégák!</h1><br>
+			<h4>Amennyiben nekiállnak felvinni a költségtervezőbe az adatokat,  kérem figylejenek rá hogy mindig!!! legyen legalább 1 kiadás benne, mert csak akkor mentőtid el a tétel!</h4>
 	</div>
 	</div>
 	<script>

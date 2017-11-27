@@ -10,7 +10,8 @@
 	<button type="button" onclick=ajaxLoad("download") class="btn btn-warning btn-lg opt-btn">
 			<span class="glyphicon glyphicon-save" aria-hidden="true"></span><br>Letöltések
 			</button>		
-			
+			<br><h1>Kedves kollégák!</h1><br>
+			<h4>Amennyiben nekiállnak felvinni a költségtervezőbe az adatokat,  kérem figylejenek rá hogy mindig!!! legyen legalább 1 kiadás benne, mert csak akkor mentőtid el a tétel!</h4>
 	</div>
 	<script>
 	 function ajaxLoad(mit)
