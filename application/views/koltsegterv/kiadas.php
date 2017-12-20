@@ -62,8 +62,8 @@
 <option value="8" >Augusztus</option>
 <option value="9" >Szeptember</option>
 <option value="10" >Október</option>
-<option value="11" >Novemnber</option>
-<option value="12" >december</option>
+<option value="11" >November</option>
+<option value="12" >December</option>
 </select>
 </div>
 </div>
@@ -284,7 +284,7 @@ function ajaxAddKiadas()
 		if(cpv2=="999")
 		{
 		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
-		$("#errorcpv1").css("color","red");
+		$("#errorcpv2").css("color","red");
 		}
 		if(honap=="999")
 		{

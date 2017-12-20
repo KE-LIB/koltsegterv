@@ -419,7 +419,9 @@ class Helper_model extends CI_Model {
 		public function getKiadas()
 		{
 			$this->load->database();
-			$sql="select * from kltsg_submissions_kiadas where user_id=".$_COOKIE['userid']." and  institute_id='".$_COOKIE['egyseg']."' and unit_id='".$_COOKIE['alegyseg']."'  order by sub_id desc";	
+			$sql="select * from kltsg_submissions_kiadas where user_id=".$_COOKIE['userid']." and  institute_id='".$_COOKIE['egyseg']."' 
+			and unit_id='".$_COOKIE['alegyseg']."' order by sub_id desc";	
+			//echo $sql;
 		$query = $this->db->query($sql);
 		$sub_id=0;
 		$rovatCounter=1;
@@ -430,7 +432,7 @@ class Helper_model extends CI_Model {
 		$resRovat=$this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resRovat->result() as $sorRovat)
 		{
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."'";
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."and user_id=".$_COOKIE['userid']."'";
 		
 		$resSzamolas=$this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resSzamolas->result() as $sorSzamolas)
@@ -454,7 +456,7 @@ class Helper_model extends CI_Model {
 		<table class="table table-bordered">
 		<tr class="subtable">
 		<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Áfa egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
-		<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Művelet</th></tr>';}
+		<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Hónap</th><th>Művelet</th></tr>';}
 		echo '<tr id="Kiadas'.$row->id.'"class="edited-row">';
 		
 		$rovatCounter++;
@@ -468,6 +470,7 @@ class Helper_model extends CI_Model {
 		echo "<td>".$row->netto_osszes."</td>";
 		echo "<td>".($row->brutto_osszes-$row->netto_osszes)."</td>";
 		echo "<td>".$row->brutto_osszes."</td>";
+		echo "<td>".$row->honap."</td>";
 		echo "<td><button type='button'  onclick='delKiadRow(".$row->id.")' class='btn btn-danger'>
 		<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>&nbsp;<button type='button' 
 		onclick='editKiadRow(".$row->id.")' class='btn btn-default'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></td></tr>";
@@ -490,7 +493,7 @@ class Helper_model extends CI_Model {
 		$resRovat=$this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resRovat->result() as $sorRovat)
 		{
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_bevetel where sub_id='".$row->sub_id."'";
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_bevetel where sub_id='".$row->sub_id."and user_id=".$_COOKIE['userid']."'";
 		
 		$resSzamolas=$this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resSzamolas->result() as $sorSzamolas)
@@ -514,7 +517,7 @@ class Helper_model extends CI_Model {
 		<table class="table table-bordered">
 		<tr class="subtable">
 		<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Áfa egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
-		<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Művelet</th></tr>';}
+		<th>Nettó összesen</th><th>Áfa összesen</th><th>Bruttó összesen</th><th>Hónap</th><th>Művelet</th></tr>';}
 		echo '<tr id="Kiadas'.$row->id.'"class="edited-row2">';
 		
 		$rovatCounter++;
@@ -528,6 +531,7 @@ class Helper_model extends CI_Model {
 		echo "<td>".$row->netto_osszes."</td>";
 		echo "<td>".($row->brutto_osszes-$row->netto_osszes)."</td>";
 		echo "<td>".$row->brutto_osszes."</td>";
+		echo "<td>".$row->honap."</td>";
 		echo "<td><button type='button'  onclick='delBevRow(".$row->id.")' class='btn btn-danger'>
 		<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></button>&nbsp;<button type='button' 
 		onclick='editBevetelRow(".$row->id.")' class='btn btn-default'><span class='glyphicon glyphicon-pencil' aria-hidden='true'></span></td></tr>";
@@ -1037,7 +1041,7 @@ return $ossz;
 		  <div class="panel panel-danger">
 			<div class="panel-body">';
 			$this->load->database();
-			$sql="select * from kltsg_submissions_kiadas_sent where submissions_id=".$_POST['id']." ";
+			$sql="select * from kltsg_submissions_kiadas_sent where submissions_id=".$_POST['id']." order by sub_id asc ";
 		//echo $sql;
 			$res= $this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
 		//echo $res;
@@ -1073,17 +1077,17 @@ return $ossz;
 			</table><table class="table table-bordered">
 			<tr class="subtable">
 			<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
-			<th>Nettó összesen</th><th>Bruttó összesen<tr id="Kiadas'.$sor->id.'"class="edited-row">';
+			<th>Nettó összesen</th><th>Bruttó összesen</th>';
 			$rovatCounter++;
 				}
 			}}
-			echo "<td>".$sor->megnevezes."</td>";
+			echo "<tr id='Kiadas".$sor->id."' class='edited-row'><td>".$sor->megnevezes."</td>";
 			echo "<td>".$sor->netto_egysegar."</td>";
 			echo "<td>".$sor->brutto_egysegar."</td>";
 			echo "<td>".$sor->tax."%</td>";
 			echo "<td>".$sor->mennyiseg."</td>";
 			echo "<td>".$sor->netto_osszes."</td>";
-			echo "<td>".$sor->brutto_osszes."</td>";
+			echo "<td>".$sor->brutto_osszes."</td></tr>";
 			$sub_id=$sor->sub_id;
 			$inst= $this->db->query("select name from kltsg_institute where id=".$sor->institute_id."") or die("Hiba a institut lekérésénél");
 			$unit= $this->db->query("select name from kltsg_unit where id=".$sor->unit_id."") or die("Hiba a unit lekérésénél");
@@ -1097,7 +1101,7 @@ return $ossz;
 		<h2>Bevételek</h2>
 		  <div class="panel panel-success">
 			<div class="panel-body">';
-			$sql="select * from kltsg_submissions_bevetel_sent where submissions_id=".$_POST['id']." ";
+			$sql="select * from kltsg_submissions_bevetel_sent where submissions_id=".$_POST['id']." order by sub_id asc ";
 		//echo $sql;
 		$res= $this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
 		//echo $res;
@@ -1134,11 +1138,11 @@ return $ossz;
 		</table><table class="table table-bordered">
 		<tr class="subtable">
 		<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
-		<th>Nettó összesen</th><th>Bruttó összesen<tr id="Kiadas'.$sor->id.'"class="edited-row2">';
+		<th>Nettó összesen</th><th>Bruttó összesen</th>';
 		$rovatCounter++;
 			}
 			}}
-		echo "<td>".$sor->megnevezes."</td>";
+		echo "<tr id='Bevetel".$sor->id."' class='edited-row2'><td>".$sor->megnevezes."</td>";
 		echo "<td>".$sor->netto_egysegar."</td>";
 		echo "<td>".$sor->brutto_egysegar."</td>";
 		echo "<td>".$sor->tax."%</td>";
@@ -1157,6 +1161,9 @@ return $ossz;
 		}
 		echo'<oreo id="buruttOsszesBev" class="stealth">'.$ossz.'</oreo>';
 		}
+		
+		
+		
 		public function getEgysegenkentiLista()
 		{
 			$this->load->database();

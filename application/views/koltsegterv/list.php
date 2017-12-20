@@ -128,6 +128,8 @@ function editWork(sub,form,row_id)
 {
 var  place=$("#inst_unit_"+row_id).val();
 var	 exp=place.split("#");
+document.cookie = "egyseg="+exp[0];
+document.cookie = "alegyseg="+exp[1];
 $.ajax(
 	{
 		type:"GET",

@@ -50,8 +50,8 @@
 <option value="8" >Augusztus</option>
 <option value="9" >Szeptember</option>
 <option value="10" >Október</option>
-<option value="11" >Novemnber</option>
-<option value="12" >december</option>
+<option value="11" >November</option>
+<option value="12" >December</option>
 </select>
 </div>
 </div>

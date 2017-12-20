@@ -4,7 +4,7 @@
         <span class="text-muted credit pull-left">Minden jog fenntartva! © Kaposvári Egyetem 2017</span> 
 		
 		<span class="text-muted credit pull-right">Készítette: Diszterhöft Zoltán
-		(Kátai Gergely Péter munkálya nyomán)</span>
+		(Kátai Gergely Péter munkája nyomán)</span>
       </div>
     </div>
 		</body>
