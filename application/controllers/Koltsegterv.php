@@ -792,6 +792,11 @@ class Koltsegterv extends CI_Controller {
 		$this->load->model('Helper_model');
 		$this->Helper_model->getViewPlan();
 		}
+		public function getViewPlan2()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->getViewPlan2();
+		}
 		public function logOut()
 		{
 		unset($_COOKIE['Page']);

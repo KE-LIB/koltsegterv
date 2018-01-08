@@ -784,7 +784,7 @@ return $ossz;
 					}
 				array_push($submission_id,$record->submissions_id);
 					echo '</select></td><td class="main-table">'.$record->submissions_id.'</td><td>'.$record->submissions_time.'</td>
-					<td><button type="submit" name="editSavedWork" onclick=editWork('.$record->submissions_id.',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
+					<td><button class="btn btn-warning" role="button" onclick=getViewPlan2('.$record->submissions_id.')><span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>&nbsp;Előnézet</button><button type="submit" name="editSavedWork" onclick=editWork('.$record->submissions_id.',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
 					<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record->submissions_id.',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
 					<button type="submit"  class=" btn btn-success" onclick=sendPlane('.$record->submissions_id.')><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Feladás</button>
 					<button type="submit"  class=" btn btn-danger" onclick=deletePlane('.$record->submissions_id.',"S")><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Törlés</button>
@@ -1118,6 +1118,159 @@ return $ossz;
 				foreach($resRovat->result() as $sorRovat)
 				{
 				$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa,Year from kltsg_submissions_bevetel_sent where sub_id='".$sor->sub_id."'and submissions_id='".$_POST['id']."'";
+				$resSzamolas= $this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
+				foreach($resSzamolas->result() as $sorSzamolas)
+				{
+				$ossz=$ossz+$sorSzamolas->brutto;
+				
+			echo '
+		<table class="table table-bordered"><thead>
+		<tr><th>#</th><th colspan="6">Rovat</th><th >Rovat összesen (nettó)</th><th>Áfa összeg</th><th >Rovat összesen (bruttó)</th><th >Év</th></tr>
+		</thead><tbody id="table_rows">
+		<tr class="main-table" id="" >
+		<td ><div class="line-num">'.$rovatCounter.'</div></td>
+		<td colspan="6">'.$sorRovat->name.'</td>
+		<td colspan="">'.$sorSzamolas->netto.'</td>
+		<td colspan="">'.$sorSzamolas->afa.'</td>
+		<td colspan=""><span id=brutto'.$rovatCounter.'>'.$sorSzamolas->brutto.'</span></td>
+		<td colspan="">'.$sorSzamolas->Year.'</td>
+		</tr>
+		</table><table class="table table-bordered">
+		<tr class="subtable">
+		<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
+		<th>Nettó összesen</th><th>Bruttó összesen</th>';
+		$rovatCounter++;
+			}
+			}}
+		echo "<tr id='Bevetel".$sor->id."' class='edited-row2'><td>".$sor->megnevezes."</td>";
+		echo "<td>".$sor->netto_egysegar."</td>";
+		echo "<td>".$sor->brutto_egysegar."</td>";
+		echo "<td>".$sor->tax."%</td>";
+		echo "<td>".$sor->mennyiseg."</td>";
+		echo "<td>".$sor->netto_osszes."</td>";
+		echo "<td>".$sor->brutto_osszes."</td>";
+		$sub_id=$sor->sub_id;
+		}
+		foreach($inst->result() as $ins_a)
+		{
+		foreach($unit->result() as $unit_a)
+		{
+		echo'<oreo id="inst" class="stealth">'.$ins_a->name.'</oreo>';
+		echo'<oreo id="unit" class="stealth">'.$unit_a->name.'</oreo>';
+		}
+		}
+		echo'<oreo id="buruttOsszesBev" class="stealth">'.$ossz.'</oreo>';
+		}
+		public function getViewPlan2()
+		{
+			echo '
+			<div class="row_own">
+			  <div class="col-xs-4 col-md-4">
+			  <div class="merleg_cimke alert alert-success merleg" id="merleg_cimer"><table class="merleg_table_green" id="merleg_table"><thead>
+			  <tr ><th >&nbsp;Bevételek&nbsp;</th><th >&nbsp;Kiadások&nbsp;</th></tr></thead>
+			  <tr  ><td >&nbsp;<span id="bevetelossz">0</span>&nbsp;</td><td >&nbsp;<span id="kiadasossz">0</span>&nbsp;</td></tr>
+			  <tr ><th colspan="2">Egyenleg:</th></tr>
+			  <tr ><td colspan="2"><span id="egyenleg">0</span></td></tr>
+			  </tbody></tobdy></table>
+
+				</div>
+
+				</div>
+				<div class="col-xs-8 col-md-8">
+				<div class="alert alert-info place"><div class="place-text"><strong>Hely:</strong>
+				<oreo id="egyseg">-</oreo><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"><oreo id="alegyseg">-</oreo></span>
+				<br><oreo id="errorMsgForm"></oreo>
+				 </div>
+				 </div>
+				 </div>
+				 </div>
+		 </div>
+		<div class="container">
+		<ul class="nav nav-tabs">
+
+		<div class="row">
+		<div class="col-md-6">
+		<h2>Kiadások</h2>
+		  <div class="panel panel-danger">
+			<div class="panel-body">';
+			$this->load->database();
+			$sql="select * from kltsg_submissions_kiadas_saved where submissions_id=".$_POST['id']." order by sub_id asc ";
+		//echo $sql;
+			$res= $this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
+		//echo $res;
+			$sub_id=0;
+			$rovatCounter=1;
+			$ossz=0;
+			foreach($res->result() as $sor)
+			{
+			if($sub_id!=$sor->sub_id or $sub_id==0)
+			{
+				$sqlRovat="select name from kltsg_category where id='".$sor->sub_id."'";
+				$resRovat= $this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
+				foreach($resRovat->result() as $sorRovat)
+				{
+				$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa,Year from kltsg_submissions_kiadas_saved where sub_id='".$sor->sub_id."' and submissions_id='".$_POST['id']."'";
+				$resSzamolas= $this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
+				foreach($resSzamolas->result() as $sorSzamolas)
+				{
+				$ossz=$ossz+$sorSzamolas->brutto;
+				
+				echo '
+			<table class="table table-bordered"><thead>
+			<tr><th>#</th><th colspan="6">Rovat</th><th >Rovat összesen (nettó)</th><th>Áfa összeg</th><th >Rovat összesen (bruttó)</th><th >Év</th></tr>
+			</thead><tbody id="table_rows">
+			<tr class="main-table" id="" >
+			<td ><div class="line-num">'.$rovatCounter.'</div></td>
+			<td colspan="6">'.$sorRovat->name.'</td>
+			<td colspan="">'.$sorSzamolas->netto.'</td>
+			<td colspan="">'.$sorSzamolas->afa.'</td>
+			<td colspan=""><span id=brutto'.$rovatCounter.'>'.$sorSzamolas->brutto.'</span></td>
+			<td colspan="">'.$sorSzamolas->Year.'</td>
+			</tr>
+			</table><table class="table table-bordered">
+			<tr class="subtable">
+			<th colspan="">Tervezett beszerzés/igénylés</th><th>Nettó egységár</th><th>Bruttó egységár</th><th>Áfakulcs</th><th>Mennyiség</th>
+			<th>Nettó összesen</th><th>Bruttó összesen</th>';
+			$rovatCounter++;
+				}
+			}}
+			echo "<tr id='Kiadas".$sor->id."' class='edited-row'><td>".$sor->megnevezes."</td>";
+			echo "<td>".$sor->netto_egysegar."</td>";
+			echo "<td>".$sor->brutto_egysegar."</td>";
+			echo "<td>".$sor->tax."%</td>";
+			echo "<td>".$sor->mennyiseg."</td>";
+			echo "<td>".$sor->netto_osszes."</td>";
+			echo "<td>".$sor->brutto_osszes."</td></tr>";
+			$sub_id=$sor->sub_id;
+			$inst= $this->db->query("select name from kltsg_institute where id=".$sor->institute_id."") or die("Hiba a institut lekérésénél");
+			$unit= $this->db->query("select name from kltsg_unit where id=".$sor->unit_id."") or die("Hiba a unit lekérésénél");
+			}
+			echo'<oreo id="buruttOsszesKiad" class="stealth">'.$ossz.'</oreo>
+		</table>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-6">
+		<h2>Bevételek</h2>
+		  <div class="panel panel-success">
+			<div class="panel-body">';
+			$sql="select * from kltsg_submissions_bevetel_saved where submissions_id=".$_POST['id']." order by sub_id asc ";
+		//echo $sql;
+		$res= $this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérésénél");
+		//echo $res;
+			$sub_id=0;
+			$rovatCounter=1;
+			$ossz=0;
+
+		foreach($res->result() as $sor)
+		{
+			if($sub_id!=$sor->sub_id or $sub_id==0)
+			{
+				$sqlRovat="select name from kltsg_category where id='".$sor->sub_id."'";
+				$resRovat= $this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
+				foreach($resRovat->result() as $sorRovat)
+				{
+				$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa,Year from kltsg_submissions_bevetel_saved where sub_id='".$sor->sub_id."'and submissions_id='".$_POST['id']."'";
 				$resSzamolas= $this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 				foreach($resSzamolas->result() as $sorSzamolas)
 				{

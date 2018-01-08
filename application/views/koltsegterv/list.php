@@ -61,6 +61,22 @@ function getViewPlan(record)
 	});	
 	szamol()
 }
+function getViewPlan2(record)
+{
+	//console.log(record);
+	$.ajax(
+	{
+		type:"POST",
+		data:'id='+record,
+		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/getViewPlan2",
+		success:function(result)
+				{
+					$("#mainPage").html(result);
+					//console.log(result);
+				}
+	});	
+	szamol()
+}
 function changePlace(sub,form,row_id)
 {
 	place=$("#inst_unit_"+row_id).val();
