@@ -7,7 +7,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		<link rel="icon" href="<?php echo base_url(); ?>img/favicon.ico">
-		<title>Költségtervező új</title>
+		<title>Költségtervező</title>
 		<link rel="stylesheet" href="<?php echo base_url(); ?>css\bootstrap.min.css">
 		<link rel="stylesheet" href="<?php echo base_url(); ?>css\koltsegterv.css">
 		<script src="<?php echo base_url(); ?>js/jquery.min.js"></script>

@@ -93,16 +93,29 @@ function confirmExit()
 //mentés és kilépés
 function confirmSave()
 {
+	
 	$.ajax(
 	{
 		type:"GET",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/confirmAndSave",
 		success:function(result)
 				{
-					console.log(result);
+					console.log(result+"bejött")
+					$("#mainPage").html("<img id='theImg' src='../../img/load.gif'>")
 				}
 	});	
-	ajaxLoad("main");
+	setTimeout(function(){
+	$.ajax(
+	{
+		type:"GET",
+		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/backup",
+		success:function(result)
+				{
+					console.log(result)
+					ajaxLoad("main");
+				}
+	});	
+},8000);
 }
 //felad és kilép
 function confirmSend()
@@ -113,10 +126,22 @@ function confirmSend()
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/confirmSend",
 		success:function(result)
 				{
-					console.log(result);
+					$("#mainPage").html("<img id='theImg' src='../../img/load.gif'>")
 				}
 	});	
-	ajaxLoad("main");
+	setTimeout(function(){
+	$.ajax(
+	{
+		type:"GET",
+		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/backup",
+		success:function(result)
+				{
+					console.log(result)
+					ajaxLoad("main");
+				}
+	});	
+},8000);
+	
 }
 //h mainbe valki vissza megy kitörli a submission táblákat
 function clearSubmission()

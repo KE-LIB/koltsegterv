@@ -166,7 +166,7 @@ class Helper_model extends CI_Model {
 			
 		$this->load->database();
 		$sql="SELECT kltsg_unit.id AS unitid,parent as unitParent, kltsg_unit.name AS unitname
-		FROM kltsg_unit";		
+		FROM kltsg_unit order by parent ASC";		
 		$query = $this->db->query($sql);
 			
             return $query;
@@ -2440,6 +2440,47 @@ return $ossz;
 
 			$writer->writeToFile('download/'.$filename.'.xlsx');
 			echo "<a href=".base_url()."download/".$filename.".xlsx><span class='glyphicon glyphicon-floppy-saved' onclick=deleteFile('".$filename."','1')>Letöltés</a>";
+		}
+		public function backup()
+        {
+			
+		$date=date('Y_m_d_H_m_s');
+	echo "mentés kezdése";
+	$connection = mysqli_connect('localhost','root','','koltsegtervezes') or die("meghalt");
+$tables = array();
+$result = mysqli_query($connection,"SHOW TABLES");
+while($row = mysqli_fetch_row($result)){
+  $tables[] = $row[0];
+}
+$return = '';
+foreach($tables as $table){
+  $result = mysqli_query($connection,"SELECT * FROM ".$table);
+  $num_fields = mysqli_num_fields($result);
+  
+  $return .= 'DROP TABLE '.$table.';';
+  $row2 = mysqli_fetch_row(mysqli_query($connection,"SHOW CREATE TABLE ".$table));
+  $return .= "\n\n".$row2[1].";\n\n";
+  
+  for($i=0;$i<$num_fields;$i++){
+    while($row = mysqli_fetch_row($result)){
+      $return .= "INSERT INTO ".$table." VALUES(";
+      for($j=0;$j<$num_fields;$j++){
+        $row[$j] = addslashes($row[$j]);
+        if(isset($row[$j])){ $return .= '"'.$row[$j].'"';}
+        else{ $return .= '""';}
+        if($j<$num_fields-1){ $return .= ',';}
+      }
+      $return .= ");\n";
+    }
+  }
+  $return .= "\n\n\n";
+}
+//save file
+$handle = fopen("dumpok/".$date."_backup.sql","w+");
+fwrite($handle,$return);
+fclose($handle);
+echo "Successfully backed up";
+		
 		}
 		}
 		?>		

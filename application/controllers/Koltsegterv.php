@@ -747,6 +747,11 @@ class Koltsegterv extends CI_Controller {
 		$this->load->model('Helper_model');
 		$this->Helper_model->confirmAndSave();
 		}
+		public function backup()
+		{
+		$this->load->model('Helper_model');
+		$this->Helper_model->backup();
+		}
 		public function confirmSend()
 		{
 		$this->load->model('Helper_model');

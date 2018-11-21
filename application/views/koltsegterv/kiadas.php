@@ -98,6 +98,7 @@ Nettó egységár</th><th class="collapsed">Áfakulcs</th><th class="collapsed">
 </tr>
 </table>
 <button type="submit" onclick="ajaxAddKiadas()" value="1" name="upload_kiad" class="btn btn-success" id="upload_kiad"><span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>&nbsp;Rovat rögzítése</button>
+<button type="submit" onclick="ajaxAddKiadasAndReFill()" value="1" name="upload_kiad_andrefill" class="btn btn-warning" id="upload_kiad"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Rovat rögzítése és újboli kitoltés</button>
 <button type="submit" onclick="ajaxModKiadas()" value="1" name="mod_kiad" class="btn btn-primary stealth" id="mod_kiad"><span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>&nbsp;Rovat Módosítása</button>
 <button type="submit" onclick="showKiad()" value="1" name="cc_mod_kiad" class="btn btn-danger stealth" id="cc_mod"><span class="glyphicon glyphicon-floppy-remove" aria-hidden="true"></span>&nbsp;Mégsem</button>
 
@@ -307,7 +308,110 @@ function ajaxAddKiadas()
 	
 	}
 }
+function ajaxAddKiadasAndReFill()
+{
+	var megnevezes=$("#megnevezes").val();
+	var egysegAr=$("#egysegAr").val();
+	var mennyiseg=$("#mennyiseg").val();
+	var rovat=$("#rovat").val();
+	var afa=$("#afaKulcs").val();
+	var ev=$("#kltsgEve").val();
+	var cpv1=$("#cpv1").val();
+	var cpv2=$("#cpv2").val();
+	var honap=$("#honap").val();
+	var mertekegyseg=$("#mertekegyseg").val();
+	//console.log("megnevezes="+megnevezes+"?egysegAr="+egysegAr+"?mennyiseg="+mennyiseg);
+	if(rovat=="999" || afa=="999" || mertekegyseg=="999" || megnevezes=="" || egysegAr=="" || mennyiseg=="" || cpv1=="999" || cpv2=="999" || honap=="999")
+	{
+		if(rovat=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket ");
+		$("#errorRovat").css("color","red");
+		}
+		if(afa=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorAfa").css("color","red");
+		}
+	
+		if(mertekegyseg=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorMertek").css("color","red");
+		}
+		if(megnevezes=="")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorMegnev").css("color","red");
+		}
+		if(egysegAr=="")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorBrutto").css("color","red");
+		}
+		if(mertekegyseg=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorMennyiseg").css("color","red");
+		}
+		if(cpv1=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorcpv1").css("color","red");
+		}
+		if(cpv2=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorcpv2").css("color","red");
+		}
+		if(honap=="999")
+		{
+		$("#errorMsgForm").html("Kérlek Töltsd ki a pirossal megjelőlt részeket");
+		$("#errorHonap").css("color","red");
+		}
+	}
+	else{
+	$.ajax(
+	{
+			type:"POST",
+		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/addKiadas",
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"cpv":cpv1,"honap":honap},
+		success:function(result)
+		{
+		
+	$("#honap").val("999");
+	$("#cpv1").val(cpv1);
+	$("#cpv2").val(cpv2);
+	$("#megnevezes").val(megnevezes);
+	$("#egysegAr").val(egysegAr);
+	$("#mennyiseg").val(mennyiseg);
+	$("#rovat").val(rovat);
+	$("#afaKulcs").val(afa);
+	$("#kltsgEve").val(ev);
+    $("#mertekegyseg").val(mertekegyseg);
+	setTimeout(function() {
+		$.ajax(
+	{
+		type:"POST",
+		url:"<?php echo base_url(); ?>" +"index.php/Koltsegterv/getKiadas",
+		success:function(result)
+				{
+					//console.log(result);
+					$("#meglevoKoltseg").html(result);
+				
+				}
+	});	
+	sumKiad()
+	sumBev()
+	},500);	
+setTimeout(function() {getEgyenleg()},600);	
 
+		}
+
+	});
+	
+	}
+}
 function setAfa()
 {
 	var afa=$("#afaKulcs").val();

@@ -13,7 +13,8 @@
 			<span class="glyphicon glyphicon-king" aria-hidden="true"></span><br>Admin
 			</button>
 			<br><h1>Kedves kollégák!</h1><br>
-			<h4>Amennyiben nekiállnak felvinni a költségtervezőbe az adatokat,  kérem figylejenek rá hogy mindig!!! legyen legalább 1 kiadás benne, mert csak akkor mentőtid el a tétel!</h4>
+			<h4>Amennyiben nekiállnak felvinni a költségtervezőbe az adatokat,  kérem figylejenek rá hogy mindig!!! legyen legalább 1 kiadás benne, mert csak akkor mentődik el a tétel!</h4><h4>Fejlesztések:<br><ul><li>Bekerült egy új gomb a bevétel és kiadás fülön <button type="submit"  value="1" name="upload_kiad_andFill" class="btn btn-warning" id="upload_kiad"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Rovat rögzítése és újboli kitöltés</button> <br>Melynek segítségével ha ismétlődő tételt kívánnak felvinni, ez a gomb újra kitölti ugyanazokkal az adatokattal a felületet a hónap kivételével.</li><br>
+			<li>plusz egy töltő képernyő a mentés gombra kattintva megjelenik, azért, hogy ne lehessen olyan gyorsan megnézni amit elmentettünk, mert tavaly ebből volt a gond, hogy még mentett a rendszer de már meg akarták nézni, mit csináltak, ami viszont a mentés folyamat megszakítását eredményezte.</li></ul></h4>
 	</div>
 	</div>
 	<script>
