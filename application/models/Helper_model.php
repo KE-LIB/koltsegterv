@@ -784,8 +784,9 @@ return $ossz;
 					}
 				array_push($submission_id,$record->submissions_id);
 					echo '</select></td><td class="main-table">'.$record->submissions_id.'</td><td>'.$record->submissions_time.'</td>
-					<td><button class="btn btn-warning" role="button" onclick=getViewPlan2('.$record->submissions_id.')><span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>&nbsp;Előnézet</button><button type="submit" name="editSavedWork" onclick=editWork('.$record->submissions_id.',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
-					<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record->submissions_id.',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
+					<td><button class="btn btn-warning" role="button" onclick=getViewPlan2('.$record->submissions_id.')><span class="glyphicon glyphicon-eye-open" aria-hidden="true" ></span>&nbsp;Előnézet</button>
+					<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record->submissions_id.',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>&nbsp;
+					<button type="submit" name="editSavedWork" onclick=editWork('.$record->submissions_id.',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button> 
 					<button type="submit"  class=" btn btn-success" onclick=sendPlane('.$record->submissions_id.')><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Feladás</button>
 					<button type="submit"  class=" btn btn-danger" onclick=deletePlane('.$record->submissions_id.',"S")><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Törlés</button>
 					</td>';
@@ -1113,7 +1114,7 @@ return $ossz;
 		{
 			if($sub_id!=$sor->sub_id or $sub_id==0)
 			{
-				$sqlRovat="select name from kltsg_category where id='".$sor->sub_id."'";
+				$sqlRovat="select name from kltsg_category_bev where id='".$sor->sub_id."'";
 				$resRovat= $this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 				foreach($resRovat->result() as $sorRovat)
 				{
@@ -1266,7 +1267,7 @@ return $ossz;
 		{
 			if($sub_id!=$sor->sub_id or $sub_id==0)
 			{
-				$sqlRovat="select name from kltsg_category where id='".$sor->sub_id."'";
+				$sqlRovat="select name from kltsg_category_bev where id='".$sor->sub_id."'";
 				$resRovat= $this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 				foreach($resRovat->result() as $sorRovat)
 				{
