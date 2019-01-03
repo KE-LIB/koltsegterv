@@ -116,6 +116,7 @@ function confirmSave()
 				}
 	});	
 },8000);
+$("#fomenu").attr('onclick','ajaxLoad("main")')
 }
 //felad és kilép
 function confirmSend()
@@ -141,7 +142,7 @@ function confirmSend()
 				}
 	});	
 },8000);
-	
+	$("#fomenu").attr('onclick','ajaxLoad("main")')
 }
 //h mainbe valki vissza megy kitörli a submission táblákat
 function clearSubmission()

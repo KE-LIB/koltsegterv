@@ -776,6 +776,7 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$this->Helper_model->editWork();
+		echo "editWork megnyitva";
 		}
 		public function sendSavedPlane()
 		{

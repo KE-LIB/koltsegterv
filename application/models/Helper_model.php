@@ -432,8 +432,7 @@ class Helper_model extends CI_Model {
 		$resRovat=$this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resRovat->result() as $sorRovat)
 		{
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."and user_id=".$_COOKIE['userid']."'";
-		
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."' and user_id='".$_COOKIE['userid']."'";
 		$resSzamolas=$this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resSzamolas->result() as $sorSzamolas)
 		{
@@ -449,7 +448,7 @@ class Helper_model extends CI_Model {
 		<td colspan="6">'.$sorRovat->name.'</td>
 		<td colspan="">'.$sorSzamolas->netto.'</td>
 		<td colspan="">'.$sorSzamolas->afa.'</td>
-		<td colspan=""><span id=brutto'.$rovatCounter.'>'.$sorSzamolas->brutto.'</span></td>
+		<td colspan="">'.$sorSzamolas->brutto.'</span></td>
 		</tr>
 		</table>
 		
