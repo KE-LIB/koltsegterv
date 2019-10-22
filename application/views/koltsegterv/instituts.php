@@ -72,7 +72,8 @@ $data = array(
 echo form_input($data).'</div><div class="col-sm-6"><h1> Alegységek</h1>';
 for($i=0;$i<count($egyseg);$i++)
 {
-	echo "<h4>".$egyseg[$i][1]."</h4><br>";
+	
+	echo "<h4 id='egyseg_".$egyseg[$i][0]."'>".$egyseg[$i][1]."</h4><br>";
 	for($j=0;$j<count($alegyseg);$j++)
 	{
 		if($alegyseg[$j][2]==$egyseg[$i][0])
@@ -85,6 +86,14 @@ for($i=0;$i<count($egyseg);$i++)
 		);
 echo form_checkbox($data).$alegyseg[$j][1]."<br>";
 		}
+		
+	}
+	
+	
+}
+echo "<h4 >Használaton kívül</h4><br>";
+	for($j=0;$j<count($alegyseg);$j++)
+	{
 		if($alegyseg[$j][2]=='999')
 		{
 			$data = array(
@@ -96,7 +105,6 @@ echo form_checkbox($data).$alegyseg[$j][1]."<br>";
 echo "használaton kívüli".form_checkbox($data).$alegyseg[$j][1]."<br>";
 		}
 	}
-}
 $string = '<br><br><br><br><br></div></div></div></div>';
 echo form_close($string);
 ?>
@@ -149,10 +157,13 @@ function ChangeInst(id)
 					console.log(result)
 					$("#iid").attr('value',exp[0])
 					$("#Inst_Name").attr('value',exp[1])
-					for(var i=1;i<exp.length;i++)
+					for(var i=2;i<exp.length;i++)
 					{
+						
 						$("#alegyseg_"+exp[i]).attr('checked','checked')
 					}
+					
+					
 				}
 	});
 }
