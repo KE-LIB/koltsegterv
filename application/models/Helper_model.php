@@ -180,7 +180,7 @@ class Helper_model extends CI_Model {
 		FROM kltsg_unit where parent='".$_POST['id']."'";		
 		//echo $sql;
 		$query = $this->db->query($sql);
-			
+		
             return $query;
 		
 		}
@@ -432,7 +432,8 @@ class Helper_model extends CI_Model {
 		$resRovat=$this->db->query($sqlRovat) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resRovat->result() as $sorRovat)
 		{
-		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."' and user_id='".$_COOKIE['userid']."'";
+		$sqlSzamolas="select sum(netto_osszes) as netto,sum(brutto_osszes) as brutto,sum(afa_osszes) as afa from kltsg_submissions_kiadas where sub_id='".$row->sub_id."and user_id=".$_COOKIE['userid']."'";
+		
 		$resSzamolas=$this->db->query($sqlSzamolas) or die("Hiba a kltsg_category lekérésénél");
 		foreach($resSzamolas->result() as $sorSzamolas)
 		{
@@ -448,7 +449,7 @@ class Helper_model extends CI_Model {
 		<td colspan="6">'.$sorRovat->name.'</td>
 		<td colspan="">'.$sorSzamolas->netto.'</td>
 		<td colspan="">'.$sorSzamolas->afa.'</td>
-		<td colspan="">'.$sorSzamolas->brutto.'</span></td>
+		<td colspan=""><span id=brutto'.$rovatCounter.'>'.$sorSzamolas->brutto.'</span></td>
 		</tr>
 		</table>
 		
@@ -580,6 +581,33 @@ return $ossz;
 			$sql="select * from kltsg_submissions_bevetel where id='".$_POST['id']."'";
 			$query=$this->db->query($sql);
 			return $query;
+		}
+		public function getRowId($honnan)
+		{
+			$this->load->database();
+			$this->db->select('row_id');
+			$this->db->from($honnan);
+			$this->db->order_by('row_id','DESC');
+			$this->db->limit(1);
+			$query=$this->db->get();
+			foreach($query->result() as $row);
+			{
+			$row_id=$row->row_id;
+			}
+			$row_id++;
+			return $row_id;
+		}
+		public function getSubmission()
+		{
+			$this->load->database();
+			$data=array(
+			'user_id'=>get_cookie('uid'));
+			$this->db->trans_start();
+			$this->db->insert('kltsg_submissions',$data);
+			$eid=$this->db->insert_id();
+			$this->db->trans_complete(); 
+			return $eid;
+			
 		}
 		public function confirmAndSave()
 		{
@@ -2482,5 +2510,78 @@ fclose($handle);
 echo "Successfully backed up";
 		
 		}
+	public function insertfeltoltes($data,$hova)
+	{
+		
+		if(count($data)==0)
+		{
+			
+		}
+		else
+		{
+			if($hova=="b")
+			{
+				for($i=0;$i<count($data);$i++)
+				{
+				$adat=array(
+					'row_id'=>$data[$i],
+					'submissions_id'=>$data[$i+1],
+					'institute_id'=>$data[$i+2],
+					'unit_id'=>$data[$i+3],
+					'sub_id'=>$data[$i+4],
+					'tax'=>$data[$i+5],
+					'Year'=>$data[$i+6],
+					'honap'=>$data[$i+7],
+					'megnevezes'=>$data[$i+8],
+					'brutto_egysegar'=>$data[$i+9],
+					'netto_egysegar'=>$data[$i+10],
+					'afa_ossz_egyseg'=>$data[$i+11],
+					'mennyiseg'=>$data[$i+12],
+					'quant'=>$data[$i+13],
+					'brutto_osszes'=>$data[$i+14],
+					'netto_osszes'=>$data[$i+15],
+					'afa_osszes'=>$data[$i+16],
+					'user_id'=>get_cookie('uid'));
+				$this->db->trans_start();
+				$this->db->insert('kltsg_submissions_bevetel_saved',$adat);
+				$eid=$this->db->insert_id();
+				$this->db->trans_complete(); 
+				$i=$i+16;
+				}
+			}
+			if($hova=="k")
+			{
+				for($i=0;$i<count($data);$i++)
+				{
+				$adat=array(
+					'row_id'=>$data[$i],
+					'submissions_id'=>$data[$i+1],
+					'institute_id'=>$data[$i+2],
+					'unit_id'=>$data[$i+3],
+					'sub_id'=>$data[$i+4],
+					'tax'=>$data[$i+5],
+					'Year'=>$data[$i+6],
+					'cpv'=>$data[$i+7],
+					'honap'=>$data[$i+8],
+					'megnevezes'=>$data[$i+9],
+					'brutto_egysegar'=>$data[$i+10],
+					'netto_egysegar'=>$data[$i+11],
+					'afa_ossz_egyseg'=>$data[$i+12],
+					'mennyiseg'=>$data[$i+13],
+					'quant'=>$data[$i+14],
+					'brutto_osszes'=>$data[$i+15],
+					'netto_osszes'=>$data[$i+16],
+					'afa_osszes'=>$data[$i+17],
+					'user_id'=>get_cookie('uid'));
+				$this->db->trans_start();
+				$this->db->insert('kltsg_submissions_kiadas_saved',$adat);
+				$eid=$this->db->insert_id();
+				$this->db->trans_complete(); 
+				$i=$i+17;
+				}
+			}
+		}
+		
+	}
 		}
 		?>		

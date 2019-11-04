@@ -362,7 +362,7 @@ class Koltsegterv extends CI_Controller {
 		public function saveModInst()
 		{
 		$data['valami']="";
-		$this->load->helper('form'); 
+		//$this->load->helper('form'); 
 		$this->load->model('Helper_model');
 		$this->Helper_model->saveModInst();
 		$query=$this->Helper_model->getEveryEgyseg();
@@ -557,6 +557,7 @@ class Koltsegterv extends CI_Controller {
 		}
 		$date=date("Y");
 		$data['evek']=$date;
+		$data['egysegesID']=$_POST['egyseg']."_".$_POST['alEgyseg'];
         $this->load->view('koltsegterv/form', $data);
 		}
 		public function fillKiadas()
@@ -776,7 +777,6 @@ class Koltsegterv extends CI_Controller {
 		{
 		$this->load->model('Helper_model');
 		$this->Helper_model->editWork();
-		echo "editWork megnyitva";
 		}
 		public function sendSavedPlane()
 		{
@@ -901,6 +901,122 @@ class Koltsegterv extends CI_Controller {
 		public function deleteFile()
 		{
 		unlink('download/'.$_GET['name'].'.xlsx');
+		}
+		public function upload()
+		{
+		$this->load->model('Helper_model');
+		$this->load->helper(array('form', 'url'));
+		$config['upload_path']          = 'uploads/';
+		$config['allowed_types'] = 'csv';
+		$this->load->library('upload', $config);
+		 if ( ! $this->upload->do_upload('myfile'))
+                {
+                        $error = array('error' => $this->upload->display_errors());
+						print_r($error);
+                        
+                }
+                else
+                {
+                        $data = array('upload_data' => $this->upload->data());
+						$name=$this->upload->data('file_name');
+						$institute=$this->input->post('institute');
+						$unit=$this->input->post('unit');
+						$data['egysegegID']=$institute."_".$unit;
+		
+				$submissionid=$this->Helper_model->getSubmission('kltsg_submissions_bevetel_saved');
+				$csv = array_map('str_getcsv', file("uploads/".$name));
+					$kiadas=array();
+					$bevetel=array();
+					$mit='k';
+					/*echo "csv<br>";
+					print_r($csv);*/ 
+				for($i=0;$i<count($csv);$i++)
+					{
+					$belsoCsv=$csv[$i];
+					/*echo "belsoCsv<br>";
+					print_r($belsoCsv);*/
+					$kiadas_row_id=$this->Helper_model->getRowId('kltsg_submissions_kiadas_saved');
+						for($j=0;$j<count($belsoCsv);$j++)
+						{
+							if($mit=="k")
+							{
+								if(count($belsoCsv)==1)
+								{
+									
+									switch ($belsoCsv[0])
+									{
+										case 'kiadasok_kezdet;':
+											break;
+										case 'kiadasok_vege;':
+											$mit="b";
+											break;
+									}
+									
+									/*0. elem vagy egy parancs vagy a sub_id
+									1. elem unit
+									2.elem áfakulcs id,
+									3.elem áfakulcs id, 4. elem év, 5. elem cpv1_id,6.elem hónap id,7.elemtervezett beszerzés,8. elem bruttó egységár,9. elem nettó egységár, 10. elem áfa egység, 11.elem mennyiség , 12.elem mértékegység . 13. össz bruttó, 14 össz nettó, 15 össz áfa;
+									*/
+								}
+								else{
+									if($j==0)
+									{
+										    array_push($kiadas,$kiadas_row_id);
+											array_push($kiadas,$submissionid);	
+											array_push($kiadas,$institute);
+											array_push($kiadas,$unit);
+											array_push($kiadas,$belsoCsv[$j]);
+									}
+									else
+									{
+									array_push($kiadas,$belsoCsv[$j]);
+									}
+								}
+								
+							}
+							else
+							{
+								if($j==0)
+								{
+								if($belsoCsv[0]=='bevetelek_kezdet;')
+									{
+									}
+								elseif($belsoCsv[0]=="bevetelek_vege;")
+									{
+										break;
+									}
+									else
+									{
+									
+											$bevetel_row_id=$this->Helper_model->getRowId('kltsg_submissions_bevetel_saved');
+											array_push($bevetel,$bevetel_row_id);
+											array_push($bevetel,$submissionid);	
+											array_push($bevetel,$institute);
+											array_push($bevetel,$unit);
+											array_push($bevetel,$belsoCsv[0]);
+									}
+									
+									/*0. elem vagy egy parancs vagy a sub_id 1.elem institute, 2. elem unit
+									3.elem áfakulcs id, 4. elem év, 5.elem hónap id,6.elemtervezett beszerzés,7. elem bruttó egységár,8. elem nettó egységár, 9. elem áfa egység, 10.elem mennyiség , 11.elem mértékegység . 12. össz bruttó, 13 össz nettó, 14 össz áfa;
+									*/
+								}
+								else{
+									array_push($bevetel,$belsoCsv[$j]);
+								}
+							}
+					
+						
+						
+						
+					}
+		}
+		$this->load->model('Helper_model');
+		$this->Helper_model->insertfeltoltes($bevetel,"b");
+		$this->Helper_model->insertfeltoltes($kiadas,"k");
+		$this->load->helper("file");
+		delete_files("uploads/".$name);
+		$this->load->view('koltsegterv/list');
+		}
 		}
 		
 }

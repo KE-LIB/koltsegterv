@@ -23,8 +23,9 @@
 
 
 
-<li class="" ><a data-toggle="tab" href="#kiadful" onclick="showKiad()" id="0">Kiadások</a></li>
+<li><a data-toggle="tab" href="#kiadful" onclick="showKiad()" id="0">Kiadások</a></li>
  <li><a data-toggle="tab" href="#bevful" onclick="showBev()" id="1">Bevételek</a></li>
+ <li><a data-toggle="tab" href="#feltolt" onclick="showFeltolt()" id="2">Feltöltés</a></li>
  <li class=""><a data-toggle="tab" href="#info" onclick="ajaxLoadKoltsegfel('helpKFel')" >Útmutató</a></li>
 </ul>
 <div id="koltsegfel">
@@ -56,16 +57,21 @@
 <script>
 changeFoGomb();	
 //kiadás megjelenítése+ amit eddig felvittünk
-function showKiad(){
+function showKiad()
+{
 //	getAlEgysegName();
 //getEgysegName();
-ajaxLoadKoltsegfel("kiadas")
-					
+ajaxLoadKoltsegfel("kiadas")				
 }
-function showBev(){
+function showBev()
+{
 //	getAlEgysegName();
 //getEgysegName();
 ajaxLoadKoltsegfel("bevetel")				
+}
+function showFeltolt()
+{
+ajaxLoadKoltsegfel("feltoltes")				
 }
 function ajaxLoadKoltsegfel(mit)
 {
@@ -73,14 +79,14 @@ $.ajax(
 	{
 		type:"POST",
 			url: "<?php echo base_url(); ?>" + 'index.php/Koltsegterv/loadPage',
-			data:"mit="+mit,
+			data:{mit:mit,egysegegID:'<?php echo $egysegesID;?>'},
 			success:function(result)
 				{
 					//console.log(result)
 					$("#koltsegfel").html(result);
 				}
 	});
-	}
+}
 	//elvetés
 function confirmExit()
 {
@@ -116,7 +122,6 @@ function confirmSave()
 				}
 	});	
 },8000);
-$("#fomenu").attr('onclick','ajaxLoad("main")')
 }
 //felad és kilép
 function confirmSend()
@@ -142,7 +147,7 @@ function confirmSend()
 				}
 	});	
 },8000);
-	$("#fomenu").attr('onclick','ajaxLoad("main")')
+	
 }
 //h mainbe valki vissza megy kitörli a submission táblákat
 function clearSubmission()

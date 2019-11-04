@@ -75,7 +75,6 @@ function getViewPlan2(record)
 					//console.log(result);
 				}
 	});	
-	$("#fomenu").attr('onclick','ajaxLoad("main")')
 	szamol()
 }
 function changePlace(sub,form,row_id)
