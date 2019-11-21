@@ -601,7 +601,7 @@ return $ossz;
 		{
 			$this->load->database();
 			$data=array(
-			'user_id'=>get_cookie('uid'));
+			'user_id'=>get_cookie('userid'));
 			$this->db->trans_start();
 			$this->db->insert('kltsg_submissions',$data);
 			$eid=$this->db->insert_id();
@@ -2541,7 +2541,7 @@ echo "Successfully backed up";
 					'brutto_osszes'=>$data[$i+14],
 					'netto_osszes'=>$data[$i+15],
 					'afa_osszes'=>$data[$i+16],
-					'user_id'=>get_cookie('uid'));
+					'user_id'=>get_cookie('userid'));
 				$this->db->trans_start();
 				$this->db->insert('kltsg_submissions_bevetel_saved',$adat);
 				$eid=$this->db->insert_id();
@@ -2572,7 +2572,7 @@ echo "Successfully backed up";
 					'brutto_osszes'=>$data[$i+15],
 					'netto_osszes'=>$data[$i+16],
 					'afa_osszes'=>$data[$i+17],
-					'user_id'=>get_cookie('uid'));
+					'user_id'=>get_cookie('userid'));
 				$this->db->trans_start();
 				$this->db->insert('kltsg_submissions_kiadas_saved',$adat);
 				$eid=$this->db->insert_id();
