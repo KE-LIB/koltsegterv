@@ -52,7 +52,8 @@ function stopUpload(success){
                              <input type="submit" name="submitBtn" class="sbtn" value="feltöltés"  />
                          </label>
                      </p>
-                     Miután feltöltötted a file-t, a Saját tervezetek/mentett tervezetek alatt meg is nézheted.
+					  <b>Nagyon fontos! a szabadon beírható részbe "Tervezett beszerzés/igénylés" kérek mindenkit, ne írjon ","-őt mert akkor elcsúsznek feltöltéskor a sorok!</b><br>
+                     A feltötés soroktól függően eltarthat akér 3-5 percig is!<br>Miután feltöltötted a file-t, a Saját tervezetek/mentett tervezetek alatt meg is nézheted.
                      <iframe id="upload_target" name="upload_target" src="#" style="width:0;height:0;border:0px solid #fff;"></iframe>
                  </form>
              </div>

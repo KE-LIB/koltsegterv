@@ -14,7 +14,8 @@
 			<h4>Amennyiben nekiállnak felvinni a költségtervezőbe az adatokat,  kérem figylejenek rá hogy mindig!!! legyen legalább 1 kiadás benne, mert csak akkor mentődik el a tétel!</h4><h4>Fejlesztések:<br><ul>
 			<li>Bekerült egy új fül a tervezőbe, a  <a data-toggle="tab" href="#feltolt"  id="2">Feltöltés</a> fül, melynek segítségével egy csv fájlt feltöltve tudtok bevinni adatokat a rendszerbe.<br> Maga az excel ami tudja generálni a csv fájlt az alábbi linken letölthető:
 			<a href='../../uploads/kst.xlsm' target="_blank"> Link</a><br>
-			Miután be vittük az adatokat, magára a csv generálás gombra kattintva ahová lementettük ezt a fáljt és megnyitottuk, oda menti a csv fáljt is. Figyelem, ez még teszt állapotba van, tehát ezt csak a  legvégső esetbe használjuk!</li>
+			Miután be vittük az adatokat, magára a csv generálás gombra kattintva ahová lementettük ezt a fáljt és megnyitottuk, oda menti a csv fáljt is. 
+			<b>Nagyon fontos! a szabadon beírható részbe "Tervezett beszerzés/igénylés" kérek mindenkit, ne írjon ","-őt mert akkor elcsúsznek feltöltéskor a sorok!</b> Figyelem, ez még teszt állapotba van, tehát ezt csak a  legvégső esetbe használjuk!</li>
 			</ul></h4>
 	</div>
 	<script>

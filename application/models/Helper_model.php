@@ -6,6 +6,7 @@ class Helper_model extends CI_Model {
         {
                 // Call the CI_Model constructor
                 parent::__construct();
+				error_reporting(0);
         }
 		public function getEgyseg()
         {
@@ -303,6 +304,7 @@ class Helper_model extends CI_Model {
 		$ev=$_POST['ev'];
 		$honap=$_POST['honap'];
 		$cpv=$_POST['cpv'];
+		$cpv2=$_POST['cpv2'];
 		$brutto_osszes=$mennyiseg*$egysegAr;
 		$nettoEA=round(($egysegAr/($_COOKIE['afaKulcs']+100))*100);
 		$netto_osszes=$mennyiseg*$nettoEA;
@@ -311,9 +313,9 @@ class Helper_model extends CI_Model {
 		$brutto_egysegar=round($brutto_osszes/$mennyiseg);
 		$sql="insert into kltsg_submissions_kiadas 
 		(`sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`,
-		`megnevezes`, `netto_egysegar`, `tax`,  `afa_ossz_egyseg`, `quant`, `brutto_egysegar`,`Year`,`cpv`,`honap`)
+		`megnevezes`, `netto_egysegar`, `tax`,  `afa_ossz_egyseg`, `quant`, `brutto_egysegar`,`Year`,`cpv`,`honap`,cpv2)
 		values ('".$rovat."','".$_COOKIE['userid']."','".$_COOKIE['egyseg']."','".$_COOKIE['alegyseg']."','".$brutto_osszes."','".$netto_osszes."',
-		'".$afa_osszes."','".$mennyiseg."','".$megnevezes."','".$nettoEA."','".$_COOKIE['afaKulcs']."','".$afa_ossz_egyseg."','".$_COOKIE['mertekegyseg']."','".$brutto_egysegar."','".$ev."','".$cpv."','".$honap."')";
+		'".$afa_osszes."','".$mennyiseg."','".$megnevezes."','".$nettoEA."','".$_COOKIE['afaKulcs']."','".$afa_ossz_egyseg."','".$_COOKIE['mertekegyseg']."','".$brutto_egysegar."','".$ev."','".$cpv."','".$honap."','".$cpv2."')";
 		$query = $this->db->query($sql);
 			
        
@@ -353,6 +355,7 @@ class Helper_model extends CI_Model {
 		$id=$_POST['id'];
 		$afa=$_POST['afa'];
 		$cpv=$_POST['cpv'];
+		$cpv2=$_POST['cpv2'];
 		$honap=$_POST['honap'];
 		$brutto_osszes=$mennyiseg*$egysegAr;
 		$nettoEA=round(($egysegAr/($afa+100))*100);
@@ -372,7 +375,8 @@ class Helper_model extends CI_Model {
 		megnevezes='".$megnevezes."', 
 		netto_egysegar='".$nettoEA."',
 		tax='".$afa."', 
-		honap='".$honap."', 
+		honap='".$honap."',
+		cpv2='".$cpv2."',
 		afa_ossz_egyseg='".$afa_ossz_egyseg."',
 		quant='".$_COOKIE['mertekegyseg']."', 
 		brutto_egysegar='".$brutto_egysegar."',
@@ -629,8 +633,8 @@ return $ossz;
 			{
 			foreach($res->result() as $kiadas)
 			{
-			$sqlKiadas="insert into kltsg_submissions_kiadas_saved ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,cpv,honap)
-			values('".$row_id."','".$subId."','".$kiadas->sub_id."','".$_COOKIE['userid']."','".$kiadas->institute_id."','".$kiadas->unit_id."','".$kiadas->brutto_osszes."','".$kiadas->netto_osszes."','".$kiadas->afa_osszes."','".$kiadas->mennyiseg."','".$kiadas->megnevezes."','".$kiadas->netto_egysegar."','".$kiadas->tax."','0','".$kiadas->afa_ossz_egyseg."','".$kiadas->quant."','".$kiadas->brutto_egysegar."','".$kiadas->Year."','".$kiadas->cpv."','".$kiadas->honap."')";
+			$sqlKiadas="insert into kltsg_submissions_kiadas_saved ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,cpv,honap,cpv2)
+			values('".$row_id."','".$subId."','".$kiadas->sub_id."','".$_COOKIE['userid']."','".$kiadas->institute_id."','".$kiadas->unit_id."','".$kiadas->brutto_osszes."','".$kiadas->netto_osszes."','".$kiadas->afa_osszes."','".$kiadas->mennyiseg."','".$kiadas->megnevezes."','".$kiadas->netto_egysegar."','".$kiadas->tax."','0','".$kiadas->afa_ossz_egyseg."','".$kiadas->quant."','".$kiadas->brutto_egysegar."','".$kiadas->Year."','".$kiadas->cpv."','".$kiadas->honap."','".$kiadas->cpv2."')";
 			//echo $sqlKiadas;
 			$this->db->query($sqlKiadas) or die("Hiba a kltsg_submissions_kiadas_saved beillesztésénél");
 			}
@@ -699,8 +703,8 @@ return $ossz;
 			$res=$this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérdezésénél");
 			foreach($res->result() as $kiadas)
 			{
-			$sqlKiadas="insert into kltsg_submissions_kiadas_sent ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,cpv,honap)
-			values('".$row_id."','".$subId."','".$kiadas->sub_id."','".$_COOKIE['userid']."','".$kiadas->institute_id."','".$kiadas->unit_id."','".$kiadas->brutto_osszes."','".$kiadas->netto_osszes."','".$kiadas->afa_osszes."','".$kiadas->mennyiseg."','".$kiadas->megnevezes."','".$kiadas->netto_egysegar."','".$kiadas->tax."','0','".$kiadas->afa_ossz_egyseg."','".$kiadas->quant."','".$kiadas->brutto_egysegar."','".$kiadas->Year."','".$kiadas->cpv."','".$kiadas->honap."')";
+			$sqlKiadas="insert into kltsg_submissions_kiadas_sent ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,cpv,honap,cpv2)
+			values('".$row_id."','".$subId."','".$kiadas->sub_id."','".$_COOKIE['userid']."','".$kiadas->institute_id."','".$kiadas->unit_id."','".$kiadas->brutto_osszes."','".$kiadas->netto_osszes."','".$kiadas->afa_osszes."','".$kiadas->mennyiseg."','".$kiadas->megnevezes."','".$kiadas->netto_egysegar."','".$kiadas->tax."','0','".$kiadas->afa_ossz_egyseg."','".$kiadas->quant."','".$kiadas->brutto_egysegar."','".$kiadas->Year."','".$kiadas->cpv."','".$kiadas->honap."','".$kiadas->cpv2."')";
 			//echo $sqlKiadas;
 			$this->db->query($sqlKiadas) or die("Hiba a kltsg_submissions_kiadas_sent beillesztésénél");
 			}
@@ -892,8 +896,8 @@ return $ossz;
 			$this->load->database();
 			if($_GET['form']=="S")
 		{
-			$sql="insert into kltsg_submissions_kiadas(sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap) 
-			select sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap 
+			$sql="insert into kltsg_submissions_kiadas(sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap,cpv2) 
+			select sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap,cpv2 
 			from kltsg_submissions_kiadas_saved 
 			where user_id='".$_COOKIE['userid']."' and submissions_id='".$_GET['sub']."'";
 			$this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas_saved másolásánál ");
@@ -917,8 +921,8 @@ return $ossz;
 		}
 		else
 		{
-				$sql="insert into kltsg_submissions_kiadas(sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap) 
-			select sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap 
+				$sql="insert into kltsg_submissions_kiadas(sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap,cpv2) 
+			select sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,afa_ossz_egyseg, quant, brutto_egysegar,created_time,Year,cpv,honap,cpv2 
 			from kltsg_submissions_kiadas_sent 
 			where user_id='".$_COOKIE['userid']."' and submissions_id='".$_GET['sub']."'";
 			$this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas_sent  másolásánál ");
@@ -945,8 +949,8 @@ return $ossz;
 		public function sendSavedPlane()
 		{
 			$this->load->database();
-			$sql="insert into kltsg_submissions_kiadas_sent (`row_id`, `submissions_id`, `sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`, `megnevezes`, `netto_egysegar`, `tax`, `category_tax_field`, `afa_ossz_egyseg`, `quant`, `brutto_egysegar`, `created_time`,Year,cpv,honap)
-			 select `row_id`, `submissions_id`, `sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`, `megnevezes`, `netto_egysegar`, `tax`, `category_tax_field`, `afa_ossz_egyseg`, `quant`, `brutto_egysegar`, `created_time`,Year,cpv,honap 
+			$sql="insert into kltsg_submissions_kiadas_sent (`row_id`, `submissions_id`, `sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`, `megnevezes`, `netto_egysegar`, `tax`, `category_tax_field`, `afa_ossz_egyseg`, `quant`, `brutto_egysegar`, `created_time`,Year,cpv,honap,cpv2)
+			 select `row_id`, `submissions_id`, `sub_id`, `user_id`, `institute_id`, `unit_id`, `brutto_osszes`, `netto_osszes`, `afa_osszes`, `mennyiseg`, `megnevezes`, `netto_egysegar`, `tax`, `category_tax_field`, `afa_ossz_egyseg`, `quant`, `brutto_egysegar`, `created_time`,Year,cpv,honap,cpv2 
 			from kltsg_submissions_kiadas_saved 
 			where user_id='".$_COOKIE['userid']."' and submissions_id='".$_GET['sub']."'";
 			$this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas_sent másolásánál ");
@@ -1643,7 +1647,7 @@ return $ossz;
 		$rows = array(array());
 		array_push($rows,array('Analitkus Egységenként',$_COOKIE['Ev'],'','','','','','','','','','','','','',''));
 		array_push($rows,array('Szervezet','Egység','Rovat','Rovat megnevezés','Tervezett beszerzés/igénylés','Nettó egységár','ÁFA kulcs'
-			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap'));	
+			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap','CPV2 kód'));	
 			$bev_a=array();	
 			foreach($bev->result() as $bevrec)
 			{	
@@ -1664,6 +1668,7 @@ return $ossz;
 				array_push($bev_a,$bevrec->brutto_osszes);
 				array_push($bev_a,'nincs');
 				array_push($bev_a,$bevrec->honap);
+			    array_push($bev_a,'nincs');
 				
 				$bevsum+=$bevrec->brutto_osszes;
 				array_push($rows,$bev_a);	
@@ -1677,7 +1682,8 @@ return $ossz;
 					(SELECT kltsg_unit.name FROM kltsg_unit WHERE id=unit_id ) AS unitname,
 					(SELECT kltsg_category.code FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC)AS kkod,
 					(SELECT kltsg_category.name FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC) AS kname,
-					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv2,
+					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv1,
+					(SELECT name FROM kltsg_cpv2 WHERE id=cpv2) as cpv2,
 					megnevezes,
 					netto_egysegar,
 					tax,
@@ -1692,6 +1698,7 @@ return $ossz;
 					where institute_id=".$_GET['id']." and Year=".$_COOKIE['Ev']."  ORDER BY submissions_id DESC ";
 					
 			$kiad=$this->db->query($sqlkiad);
+			//echo $this->db->last_query();
 			foreach($kiad->result() as $kiadrec)
 			{	
 			$kiad_a=array();
@@ -1709,8 +1716,9 @@ return $ossz;
 				array_push($kiad_a,$kiadrec->netto_osszes);
 				array_push($kiad_a,$kiadrec->afa_osszes);
 				array_push($kiad_a,$kiadrec->brutto_osszes);
-				array_push($kiad_a,$kiadrec->cpv2);
+				array_push($kiad_a,$kiadrec->cpv1);
 				array_push($kiad_a,$kiadrec->honap);
+				array_push($kiad_a,$kiadrec->cpv2);
 				$kiadsum+=$kiadrec->brutto_osszes;
 				array_push($rows,$kiad_a);	
 			}
@@ -1721,7 +1729,9 @@ return $ossz;
 		$writer = new XLSXWriter();
 		$writer->setAuthor('ke');
 		foreach($rows as $row)
-			$writer->writeSheetRow('Analitkus Egységenként', $row);
+		{
+		$writer->writeSheetRow('Analitkus Egységenként', $row);
+		}
 
 
 		$writer->writeToFile('download/'.$filename.'.xlsx');
@@ -1762,7 +1772,7 @@ return $ossz;
 		$rows = array(array());
 		array_push($rows,array('Analitkus Alegységenként',$_COOKIE['Ev'],'','','','','','','','','','','','','',''));
 		array_push($rows,array('Szervezet','Egység','Rovat','Rovat megnevezés','Tervezett beszerzés/igénylés','Nettó egységár','ÁFA kulcs'
-			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap'));	
+			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap','CPV2 kód'));	
 			$bev_a=array();	
 			foreach($bev->result() as $bevrec)
 			{	
@@ -1795,7 +1805,8 @@ return $ossz;
 					(SELECT kltsg_unit.name FROM kltsg_unit WHERE id=unit_id ) AS unitname,
 					(SELECT kltsg_category.code FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC)AS kkod,
 					(SELECT kltsg_category.name FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC) AS kname,
-					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv2,
+					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv1,
+					(SELECT name FROM kltsg_cpv2 WHERE id=cpv2) as cpv2,
 					megnevezes,
 					netto_egysegar,
 					tax,
@@ -1827,8 +1838,9 @@ return $ossz;
 				array_push($kiad_a,$kiadrec->netto_osszes);
 				array_push($kiad_a,$kiadrec->afa_osszes);
 				array_push($kiad_a,$kiadrec->brutto_osszes);
-				array_push($kiad_a,$kiadrec->cpv2);
+				array_push($kiad_a,$kiadrec->cpv1);
 				array_push($kiad_a,$kiadrec->honap);
+				array_push($kiad_a,$kiadrec->cpv2);
 				$kiadsum+=$kiadrec->brutto_osszes;
 				array_push($rows,$kiad_a);	
 			}
@@ -1880,7 +1892,7 @@ return $ossz;
 		$rows = array(array());
 		array_push($rows,array('Analitkus Alegységenként',$_COOKIE['Ev'],'','','','','','','','','','','','','',''));
 		array_push($rows,array('Szervezet','Egység','Rovat','Rovat megnevezés','Tervezett beszerzés/igénylés','Nettó egységár','ÁFA kulcs'
-			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap'));	
+			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap','CPV2 kód'));	
 			$bev_a=array();	
 			foreach($bev->result() as $bevrec)
 			{	
@@ -1913,7 +1925,8 @@ return $ossz;
 					(SELECT kltsg_unit.name FROM kltsg_unit WHERE id=unit_id ) AS unitname,
 					(SELECT kltsg_category.code FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC)AS kkod,
 					(SELECT kltsg_category.name FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC) AS kname,
-					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv2,
+					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv1,
+					(SELECT name FROM kltsg_cpv2 WHERE id=cpv2) as cpv2,
 					megnevezes,
 					netto_egysegar,
 					tax,
@@ -1945,8 +1958,9 @@ return $ossz;
 				array_push($kiad_a,$kiadrec->netto_osszes);
 				array_push($kiad_a,$kiadrec->afa_osszes);
 				array_push($kiad_a,$kiadrec->brutto_osszes);
-				array_push($kiad_a,$kiadrec->cpv2);
+				array_push($kiad_a,$kiadrec->cpv1);
 				array_push($kiad_a,$kiadrec->honap);
+				array_push($kiad_a,$kiadrec->cpv2);
 				$kiadsum+=$kiadrec->brutto_osszes;
 				array_push($rows,$kiad_a);	
 			}
@@ -1998,7 +2012,7 @@ return $ossz;
 		$rows = array(array());
 		array_push($rows,array('Analitkus Teljes',$_COOKIE['Ev'],'','','','','','','','','','','','','',''));
 		array_push($rows,array('Szervezet','Egység','Rovat','Rovat megnevezés','Tervezett beszerzés/igénylés','Nettó egységár','ÁFA kulcs'
-			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap'));	
+			,'ÁFA egységár','Bruttó egységár','Mennyiség','Mennyiségi egység','Nettó összeg','ÁFA összeg','Bruttó összeg','CPV kód','Hónap','CPV2 kód'));	
 			$bev_a=array();	
 			foreach($bev->result() as $bevrec)
 			{	
@@ -2031,7 +2045,8 @@ return $ossz;
 					(SELECT kltsg_unit.name FROM kltsg_unit WHERE id=unit_id ) AS unitname,
 					(SELECT kltsg_category.code FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC)AS kkod,
 					(SELECT kltsg_category.name FROM kltsg_category WHERE id=sub_id ORDER bY kltsg_category.code ASC) AS kname,
-					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv2,
+					(SELECT name FROM kltsg_cpv1 WHERE id=cpv) as cpv1,
+					(SELECT name FROM kltsg_cpv2 WHERE id=cpv2) as cpv2,
 					megnevezes,
 					netto_egysegar,
 					tax,
@@ -2063,8 +2078,9 @@ return $ossz;
 				array_push($kiad_a,$kiadrec->netto_osszes);
 				array_push($kiad_a,$kiadrec->afa_osszes);
 				array_push($kiad_a,$kiadrec->brutto_osszes);
-				array_push($kiad_a,$kiadrec->cpv2);
+				array_push($kiad_a,$kiadrec->cpv1);
 				array_push($kiad_a,$kiadrec->honap);
+				array_push($kiad_a,$kiadrec->cpv2);
 				$kiadsum+=$kiadrec->brutto_osszes;
 				array_push($rows,$kiad_a);	
 			}
@@ -2474,7 +2490,7 @@ return $ossz;
 			
 		$date=date('Y_m_d_H_m_s');
 	echo "mentés kezdése";
-	$connection = mysqli_connect('localhost','root','','koltsegtervezes') or die("meghalt");
+	$connection = mysqli_connect('localhost','root','','koltsegterv') or die("meghalt");
 $tables = array();
 $result = mysqli_query($connection,"SHOW TABLES");
 while($row = mysqli_fetch_row($result)){

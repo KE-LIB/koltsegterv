@@ -298,7 +298,7 @@ function ajaxAddKiadas()
 	{
 			type:"POST",
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/addKiadas",
-		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"cpv":cpv1,"honap":honap},
+		data:{'megnevezes':megnevezes,"egysegAr":egysegAr,"mennyiseg":mennyiseg,"rovat":rovat,"ev":ev,"cpv":cpv1,"cpv2":cpv2,"honap":honap},
 		success:function(result)
 		{
 		showKiad();
