@@ -685,6 +685,7 @@ return $ossz;
 		}
 		public function confirmSend()
 		{
+			$row_id=0;
 			$this->load->database();
 			$data=array('user_id'=>$_COOKIE['userid']);
 			$this->db->insert('kltsg_submissions',$data) or die("Hiba a kltsg_submissions beillesztésénél");
@@ -698,24 +699,49 @@ return $ossz;
 			{
 			$row_id=$sorSzam_a->row_id;
 			}
+			}
 			$row_id++;
-			$sql="select * from kltsg_submissions_kiadas where user_id='".$_COOKIE['userid']."' ";
+			$sql="select * from kltsg_submissions_kiadas where user_id='".get_cookie('userid')."' ";
+			echo $sql;
 			$res=$this->db->query($sql) or die("Hiba a kltsg_submissions_kiadas lekérdezésénél");
 			foreach($res->result() as $kiadas)
 			{
-			$sqlKiadas="insert into kltsg_submissions_kiadas_sent ( row_id, submissions_id, sub_id, user_id, institute_id,unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,cpv,honap,cpv2)
-			values('".$row_id."','".$subId."','".$kiadas->sub_id."','".$_COOKIE['userid']."','".$kiadas->institute_id."','".$kiadas->unit_id."','".$kiadas->brutto_osszes."','".$kiadas->netto_osszes."','".$kiadas->afa_osszes."','".$kiadas->mennyiseg."','".$kiadas->megnevezes."','".$kiadas->netto_egysegar."','".$kiadas->tax."','0','".$kiadas->afa_ossz_egyseg."','".$kiadas->quant."','".$kiadas->brutto_egysegar."','".$kiadas->Year."','".$kiadas->cpv."','".$kiadas->honap."','".$kiadas->cpv2."')";
-			//echo $sqlKiadas;
-			$this->db->query($sqlKiadas) or die("Hiba a kltsg_submissions_kiadas_sent beillesztésénél");
+			$sqlKiadas=array
+			('row_id' =>$row_id,
+			'submissions_id'=>$subId,
+			'sub_id' =>$kiadas->sub_id,
+			'user_id'=>$_COOKIE['userid'],
+			'institute_id' =>$kiadas->institute_id,
+			'unit_id'=>$kiadas->unit_id,
+			' brutto_osszes'=>$kiadas->brutto_osszes,
+			' netto_osszes' =>$kiadas->netto_osszes,
+			' afa_osszes' =>$kiadas->afa_osszes,
+			' mennyiseg'=>$kiadas->mennyiseg,
+			' megnevezes'=>$kiadas->megnevezes,
+			' netto_egysegar' =>$kiadas->netto_egysegar,
+			' tax' =>$kiadas->tax,
+			'category_tax_field' =>'0',
+			' afa_ossz_egyseg'=>$kiadas->afa_ossz_egyseg,
+			' quant'=>$kiadas->quant,
+			' brutto_egysegar' =>$kiadas->brutto_egysegar,
+			'Year' =>$kiadas->Year,
+			'cpv' =>$kiadas->cpv,
+			'honap' =>$kiadas->honap,
+			'cpv2'=>$kiadas->cpv2
+			);
+			$this->db->trans_start();
+			$this->db->insert('kltsg_submissions_kiadas_sent',$sqlKiadas);
+			$eid=$this->db->insert_id();
+			$this->db->trans_complete(); 
 			}
-			}
+			$row_id=0;
 			//bevételek átrakása
 			$sql="select row_id from kltsg_submissions_bevetel_sent order by row_id desc limit 1";
 			$res=$this->db->query($sql);
 			foreach($res->result() as $sorSzam_a);
 			$row_id=$sorSzam_a->row_id;
 			$row_id++;
-			$sql="select * from kltsg_submissions_bevetel where user_id='".$_COOKIE['userid']."' ";
+			$sql="select * from kltsg_submissions_bevetel where user_id='".get_cookie('userid')."' ";
 			//echo $sql;
 			$res=$this->db->query($sql)or die("Hiba a kltsg_submissions_bevétel lekérdezésénél");
 			$row_count=$res->num_rows();
@@ -723,28 +749,30 @@ return $ossz;
 			{
 			foreach($res->result() as $bevetel)
 			{
-			$sqlbevetel="insert into kltsg_submissions_bevetel_sent ( row_id, submissions_id, sub_id, user_id, institute_id,
-			unit_id, brutto_osszes, netto_osszes, afa_osszes, mennyiseg, megnevezes, netto_egysegar, tax,
-			category_tax_field, afa_ossz_egyseg, quant, brutto_egysegar,Year,honap)
-			values('".$row_id."',
-			'".$subId."',
-			'".$bevetel->sub_id."',
-			'".$_COOKIE['userid']."',
-			'".$bevetel->institute_id."',
-			'".$bevetel->unit_id."',
-			'".$bevetel->brutto_osszes."',
-			'".$bevetel->netto_osszes."',
-			'".$bevetel->afa_osszes."',
-			'".$bevetel->mennyiseg."',
-			'".$bevetel->megnevezes."',
-			'".$bevetel->netto_egysegar."',
-			'".$bevetel->tax."',
-			'0',
-			'".$bevetel->afa_ossz_egyseg."',
-			'".$bevetel->quant."',
-			'".$bevetel->brutto_egysegar."',
-			'".$bevetel->Year."','".$bevetel->honap."')";
-			$this->db->query($sqlbevetel) or die("Hiba a kltsg_submissions_bevetel_sent beillesztésénél");
+			$sqlBevetel=array(
+			'row_id'=>$row_id,
+			'submissions_id'=>$subId,
+			'sub_id'=>$bevetel->sub_id,
+			'user_id'=>$_COOKIE['userid'],
+			'institute_id	'=>$bevetel->institute_id,
+			'unit_id	'=>$bevetel->unit_id,
+			'brutto_osszes'=>$bevetel->brutto_osszes,
+			'netto_osszes	'=>$bevetel->netto_osszes,
+			'afa_osszes	'=>$bevetel->afa_osszes,
+			'mennyiseg	'=>$bevetel->mennyiseg,
+			'megnevezes	'=>$bevetel->megnevezes,
+			'netto_egysegar	'=>$bevetel->netto_egysegar,
+			'tax'=>$bevetel->tax,
+			'category_tax_field'=>'0',
+			'afa_ossz_egyseg	'=>$bevetel->afa_ossz_egyseg,
+			'quant'=>$bevetel->quant,
+			'brutto_egysegar'=>$bevetel->brutto_egysegar,
+			'Year	'=>$bevetel->Year,
+			'honap'=>$bevetel->honap);
+			$this->db->trans_start();
+			$this->db->insert('kltsg_submissions_bevetel_sent',$sqlBevetel);
+			$eid=$this->db->insert_id();
+			$this->db->trans_complete(); 
 			}
 			}
 			$sqlDelteBevetel="delete from kltsg_submissions_bevetel where user_id='".$_COOKIE['userid']."'" ;

@@ -25,7 +25,7 @@
 
 <li><a data-toggle="tab" href="#kiadful" onclick="showKiad()" id="0">Kiadások</a></li>
  <li><a data-toggle="tab" href="#bevful" onclick="showBev()" id="1">Bevételek</a></li>
- <li><a data-toggle="tab" href="#feltolt" onclick="showFeltolt()" id="2">Feltöltés</a></li>
+ <!--li><a data-toggle="tab" href="#feltolt" onclick="showFeltolt()" id="2">Feltöltés</a></li-->
  <li class=""><a data-toggle="tab" href="#info" onclick="ajaxLoadKoltsegfel('helpKFel')" >Útmutató</a></li>
 </ul>
 <div id="koltsegfel">
@@ -132,6 +132,7 @@ function confirmSend()
 		url:"<?php echo base_url(); ?>" + "index.php/Koltsegterv/confirmSend",
 		success:function(result)
 				{
+					console.log(result);
 					$("#mainPage").html("<img id='theImg' src='../../img/load.gif'>")
 				}
 	});	
