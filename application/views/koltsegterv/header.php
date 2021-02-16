@@ -18,15 +18,15 @@
 			<div class="container" style="width:100%;" id="overPage">
 				<div class="row" style="width:100%;">
 					<div id="headPage">
-						<div class="col-sm-4">
-								<img class="felirat" src="<?php echo base_url(); ?>img/felirat.png"  alt="KE Költségtervező" border="0"/>
+						<div class="col-sm-2">
+								MATE Költségtervező
 						</div>
-						<div class="col-sm-4">
-								<a class="pull-center" target="_blank" href="http://www.ke.hu">
-								<img class="logo" onmouseover="this.src='<?php echo base_url(); ?>img/ke_kozep_ff.png'" onmouseout="this.src='<?php echo base_url(); ?>img/ke_kozep.png'" src="<?php echo base_url(); ?>img/ke_kozep.png"  alt="KE logo" border="0"/>
+						<div class="col-sm-3">
+								<a class="pull-center" target="_blank" href="http://www.uni-mate.hu">
+								<img class="logo" src="<?php echo base_url(); ?>img/ke_kozep.png"  alt="MATE logo" border="0"/>
 								</a>
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-7">
 								<div class="pull-right" id="topLeft"></div>
 								
 						</div>
