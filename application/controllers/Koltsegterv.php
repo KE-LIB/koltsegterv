@@ -745,6 +745,7 @@ class Koltsegterv extends CI_Controller {
 		}
 		public function confirmAndSave()
 		{
+		set_cookie("work",1);	
 		$this->load->model('Helper_model');
 		$this->Helper_model->confirmAndSave();
 		}

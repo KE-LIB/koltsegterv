@@ -56,6 +56,8 @@
 
 <script>
 changeFoGomb();	
+showKiad();
+showBev()
 //kiadás megjelenítése+ amit eddig felvittünk
 function showKiad()
 {
@@ -107,6 +109,7 @@ function confirmSave()
 		success:function(result)
 				{
 					console.log(result+"bejött")
+					$("#felsopanel").hide();
 					$("#mainPage").html("<img id='theImg' src='../../img/load.gif'>")
 				}
 	});	
@@ -133,6 +136,7 @@ function confirmSend()
 		success:function(result)
 				{
 					console.log(result);
+					$("#felsopanel").hide();
 					$("#mainPage").html("<img id='theImg' src='../../img/load.gif'>")
 				}
 	});	

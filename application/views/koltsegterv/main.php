@@ -19,6 +19,8 @@
 			</ul></h4>
 	</div>
 	<script>
+	$("#felsopanel").show();
+	changeFoGomb();
 	 function ajaxLoad(mit)
 {
 	
@@ -78,6 +80,10 @@ function logOut()
 			document.cookie = "ev=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 			document.cookie = "userid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/newkoltsegterv/koltsegterv;";
 	
+}
+function changeFoGomb()
+{
+	$("#fomenu").attr('onclick','ajaxLoad("main")')
 }
 </script>
 </script>

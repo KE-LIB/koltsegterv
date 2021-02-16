@@ -1,3 +1,0 @@
-[1010/141604.379:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cuppat\Reports\Dump: A rendszer nem találja a megadott elérési utat. (0x3)
-[1010/141604.381:ERROR:registration_protocol_win.cc(84)] TransactNamedPipe: A pipe használata befejezõdött. (0x6D)
-[1010/141604.382:ERROR:crash_report_database_win.cc(568)] CreateDirectory C:\Program Files (x86)\Cuppat\Reports\Dump: A rendszer nem találja a megadott elérési utat. (0x3)

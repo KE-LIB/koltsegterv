@@ -779,6 +779,7 @@ return $ossz;
 			$this->db->query($sqlDelteBevetel) or die("Hiba a kltsg_submissions_bevetel törlésénél");
 			$sqlDelteKiadas="delete from kltsg_submissions_kiadas where user_id='".$_COOKIE['userid']."'" ;
 			$this->db->query($sqlDelteKiadas) or die("Hiba a kltsg_submissions_kiadas törlésénél");
+			set_cookie("work",0);	
 		}
 
 		public function clearSubmission()
@@ -887,12 +888,17 @@ return $ossz;
 						}
 					}
 
-					echo '</select></td><td class="main-table">'.$record->submissions_id.'</td><td>'.$record->submissions_time.'</td>
+					echo '</select></td><td class="main-table">'.$record->submissions_id.'</td><td>'.$record->submissions_time.'</td>';
+					if(get_cookie("work")==1){}
+					else
+					{
+						echo '
 					<td><button type="submit" name="editSavedWork" onclick=editWork('.$record->submissions_id.',"S",'.$i.') class=" btn btn-default"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;Szerkesztés</button>
 					<button type="submit" name="changePlace" class=" btn btn-primary" onclick=changePlace('.$record->submissions_id.',"S",'.$i.')><span class="glyphicon glyphicon-globe" aria-hidden="true"></span>&nbsp;Hely módosítása</button>
 					<button type="submit"  class=" btn btn-success" onclick=sendPlane('.$record->submissions_id.')><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;Feladás</button>
 					<button type="submit"  class=" btn btn-danger" onclick=deletePlane('.$record->submissions_id.',"S")><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Törlés</button>
 					</td>';
+					}
 				}
 			}
 			

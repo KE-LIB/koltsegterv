@@ -29,7 +29,7 @@
 						</div>
 						<div class="col-sm-4">
 								<div class="panel panel-primary panel-transparent">
-  <div class="panel-body-info">
+  <div class="panel-body-info" id="felsopanel">
   Üdvözöljük <?php 
   if(isset($user))
   {
